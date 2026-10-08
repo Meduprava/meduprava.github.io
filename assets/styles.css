@@ -55,18 +55,18 @@ p{margin:0 0 12px}
 .lead{font-size:18px;line-height:27px;max-width:60ch}
 .muted{color:var(--muted);font-size:14px;line-height:20px}
 .law{color:var(--muted);font-size:14px;line-height:20px;margin:0}
-.eyebrow{font-size:14px;line-height:20px;font-weight:600;color:var(--terracotta-text);margin-bottom:var(--space-4)}
+.eyebrow{font-size:18px;line-height:24px;font-weight:600;color:var(--terracotta-text);margin-bottom:var(--space-4);white-space:nowrap}
 
 /* Логотип и шапка */
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
-.top__in{display:flex;align-items:center;gap:var(--space-4);min-height:68px}
+.top__in{display:flex;align-items:center;gap:var(--space-4);min-height:96px}
 .brand{display:flex;align-items:center;text-decoration:none;color:var(--ink)}
-.brand__logo{display:block;height:44px;width:auto}
+.brand__logo{display:block;height:88px;width:auto}
 .brand__logo--dark{display:none}
 .top__nav{display:flex;gap:var(--space-6);margin-left:auto;font-size:15px}
 .top__nav a{color:var(--ink);text-decoration:none}
 .top__nav a:hover{color:var(--deep)}
-@media (max-width:760px){.top__nav{display:none}.top__in .btn{margin-left:auto}}
+@media (max-width:760px){.top__nav{display:none}.top__in .btn{margin-left:auto}.top__in{min-height:76px}.brand__logo{height:64px}.eyebrow{font-size:16px;line-height:22px;white-space:normal}}
 
 /* Кнопки-пилюли */
 .btn{display:inline-block;font:inherit;font-weight:600;font-size:16px;line-height:24px;
