@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Медуправа — защита денег клиники в системе ОМС</title>
+<meta name="description" content="Разбираем акты медико-экономической экспертизы и экспертизы качества, готовим претензии в территориальный фонд и настраиваем документацию клиники. Бесплатный экспресс-аудит за пять рабочих дней.">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Медуправа — защита денег клиники в системе ОМС">
+<meta property="og:description" content="Бесплатный разбор актов экспертиз за три месяца. Отчет остается у клиники.">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="assets/meduprava-avatar.svg">
+<link rel="icon" href="assets/meduprava-znak.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
+<link rel="icon" href="assets/meduprava-znak-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)"><rect width='32' height='32' rx='7' fill='%230f6b63'/><path d='M8 20l5-9 3 5 2-3 6 7z' fill='%23fff'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Golos+Text:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Медуправа","description":"Юридическое сопровождение медицинских организаций в системе обязательного медицинского страхования","areaServed":"RU","availableLanguage":"ru","email":"meduprava@mail.ru","serviceType":"Юридические услуги для медицинских организаций"}
+</script>
+</head>
+<body>
+<a class="skip" href="#form">Перейти к форме заявки</a>
+
+<header class="top">
+  <div class="wrap top__in">
+    <a class="brand" href="/" aria-label="Медуправа, на главную"><img class="brand__logo" src="assets/meduprava-logo.svg" alt="Медуправа" width="475" height="112"><img class="brand__logo brand__logo--dark" src="assets/meduprava-logo-dark.svg" alt="" aria-hidden="true" width="475" height="112"></a>
+    <nav class="top__nav" aria-label="Разделы">
+      <a href="#audit">Аудит</a>
+      <a href="#services">Услуги</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <a class="btn btn--sm" href="#form">Оставить заявку</a>
+  </div>
+</header>
+
+<main>
+  <!-- 1. Первый экран -->
+  <section class="hero">
+    <div class="wrap hero__in">
+      <div class="hero__text">
+        <div class="hero__rule" aria-hidden="true"></div>
+        <p class="eyebrow">Юридическое сопровождение медицинских организаций</p>
+        <h1>Страховая сняла оплату по экспертизе? Часть этих денег можно вернуть</h1>
+        <p class="lead">Бесплатно разберем акты медико-экономической экспертизы и экспертизы качества за последние три месяца и покажем, что из снятого оспоримо и в какой срок. Отчет остается у вас.</p>
+        <div class="hero__cta">
+          <a class="btn" href="#form">Разобрать мои акты</a>
+          <span class="hero__note">5 рабочих дней · участие врачей не требуется</span>
+        </div>
+      </div>
+      <aside class="deadline" aria-label="Срок на претензию">
+        <h2 class="deadline__h">Срок на претензию в территориальный фонд</h2>
+        <p class="deadline__big"><strong>15</strong> рабочих дней</p>
+        <p class="deadline__p">со дня получения актов страховой медицинской организации. Фонд рассматривает претензию 30 рабочих дней и назначает повторную экспертизу.</p>
+        <p class="deadline__law">ст. 42 Федерального закона от 29.11.2010 № 326-ФЗ</p>
+        <form class="calc" id="calc" novalidate>
+          <label for="calc-date">Дата получения актов</label>
+          <input type="date" id="calc-date" name="calc-date">
+          <p class="calc__out" id="calc-out" role="status">Укажите дату, посчитаем крайний день подачи претензии.</p>
+        </form>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 2. Проблема -->
+  <section class="section" id="problem">
+    <div class="wrap">
+      <h2>Где частная клиника теряет деньги в ОМС</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Санкции по результатам контроля</h3>
+          <p>Страховая не оплачивает случай полностью или частично и применяет штраф по итогам контроля и экспертиз. Часть претензий снимается при грамотном возражении, но только если клиника успевает его заявить.</p>
+          <p class="law">ст. 40, 41 Федерального закона № 326-ФЗ</p>
+        </article>
+        <article class="card">
+          <h3>Пропущенный срок</h3>
+          <p>Чаще всего деньги теряются не в споре, а в просроченных 15 рабочих днях. После этого остается только работа на будущее.</p>
+          <p class="law">ст. 42 Федерального закона № 326-ФЗ</p>
+        </article>
+        <article class="card">
+          <h3>Дефекты оформления, а не лечения</h3>
+          <p>Значительная часть снятий касается записей в карте: не обосновано отклонение, не зафиксирован осмотр, нет протокола врачебной комиссии. Это лечится правилами ведения документации.</p>
+          <p class="law">ст. 22, 37, 48 Федерального закона № 323-ФЗ</p>
+        </article>
+        <article class="card">
+          <h3>Объемы и тарифы</h3>
+          <p>Заявка на объемы, работа комиссии, применение тарифного соглашения. Зона, где у частной клиники обычно нет собственной позиции.</p>
+          <p class="law">ст. 30, 36 Федерального закона № 326-ФЗ</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Что получает клиника -->
+  <section class="section section--alt" id="result">
+    <div class="wrap">
+      <h2>Что вы получаете по итогам аудита</h2>
+      <ul class="list">
+        <li>Перечень снятий за период с оценкой: что оспоримо, что спорно, что бесспорно.</li>
+        <li>Сумму, которую считаем оспоримой, и сумму снятий за период целиком.</li>
+        <li>Даты истечения срока на претензию по каждому акту и список тех, где срок горит.</li>
+        <li>Причины повторяющихся снятий: документация, внутренний контроль, объемы.</li>
+        <li>Что клиника может поправить сама, без юриста.</li>
+      </ul>
+      <p class="muted">Отчет остается у клиники независимо от того, продолжим ли мы работу. Выводов о качестве лечения в нем нет: мы работаем с правовой стороной спора.</p>
+    </div>
+  </section>
+
+  <!-- 4. Как проходит -->
+  <section class="section" id="audit">
+    <div class="wrap">
+      <h2>Как проходит экспресс-аудит</h2>
+      <ol class="steps">
+        <li><span class="steps__d">День 1</span><p>Соглашение о конфиденциальности, запрос документов, прием по описи.</p></li>
+        <li><span class="steps__d">День 2</span><p>Расчет сроков по всем актам и формальная проверка процедуры контроля.</p></li>
+        <li><span class="steps__d">День 3</span><p>Разбор спорных случаев по существу, оценка перспективы по каждому.</p></li>
+        <li><span class="steps__d">День 4</span><p>Документация, внутренний контроль, объемы и тарифы: почему снятия повторяются.</p></li>
+        <li><span class="steps__d">День 5</span><p>Отчет и встреча с руководителем на 30-40 минут.</p></li>
+      </ol>
+      <p class="muted">От клиники нужны акты экспертиз за три месяца, реестр случаев с суммами и договор со страховой. Медицинская документация передается обезличенной либо по поручению на обработку персональных данных.</p>
+    </div>
+  </section>
+
+  <!-- 5. Услуги -->
+  <section class="section section--alt" id="services">
+    <div class="wrap">
+      <h2>Что делаем дальше</h2>
+      <div class="cards cards--tight">
+        <article class="card"><h3>Возражения и претензия</h3><p>Возражения в страховую, претензия в территориальный фонд, сопровождение повторной экспертизы.</p></article>
+        <article class="card"><h3>Судебные споры</h3><p>Споры со страховыми организациями и фондом, включая взыскание неоплаченных случаев.</p></article>
+        <article class="card"><h3>Проверки фонда</h3><p>Подготовка, сопровождение проверки целевого использования средств, возражения на акт.</p></article>
+        <article class="card"><h3>Документация</h3><p>Правила ведения карты, внутренний контроль качества, работа врачебной комиссии.</p></article>
+        <article class="card"><h3>Обучение врачей</h3><p>Какие формулировки в документации снимают претензии эксперта, а какие их создают.</p></article>
+        <article class="card"><h3>Абонентское сопровождение</h3><p>Постоянная работа с потоком актов, договорами и проверками.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Команда -->
+  <section class="section" id="team">
+    <div class="wrap team">
+      <div>
+        <h2>Кто ведет направление</h2>
+        <p><strong>Штин Антон Владимирович</strong>, руководитель юридического направления Медуправа. Управленческий стаж с 2007 года, с 2020 года частная юридическая практика в сопровождении бизнеса. В медицинском праве: лицензирование медицинской деятельности, договоры клиники, персональные данные и врачебная тайна, спор со страховой организацией по результатам экспертизы качества.</p>
+        <p class="muted">Медуправа - это три направления: юридическое, финансовое и маркетинговое. Юрист снимает претензии и ставит документы, финансист считает экономику объемов и тарифов, маркетолог отвечает за поток пациентов.</p>
+      </div>
+      <div class="quote">
+        <p>Мы не оцениваем качество лечения и не спорим с медицинскими решениями. Наша часть - процедура контроля, соответствие кода дефекта фактам, сроки и расчет санкции.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. FAQ -->
+  <section class="section section--alt" id="faq">
+    <div class="wrap">
+      <h2>Вопросы и ответы</h2>
+      <div class="faq">
+        <details><summary>Почему аудит бесплатный</summary><p>Это наш способ показать работу. Мы тратим пять дней, вы получаете отчет и решаете сами. Если возвращать нечего, мы так и напишем.</p></details>
+        <details><summary>Сколько стоит дальнейшая работа</summary><p>Зависит от числа спорных случаев и сумм. Цену называем после аудита, когда понятен объем, а не прайсом вслепую.</p></details>
+        <details><summary>Что нужно от клиники</summary><p>Акты экспертиз за три месяца, реестр случаев с суммами, договор со страховой. Участие врачей на этом этапе не требуется.</p></details>
+        <details><summary>Что с персональными данными пациентов</summary><p>Документы передаются обезличенными либо по поручению на обработку персональных данных. Соглашение о конфиденциальности подписываем до получения документов.</p></details>
+        <details><summary>Вы оцениваете качество лечения</summary><p>Нет. Там, где спор упирается в медицинское обоснование, привлекаем врача-эксперта по профилю, и это отдельная позиция.</p></details>
+        <details><summary>Мы пропустили срок по части актов</summary><p>Срок на претензию восстановить нельзя, но мы посмотрим, какие варианты остались, и что сделать, чтобы следующие акты не ушли так же.</p></details>
+        <details><summary>Вы работаете только в своем регионе</summary><p>Работаем удаленно по всей стране, документы передаются в электронном виде.</p></details>
+        <details><summary>Можно заказать только настройку документации</summary><p>Да. Разбор актов и настройка документации - разные задачи, можно взять любую.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Форма -->
+  <section class="section" id="form">
+    <div class="wrap form__wrap">
+      <div>
+        <h2>Заявка на экспресс-аудит</h2>
+        <p>Ответим в рабочее время и скажем, какие документы нужны. Если тема не актуальна, просто не отвечайте на наше письмо.</p>
+        <p class="muted">Или напишите напрямую: <a href="mailto:meduprava@mail.ru">meduprava@mail.ru</a></p>
+      </div>
+      <form class="form" id="lead-form" novalidate>
+        <label for="org">Клиника <span aria-hidden="true">*</span>
+          <input type="text" id="org" name="org" required autocomplete="organization" placeholder="ООО «Название»">
+        </label>
+        <label for="name">Как к вам обращаться <span aria-hidden="true">*</span>
+          <input type="text" id="name" name="name" required autocomplete="name" placeholder="Имя и отчество">
+        </label>
+        <label for="contact">Телефон или мессенджер <span aria-hidden="true">*</span>
+          <input type="text" id="contact" name="contact" required autocomplete="tel" placeholder="+7 ...">
+        </label>
+        <label for="email">Электронная почта
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="необязательно">
+        </label>
+        <label class="check">
+          <input type="checkbox" id="consent" name="consent" required>
+          <span>Согласен на обработку персональных данных на условиях <a href="legal/consent.html">согласия</a> и <a href="legal/privacy.html">политики обработки персональных данных</a>.</span>
+        </label>
+        <button class="btn" type="submit">Отправить заявку</button>
+        <p class="form__status" id="form-status" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <div>
+      <p class="foot__brand"><img class="foot__logo" src="assets/meduprava-logo-dark.svg" alt="Медуправа" width="475" height="112"></p>
+      <p class="muted">Юридическое, финансовое и маркетинговое сопровождение медицинских организаций.</p>
+    </div>
+    <div>
+      <p>Исполнитель: индивидуальный предприниматель Штин Антон Владимирович</p>
+      <p>ОГРНИП: <span data-field="ogrnip">указать</span> · ИНН: <span data-field="inn">указать</span></p>
+      <p><a href="mailto:meduprava@mail.ru">meduprava@mail.ru</a></p>
+    </div>
+    <div>
+      <p><a href="legal/privacy.html">Политика обработки персональных данных</a></p>
+      <p><a href="legal/consent.html">Согласие на обработку персональных данных</a></p>
+      <p><a href="legal/cookies.html">Использование файлов cookie</a></p>
+    </div>
+  </div>
+  <div class="wrap foot__fine">
+    <p>Сайт информационный. Публикуемые сведения не являются публичной офертой. Услуги оказываются юридическим лицам и индивидуальным предпринимателям на основании договора. Медуправа не является медицинской организацией и медицинских услуг не оказывает.</p>
+  </div>
+</footer>
+
+<div class="cookie" id="cookie" hidden>
+  <p>Сайт использует файлы cookie для работы веб-аналитики. Подробности - в <a href="legal/cookies.html">уведомлении о cookie</a>.</p>
+  <div class="cookie__btns">
+    <button class="btn btn--sm" type="button" data-cookie="accept">Принять</button>
+    <button class="btn btn--sm btn--mint" type="button" data-cookie="decline">Только необходимые</button>
+  </div>
+</div>
+
+<script src="assets/config.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>
