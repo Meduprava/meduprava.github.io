@@ -1,8 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- ВАЖНО: после создания GitHub Pages замените YOUR-USERNAME на ваш логин GitHub. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://YOUR-USERNAME.github.io/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://YOUR-USERNAME.github.io/legal/privacy.html</loc><priority>0.2</priority></url>
-  <url><loc>https://YOUR-USERNAME.github.io/legal/consent.html</loc><priority>0.2</priority></url>
-  <url><loc>https://YOUR-USERNAME.github.io/legal/cookies.html</loc><priority>0.2</priority></url>
+  <url>
+    <loc>https://meduprava.github.io/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://meduprava.github.io/legal/privacy.html</loc>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://meduprava.github.io/legal/consent.html</loc>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://meduprava.github.io/legal/cookies.html</loc>
+    <priority>0.2</priority>
+  </url>
 </urlset>
