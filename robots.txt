@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# ВАЖНО: после создания GitHub Pages замените YOUR-USERNAME на ваш логин GitHub.
-Sitemap: https://YOUR-USERNAME.github.io/sitemap.xml
+Sitemap: https://meduprava.github.io/sitemap.xml
