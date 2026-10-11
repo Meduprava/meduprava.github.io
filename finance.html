@@ -32,10 +32,9 @@
     .wrap { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
     .top { position: relative; z-index: 2; background: rgba(255,255,255,.96); border-bottom: 1px solid #edf0ee; }
     .top__in { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { text-decoration: none; display: inline-flex; align-items: center; gap: 12px; font-weight: 700; color: var(--green); letter-spacing: .01em; }
-    .brand__mark { width: 42px; height: 42px; border-radius: 13px; background: var(--green); color: white; display: grid; place-items: center; font-size: 22px; }
-    .brand__text { line-height: 1.15; }
-    .brand__sub { display: block; margin-top: 5px; font-size: 10px; letter-spacing: .16em; font-weight: 600; }
+    .brand { text-decoration: none; display: inline-flex; align-items: center; gap: 0; flex: 0 0 auto; }
+    .brand__logo { display: block; width: min(310px, 29vw); height: auto; }
+    .brand__sub { display: none; }
     nav { display: flex; gap: 25px; align-items: center; }
     nav a { text-decoration: none; color: #43514C; font-size: 14px; }
     nav a:hover { color: var(--green); }
@@ -51,12 +50,32 @@
     h3 { font-size: 21px; margin: 0 0 10px; }
     p { margin: 0 0 14px; }
     .hero { padding: 64px 0 70px; background: linear-gradient(120deg, #F8F7F3 0%, #fff 55%, #EAF3F0 100%); overflow: hidden; }
-    .hero__grid { display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 48px; }
-    .hero__lead { color: var(--muted); font-size: clamp(18px, 2vw, 22px); max-width: 650px; margin-bottom: 28px; }
+    .hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(28px, 4vw, 58px); }
+    .hero__copy { min-width: 0; }
+    .hero .eyebrow { font-size: clamp(18px, 2vw, 24px); line-height: 1.35; letter-spacing: .12em; max-width: none; margin-bottom: 20px; }
+    .hero__lead { color: var(--muted); font-size: clamp(17px, 1.45vw, 21px); max-width: 650px; margin-bottom: 24px; }
     .hero__slogan { color: var(--terra); font-size: clamp(21px, 2.6vw, 28px); font-weight: 700; margin-bottom: 12px; }
     .hero__buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
     .hero__note { font-size: 13px; color: var(--muted); }
-    .hero__image { width: 100%; height: 450px; object-fit: cover; object-position: center; border-radius: 28px; box-shadow: var(--shadow); }
+    .hero__image { width: 100%; height: clamp(340px, 37vw, 500px); object-fit: cover; object-position: center; border-radius: 28px; box-shadow: var(--shadow); }
+    .section-heading--center { text-align: center; margin-inline: auto; }
+    .section-heading--center .section__intro { max-width: none; margin-inline: auto; white-space: nowrap; }
+    .section-heading--center .eyebrow { text-align: center; }
+    .section-heading--center h2 { text-align: center; }
+    .benefits-shell > h2, .benefits-shell > .section__intro { text-align: center; }
+    .benefits-shell > .section__intro { max-width: none; white-space: nowrap; }
+    .section-heading--center { margin-bottom: 30px; }
+    .section-heading--center .section__intro { margin-bottom: 0; }
+    .format-heading { text-align: center; }
+    .format-heading .section__intro { max-width: none; margin-inline: auto; }
+    .site-footer { background: var(--green); color: #fff; padding: 38px 0; }
+    .footer-grid { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 34px; align-items: start; }
+    .footer-logo { width: min(265px, 100%); height: auto; margin-bottom: 16px; }
+    .footer-description { color: #d9e8e3; margin: 0; max-width: 410px; }
+    .footer-details p { margin: 0 0 10px; overflow-wrap: anywhere; }
+    .footer-links { display: grid; gap: 10px; }
+    .footer-links a, .footer-details a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+    .footer-details a { overflow-wrap: anywhere; }
     .section { padding: 78px 0; }
     .section--linen { background: var(--linen); }
     .section--mint { background: var(--mint); }
@@ -107,6 +126,10 @@
       .hero__grid, .expert { grid-template-columns: 1fr; }
       .hero__grid { gap: 30px; }
       .hero__image { height: min(68vw, 430px); }
+      .hero .eyebrow { font-size: 16px; }
+      .section-heading--center .section__intro, .benefits-shell > .section__intro { white-space: normal; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand-column { grid-column: 1 / -1; }
       .expert__photo { max-height: 560px; }
       .cta { grid-template-columns: 1fr; }
       .cta .btn { justify-self: start; white-space: normal; }
@@ -114,7 +137,7 @@
     @media (max-width: 600px) {
       .wrap { width: min(100% - 28px, 1160px); }
       .top__in { min-height: 72px; gap: 12px; }
-      .brand__mark { width: 36px; height: 36px; }
+      .brand__logo { width: min(220px, 52vw); }
       .top .btn { min-height: 40px; padding: 8px 12px; font-size: 12px; }
       .hero { padding: 44px 0 48px; }
       .hero__buttons { align-items: stretch; flex-direction: column; }
@@ -125,6 +148,8 @@
       .benefits-shell { padding: 18px; }
       .service { padding: 22px; }
       .cta { border-radius: 20px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .footer-brand-column { grid-column: auto; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
   </style>
@@ -133,8 +158,7 @@
 <header class="top">
   <div class="wrap top__in">
     <a class="brand" href="index.html" aria-label="Медуправа — главная">
-      <span class="brand__mark" aria-hidden="true">М</span>
-      <span class="brand__text">Медуправа<span class="brand__sub">ФИНАНСЫ КЛИНИКИ</span></span>
+      <img class="brand__logo" src="assets/meduprava-logo.svg" alt="Медуправа" width="444" height="90">
     </a>
     <nav aria-label="Разделы страницы">
       <a href="#control">Финансы под контролем</a>
@@ -142,21 +166,21 @@
       <a href="#format">Формат работы</a>
       <a href="#services">Услуги</a>
     </nav>
-    <a class="btn btn--green" href="#contact">Обсудить задачу</a>
+    <a class="btn btn--green" href="https://forms.yandex.ru/u/6acb822e5057b228f8a8c76e">Оставить номер для звонка</a>
   </div>
 </header>
 
 <main>
   <section class="hero">
     <div class="wrap hero__grid">
-      <div>
-        <p class="eyebrow">Для собственников частных медицинских клиник и стоматологий</p>
+      <div class="hero__copy">
+        <p class="eyebrow">Для собственников частных медицинских клиник</p>
         <h1>Финансовый директор для медицинских клиник</h1>
         <p class="hero__slogan">Выручка есть. А где прибыль?</p>
         <p class="hero__lead">Управленческий учёт, контроль расходов и денежных потоков, финансовые расчёты для развития клиники.</p>
         <div class="hero__buttons">
           <a class="btn btn--green" href="https://forms.yandex.ru/u/6acb822e5057b228f8a8c76e">Получить бесплатную экспресс-диагностику</a>
-          <a class="btn btn--outline" href="#contact">Обсудить финансовые задачи</a>
+          <a class="btn btn--outline" href="https://forms.yandex.ru/u/6acb822e5057b228f8a8c76e">Оставить номер для звонка</a>
         </div>
         <p class="hero__note">Короткая анкета помогает определить предварительные зоны внимания. Анализ документов в неё не входит.</p>
       </div>
@@ -203,12 +227,14 @@
         <h2>Штин Елена</h2>
         <p class="expert__role">Финансовый директор</p>
         <p class="expert__copy">Специализируюсь на финансовом управлении медицинскими клиниками с 2018 года.</p>
-        <p class="expert__copy">Помогаю собственникам контролировать затраты, выстраивать управленческий учёт, настраивать KPI сотрудников и оценивать финансовую целесообразность инвестиций.</p>
+        <p class="expert__copy">Помогаю собственникам контролировать затраты, выстраивать управленческий учёт, автоматизировать регулярные финансовые процессы, настраивать KPI сотрудников и оценивать целесообразность инвестиций.</p>
+        <p class="expert__copy"><strong>Собственник должен в любой момент понимать: где деньги, сколько денег и какую сумму можно безопасно забрать из бизнеса, не ставя под риск выплаты и развитие клиники.</strong></p>
         <div class="chips">
           <span class="chip">Управленческий учёт</span>
           <span class="chip">Контроль расходов</span>
           <span class="chip">KPI сотрудников</span>
           <span class="chip">Финансовые модели</span>
+          <span class="chip">Автоматизация финансов</span>
         </div>
       </div>
     </div>
@@ -216,9 +242,11 @@
 
   <section class="section section--mint" id="format">
     <div class="wrap">
-      <p class="eyebrow">Понятный процесс и контроль</p>
-      <h2>Как мы работаем: дистанционно и очно</h2>
-      <p class="section__intro">Финансовому директору необязательно каждый день находиться в клинике, чтобы управлять финансовыми процессами. Важны достоверные данные, регулярная отчётность, согласованные сроки и контроль выполнения задач.</p>
+      <div class="format-heading">
+        <p class="eyebrow">Понятный процесс и контроль</p>
+        <h2>Как мы работаем: дистанционно и очно</h2>
+        <p class="section__intro">Финансовому директору необязательно каждый день находиться в клинике, чтобы управлять финансовыми процессами. Важны достоверные данные, регулярная отчётность, согласованные сроки и контроль выполнения задач.</p>
+      </div>
       <div class="format-grid">
         <article class="format-card">
           <div class="format-card__top">
@@ -248,9 +276,11 @@
 
   <section class="section" id="services">
     <div class="wrap">
-      <p class="eyebrow">Форматы сотрудничества</p>
-      <h2>Услуги и стоимость</h2>
-      <p class="section__intro">Можно начать с конкретной задачи или выстроить регулярное финансовое управление.</p>
+      <div class="section-heading--center">
+        <p class="eyebrow">Форматы сотрудничества</p>
+        <h2>Услуги и стоимость</h2>
+        <p class="section__intro">Можно начать с конкретной задачи или выстроить регулярное финансовое управление.</p>
+      </div>
       <div class="services">
         <article class="service">
           <h3>Финансовая диагностика</h3>
@@ -339,10 +369,22 @@
   </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>© Медуправа · Финансовое управление медицинскими клиниками</span>
-    <span><a href="index.html">Основной сайт</a> · <a href="legal/privacy.html">Политика обработки персональных данных</a> · <a href="legal/consent.html">Согласие на обработку персональных данных</a></span>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand-column">
+      <a href="index.html" aria-label="Медуправа — главная"><img class="footer-logo" src="assets/meduprava-logo-dark.svg" alt="Медуправа" width="444" height="90"></a>
+      <p class="footer-description">Юридическое, финансовое и маркетинговое сопровождение медицинских организаций.</p>
+    </div>
+    <div class="footer-details">
+      <p>Исполнитель: индивидуальный предприниматель Штин Антон Владимирович</p>
+      <p>ОГРНИП: 320246800028048 · ИНН: 245208470580</p>
+      <p><a href="mailto:meduprava@mail.ru">meduprava@mail.ru</a></p>
+    </div>
+    <div class="footer-links">
+      <a href="legal/privacy.html">Политика обработки персональных данных</a>
+      <a href="legal/consent.html">Согласие на обработку персональных данных</a>
+      <a href="legal/cookies.html">Использование файлов cookie</a>
+    </div>
   </div>
 </footer>
 </body>
