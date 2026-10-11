@@ -152,6 +152,15 @@
       .footer-brand-column { grid-column: auto; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+
+    /* Cookie banner: одинаковая логика согласия, что и на основной странице */
+    .cookie { position: fixed; left: 16px; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); max-width: 640px; margin: 0 auto; background: var(--white); color: var(--ink); border: 1px solid var(--line); border-radius: 22px; padding: 16px 20px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; box-shadow: 0 10px 30px rgba(32,39,36,.16); z-index: 999; }
+    .cookie[hidden] { display: none !important; }
+    .cookie p { margin: 0; font-size: 14px; line-height: 1.45; flex: 1 1 260px; }
+    .cookie p a { color: var(--green); text-decoration: underline; }
+    .cookie__btns { display: flex; flex-wrap: wrap; gap: 8px; }
+    .cookie__btns .btn { min-height: 42px; padding: 9px 15px; font-size: 13px; }
+    .cookie__btns .btn--mint { background: var(--mint); color: var(--green); border-color: var(--mint); }
   </style>
 </head>
 <body>
@@ -387,5 +396,15 @@
     </div>
   </div>
 </footer>
+
+<div class="cookie" id="cookie" hidden role="dialog" aria-label="Настройки файлов cookie" aria-live="polite">
+  <p>Сайт использует необходимые файлы cookie для сохранения вашего выбора. Аналитические cookie подключаются только с вашего согласия. Подробнее — в <a href="legal/cookies.html">уведомлении об использовании файлов cookie</a>.</p>
+  <div class="cookie__btns">
+    <button class="btn btn--green" type="button" data-cookie="accept">Принять</button>
+    <button class="btn btn--mint" type="button" data-cookie="decline">Только необходимые</button>
+  </div>
+</div>
+<script src="assets/config.js"></script>
+<script src="assets/main.js"></script>
 </body>
 </html>
