@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Финансовый директор для медицинских клиник на аутсорсе | Медуправа</title>
+  <meta name="description" content="Финансовое управление медицинской клиникой: управленческий учёт, контроль расходов и денежных потоков, KPI сотрудников и финансовые модели.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#1F6B63">
+  <link rel="icon" href="assets/meduprava-znak.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #1F6B63;
+      --mint: #E5F0ED;
+      --terra: #C96B4B;
+      --ink: #202724;
+      --muted: #606B67;
+      --linen: #F8F7F3;
+      --white: #fff;
+      --line: #E2E6E3;
+      --radius: 22px;
+      --shadow: 0 12px 34px rgba(31, 65, 59, .07);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--white); font-family: "Golos Text", sans-serif; line-height: 1.65; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    .wrap { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+    .top { position: relative; z-index: 2; background: rgba(255,255,255,.96); border-bottom: 1px solid #edf0ee; }
+    .top__in { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { text-decoration: none; display: inline-flex; align-items: center; gap: 12px; font-weight: 700; color: var(--green); letter-spacing: .01em; }
+    .brand__mark { width: 42px; height: 42px; border-radius: 13px; background: var(--green); color: white; display: grid; place-items: center; font-size: 22px; }
+    .brand__text { line-height: 1.15; }
+    .brand__sub { display: block; margin-top: 5px; font-size: 10px; letter-spacing: .16em; font-weight: 600; }
+    nav { display: flex; gap: 25px; align-items: center; }
+    nav a { text-decoration: none; color: #43514C; font-size: 14px; }
+    nav a:hover { color: var(--green); }
+    .btn { display: inline-flex; justify-content: center; align-items: center; text-align: center; min-height: 48px; padding: 12px 22px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid transparent; transition: transform .15s ease, background .15s ease; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn--green { color: white; background: var(--green); }
+    .btn--green:hover { background: #18564f; }
+    .btn--outline { color: var(--green); border-color: #b8cec8; background: transparent; }
+    .eyebrow { margin: 0 0 14px; color: var(--green); font-size: 12px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+    h1,h2,h3 { font-family: "Lora", serif; line-height: 1.18; letter-spacing: -.025em; }
+    h1 { font-size: clamp(36px, 5vw, 58px); margin: 0 0 20px; max-width: 720px; }
+    h2 { font-size: clamp(29px, 3.5vw, 42px); margin: 0 0 14px; }
+    h3 { font-size: 21px; margin: 0 0 10px; }
+    p { margin: 0 0 14px; }
+    .hero { padding: 64px 0 70px; background: linear-gradient(120deg, #F8F7F3 0%, #fff 55%, #EAF3F0 100%); overflow: hidden; }
+    .hero__grid { display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 48px; }
+    .hero__lead { color: var(--muted); font-size: clamp(18px, 2vw, 22px); max-width: 650px; margin-bottom: 28px; }
+    .hero__slogan { color: var(--terra); font-size: clamp(21px, 2.6vw, 28px); font-weight: 700; margin-bottom: 12px; }
+    .hero__buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+    .hero__note { font-size: 13px; color: var(--muted); }
+    .hero__image { width: 100%; height: 450px; object-fit: cover; object-position: center; border-radius: 28px; box-shadow: var(--shadow); }
+    .section { padding: 78px 0; }
+    .section--linen { background: var(--linen); }
+    .section--mint { background: var(--mint); }
+    .section__intro { max-width: 790px; color: var(--muted); font-size: 19px; margin-bottom: 30px; }
+    .benefits-shell { border: 1px solid var(--line); border-radius: 24px; padding: clamp(22px, 3vw, 34px); background: #fff; }
+    .benefits-shell h2 { margin-bottom: 18px; }
+    .benefits-shell .section__intro { margin-bottom: 24px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+    .benefit { background: var(--mint); border-radius: 16px; padding: 24px; min-height: 220px; }
+    .benefit__icon { width: 36px; height: 36px; color: var(--green); margin-bottom: 14px; }
+    .benefit p { font-size: 17px; margin: 0; }
+    .expert { display: grid; grid-template-columns: .82fr 1.18fr; align-items: center; gap: clamp(30px, 6vw, 76px); }
+    .expert__photo { width: 100%; max-height: 530px; object-fit: cover; object-position: center 35%; border-radius: 24px; box-shadow: var(--shadow); }
+    .expert__role { color: var(--terra); font-weight: 700; margin-bottom: 18px; }
+    .expert__copy { font-size: 18px; color: #46524D; }
+    .chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
+    .chip { background: var(--mint); color: var(--green); padding: 8px 13px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+    .format-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; margin: 30px 0; }
+    .format-card { background: white; border: 1px solid #dbe6e2; border-radius: 18px; padding: 26px; }
+    .format-card__top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; color: var(--green); }
+    .format-card__top svg { width: 32px; height: 32px; flex: none; }
+    .format-card h3 { margin: 0; }
+    .checks { list-style: none; padding: 0; margin: 20px 0 0; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
+    .checks li { background: rgba(255,255,255,.78); border-radius: 13px; padding: 16px; }
+    .checks strong { display: block; color: var(--green); margin-bottom: 4px; }
+    .note { font-size: 14px; color: var(--muted); margin-top: 20px; }
+    .services { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; }
+    .service { display: flex; flex-direction: column; background: white; border: 1px solid var(--line); border-radius: 18px; padding: 26px; }
+    .service__price { font-family: "Lora", serif; color: var(--green); font-size: 28px; font-weight: 700; margin: 4px 0 12px; }
+    .service p { color: var(--muted); margin-bottom: 0; }
+    .steps { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; counter-reset: step; }
+    .step { background: white; border-radius: 18px; padding: 24px; border: 1px solid var(--line); }
+    .step:before { counter-increment: step; content: "0" counter(step); display: block; color: var(--terra); font-family: "Lora",serif; font-size: 28px; margin-bottom: 14px; }
+    .step p { color: var(--muted); margin: 0; }
+    .faq { max-width: 900px; margin: 0 auto; }
+    details { border-bottom: 1px solid var(--line); padding: 20px 0; }
+    summary { cursor: pointer; font-weight: 600; font-size: 17px; }
+    details p { color: var(--muted); margin: 12px 0 0; }
+    .cta { background: var(--green); color: white; border-radius: 26px; padding: clamp(28px, 5vw, 54px); display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center; }
+    .cta h2 { max-width: 720px; }
+    .cta p { color: #e2efeb; max-width: 690px; margin-bottom: 0; }
+    .cta .btn { background: white; color: var(--green); white-space: nowrap; }
+    footer { padding: 28px 0; font-size: 13px; color: var(--muted); }
+    footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    footer a { color: var(--green); }
+    @media (max-width: 850px) {
+      nav { display: none; }
+      .hero__grid, .expert { grid-template-columns: 1fr; }
+      .hero__grid { gap: 30px; }
+      .hero__image { height: min(68vw, 430px); }
+      .expert__photo { max-height: 560px; }
+      .cta { grid-template-columns: 1fr; }
+      .cta .btn { justify-self: start; white-space: normal; }
+    }
+    @media (max-width: 600px) {
+      .wrap { width: min(100% - 28px, 1160px); }
+      .top__in { min-height: 72px; gap: 12px; }
+      .brand__mark { width: 36px; height: 36px; }
+      .top .btn { min-height: 40px; padding: 8px 12px; font-size: 12px; }
+      .hero { padding: 44px 0 48px; }
+      .hero__buttons { align-items: stretch; flex-direction: column; }
+      .hero__buttons .btn { width: 100%; }
+      .section { padding: 54px 0; }
+      .grid-2, .format-grid, .services, .steps, .checks { grid-template-columns: 1fr; }
+      .benefit { min-height: unset; padding: 20px; }
+      .benefits-shell { padding: 18px; }
+      .service { padding: 22px; }
+      .cta { border-radius: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top__in">
+    <a class="brand" href="index.html" aria-label="Медуправа — главная">
+      <span class="brand__mark" aria-hidden="true">М</span>
+      <span class="brand__text">Медуправа<span class="brand__sub">ФИНАНСЫ КЛИНИКИ</span></span>
+    </a>
+    <nav aria-label="Разделы страницы">
+      <a href="#control">Финансы под контролем</a>
+      <a href="#expert">Эксперт</a>
+      <a href="#format">Формат работы</a>
+      <a href="#services">Услуги</a>
+    </nav>
+    <a class="btn btn--green" href="#contact">Обсудить задачу</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div>
+        <p class="eyebrow">Для собственников частных медицинских клиник и стоматологий</p>
+        <h1>Финансовый директор для медицинских клиник</h1>
+        <p class="hero__slogan">Выручка есть. А где прибыль?</p>
+        <p class="hero__lead">Управленческий учёт, контроль расходов и денежных потоков, финансовые расчёты для развития клиники.</p>
+        <div class="hero__buttons">
+          <a class="btn btn--green" href="https://forms.yandex.ru/u/6acb822e5057b228f8a8c76e">Получить бесплатную экспресс-диагностику</a>
+          <a class="btn btn--outline" href="#contact">Обсудить финансовые задачи</a>
+        </div>
+        <p class="hero__note">Короткая анкета помогает определить предварительные зоны внимания. Анализ документов в неё не входит.</p>
+      </div>
+      <img class="hero__image" src="assets/finance/clinic-financial-review.png" alt="Финансовый директор и врач обсуждают данные медицинской клиники" width="1600" height="900">
+    </div>
+  </section>
+
+  <section class="section" id="control">
+    <div class="wrap">
+      <div class="benefits-shell">
+        <h2>Финансы клиники под контролем</h2>
+        <p class="section__intro">Понимайте, где зарабатывает клиника, куда уходят деньги и что мешает расти прибыли.</p>
+        <div class="grid-2">
+          <article class="benefit">
+            <svg class="benefit__icon" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M4 26 13 17l6 5L32 8M25 8h7v7M7 31v-5M14 31V21M21 31v-6M28 31V17" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3>Знаете, сколько зарабатываете</h3>
+            <p>Видите реальную прибыль клиники и понимаете, какие направления приносят деньги, а какие съедают ресурсы.</p>
+          </article>
+          <article class="benefit">
+            <svg class="benefit__icon" viewBox="0 0 36 36" fill="none" aria-hidden="true"><rect x="4" y="7" width="26" height="23" rx="3" stroke="currentColor" stroke-width="2.5"/><path d="M4 12h26M23 20h10v7H23a3.5 3.5 0 0 1 0-7Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/></svg>
+            <h3>Деньги есть к сроку платежей</h3>
+            <p>Заранее планируете выплаты зарплат, налоги, аренду и закупки — без аврального поиска денег в последний момент.</p>
+          </article>
+          <article class="benefit">
+            <svg class="benefit__icon" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="13" cy="11" r="5" stroke="currentColor" stroke-width="2.5"/><circle cx="26" cy="13" r="4" stroke="currentColor" stroke-width="2.5"/><path d="M3 30c0-6 4-10 10-10s10 4 10 10M23 22c5-2 10 2 10 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            <h3>Команда работает на результат</h3>
+            <p>Настраиваете KPI и премирование так, чтобы мотивация сотрудников была связана с измеримыми результатами клиники.</p>
+          </article>
+          <article class="benefit">
+            <svg class="benefit__icon" viewBox="0 0 36 36" fill="none" aria-hidden="true"><rect x="5" y="3" width="26" height="30" rx="4" stroke="currentColor" stroke-width="2.5"/><rect x="10" y="8" width="16" height="5" rx="1" stroke="currentColor" stroke-width="2"/><path d="M11 19h1m6 0h1m6 0h1M11 25h1m6 0h1m6 0h1" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+            <h3>Инвестируете с расчётом</h3>
+            <p>До покупки оборудования оцениваете затраты, необходимую загрузку, ожидаемый денежный поток и срок окупаемости.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--linen" id="expert">
+    <div class="wrap expert">
+      <img class="expert__photo" src="assets/finance/elena-shtin-financial-director.jpg" alt="Елена Штин, финансовый директор" width="900" height="1100" loading="lazy">
+      <div>
+        <p class="eyebrow">Ваш финансовый партнёр</p>
+        <h2>Штин Елена</h2>
+        <p class="expert__role">Финансовый директор</p>
+        <p class="expert__copy">Специализируюсь на финансовом управлении медицинскими клиниками с 2018 года.</p>
+        <p class="expert__copy">Помогаю собственникам контролировать затраты, выстраивать управленческий учёт, настраивать KPI сотрудников и оценивать финансовую целесообразность инвестиций.</p>
+        <div class="chips">
+          <span class="chip">Управленческий учёт</span>
+          <span class="chip">Контроль расходов</span>
+          <span class="chip">KPI сотрудников</span>
+          <span class="chip">Финансовые модели</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--mint" id="format">
+    <div class="wrap">
+      <p class="eyebrow">Понятный процесс и контроль</p>
+      <h2>Как мы работаем: дистанционно и очно</h2>
+      <p class="section__intro">Финансовому директору необязательно каждый день находиться в клинике, чтобы управлять финансовыми процессами. Важны достоверные данные, регулярная отчётность, согласованные сроки и контроль выполнения задач.</p>
+      <div class="format-grid">
+        <article class="format-card">
+          <div class="format-card__top">
+            <svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><rect x="3" y="5" width="30" height="21" rx="3" stroke="currentColor" stroke-width="2.5"/><path d="M12 32h12M18 26v6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            <h3>Дистанционно</h3>
+          </div>
+          <p>Работаем по согласованному графику: проводим онлайн-встречи, разбираем отчёты и финансовые показатели, фиксируем задачи и сроки. Вы понимаете, что сделано и какие решения требуют вашего участия.</p>
+        </article>
+        <article class="format-card">
+          <div class="format-card__top">
+            <svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M5 32V8l13-5 13 5v24M2 32h32M13 12h2m6 0h2m-10 6h2m6 0h2m-10 6h2m6 0h2M15 32v-5h6v5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3>Личное присутствие</h3>
+          </div>
+          <p>При необходимости встречаемся в клинике: обсуждаем финансовые результаты, изучаем процессы и вместе с командой разбираем задачи, для которых важно личное участие.</p>
+        </article>
+      </div>
+      <h3>Как собственник контролирует работу</h3>
+      <ul class="checks">
+        <li><strong>Прозрачность</strong>Согласуем показатели, отчёты и формат представления результатов.</li>
+        <li><strong>Регулярность</strong>Заранее определяем график встреч, отчётности и контрольных точек.</li>
+        <li><strong>Контроль решений</strong>Ключевые решения остаются за собственником; зоны ответственности оговариваем на старте.</li>
+        <li><strong>Доступ к данным</strong>Согласуем необходимые права доступа и порядок безопасного обмена документами.</li>
+      </ul>
+      <p class="note">Формат и частоту личных встреч согласуем с учётом задач клиники. Ежедневное присутствие и постоянная доступность не предполагаются по умолчанию.</p>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="wrap">
+      <p class="eyebrow">Форматы сотрудничества</p>
+      <h2>Услуги и стоимость</h2>
+      <p class="section__intro">Можно начать с конкретной задачи или выстроить регулярное финансовое управление.</p>
+      <div class="services">
+        <article class="service">
+          <h3>Финансовая диагностика</h3>
+          <div class="service__price">от 10 000 ₽</div>
+          <p>Разбор текущей системы финансового управления, ключевых вопросов и приоритетных направлений работы.</p>
+        </article>
+        <article class="service">
+          <h3>Постановка управленческого учёта</h3>
+          <div class="service__price">от 100 000 ₽</div>
+          <p>Настройка управленческой отчётности, бюджетов и финансового контроля с учётом задач клиники.</p>
+        </article>
+        <article class="service">
+          <h3>Финансовый директор на аутсорсе</h3>
+          <div class="service__price">от 50 000 ₽/мес.</div>
+          <p>Регулярное финансовое сопровождение, анализ показателей, планирование денежных потоков и поддержка управленческих решений.</p>
+        </article>
+        <article class="service">
+          <h3>Финансовая модель клиники</h3>
+          <div class="service__price">По задаче</div>
+          <p>Расчёт сценариев развития, открытия направления, покупки оборудования или других инвестиций. Стоимость зависит от состава работ.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="wrap">
+      <p class="eyebrow">Первые шаги</p>
+      <h2>С чего начинается работа</h2>
+      <div class="steps">
+        <article class="step">
+          <h3>Экспресс-диагностика</h3>
+          <p>Заполняете короткую анкету примерно за 2 минуты. Она помогает обозначить предварительные зоны внимания.</p>
+        </article>
+        <article class="step">
+          <h3>Обсуждаем задачу</h3>
+          <p>Уточняем контекст и определяем, какой формат работы подходит клинике.</p>
+        </article>
+        <article class="step">
+          <h3>План действий</h3>
+          <p>Если нужен углублённый анализ, согласуем объём платной диагностики и следующие шаги.</p>
+        </article>
+      </div>
+      <p class="note">Экспресс-диагностика проводится на основании ответов анкеты и не включает проверку первичных документов или расчёт фактических потерь.</p>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="wrap faq">
+      <p class="eyebrow">Отвечаем на вопросы</p>
+      <h2>Частые вопросы</h2>
+      <details>
+        <summary>Как контролировать финансового директора на удалённой работе?</summary>
+        <p>На старте согласуем показатели, состав и сроки отчётности, график встреч, задачи и контрольные точки. Вы видите результаты работы и участвуете в принятии ключевых решений.</p>
+      </details>
+      <details>
+        <summary>Нужен ли финансовому директору доступ к банковскому счёту?</summary>
+        <p>Не обязательно предоставлять полный доступ. Набор данных и прав определяется задачами и согласуется с собственником; доступы следует выдавать по принципу необходимого минимума.</p>
+      </details>
+      <details>
+        <summary>Как вы взаимодействуете с бухгалтером клиники?</summary>
+        <p>Финансовый директор использует бухгалтерские данные для управленческой аналитики и планирования. Роли, формат обмена информацией и ответственность участников согласуются с клиникой.</p>
+      </details>
+      <details>
+        <summary>Как часто вы приезжаете в клинику?</summary>
+        <p>Частота очных встреч зависит от задач, географии и выбранного формата сотрудничества. График обсуждаем заранее; ежедневное присутствие не является обязательным условием.</p>
+      </details>
+      <details>
+        <summary>Как обеспечивается конфиденциальность?</summary>
+        <p>Согласуем перечень необходимых данных, права доступа и порядок обмена документами. Доступ к информации предоставляется в объёме, необходимом для выполнения согласованных задач.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="section section--linen" id="contact">
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <p class="eyebrow" style="color:#CFE5DF">Следующий шаг</p>
+          <h2>Начните управлять финансами клиники на основании цифр</h2>
+          <p>Расскажите о своей задаче — определим, какой формат финансовой работы вам подходит.</p>
+        </div>
+        <a class="btn" href="https://forms.yandex.ru/u/6acb822e5057b228f8a8c76e">Получить экспресс-диагностику</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Медуправа · Финансовое управление медицинскими клиниками</span>
+    <span><a href="index.html">Основной сайт</a> · <a href="legal/privacy.html">Политика обработки персональных данных</a> · <a href="legal/consent.html">Согласие на обработку персональных данных</a></span>
+  </div>
+</footer>
+</body>
+</html>
