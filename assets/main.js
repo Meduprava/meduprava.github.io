@@ -10,16 +10,26 @@
     if (el && CFG.REQUISITES[k]) el.textContent = CFG.REQUISITES[k];
   });
 
-  /* ---------- Калькулятор 15 рабочих дней ---------- */
-  // Считаем только выходные. Праздники закон о переносах меняет каждый год,
-  // поэтому результат показываем как ориентир, а не как юридический расчет.
+  /* ---------- Калькулятор сроков обжалования ---------- */
+  // Протокол разногласий - 10 рабочих дней (п. 71.1 Порядка контроля, приказ Минздрава России № 231н),
+  // претензия в фонд - 15 рабочих дней, только по МЭЭ и ЭКМП (ч. 1 ст. 42 Федерального закона № 326-ФЗ).
+  // Нерабочие будни 2026 г. - ст. 112 ТК РФ и постановление Правительства РФ от 24.09.2025 № 1466.
+  var HOLIDAYS = ['2026-01-01','2026-01-02','2026-01-05','2026-01-06','2026-01-07','2026-01-08','2026-01-09',
+    '2026-02-23','2026-03-09','2026-05-01','2026-05-11','2026-06-12','2026-11-04','2026-12-31'];
+  function iso(d) {
+    var m = d.getMonth() + 1, day = d.getDate();
+    return d.getFullYear() + '-' + (m < 10 ? '0' : '') + m + '-' + (day < 10 ? '0' : '') + day;
+  }
+  function isWork(d) {
+    var wd = d.getDay();
+    return wd !== 0 && wd !== 6 && HOLIDAYS.indexOf(iso(d)) === -1;
+  }
   function addWorkingDays(date, days) {
     var d = new Date(date.getTime());
     var left = days;
     while (left > 0) {
       d.setDate(d.getDate() + 1);
-      var wd = d.getDay();
-      if (wd !== 0 && wd !== 6) left--;
+      if (isWork(d)) left--;
     }
     return d;
   }
@@ -30,29 +40,34 @@
     var d = new Date(from.getTime()), n = 0;
     while (d < to) {
       d.setDate(d.getDate() + 1);
-      var wd = d.getDay();
-      if (wd !== 0 && wd !== 6) n++;
+      if (isWork(d)) n++;
     }
     return n;
+  }
+  function describe(due, today) {
+    if (due < today) return fmt(due) + ' - срок истек';
+    return fmt(due) + ' - осталось рабочих дней: ' + workingDaysBetween(today, due);
   }
   var calcInput = document.getElementById('calc-date');
   var calcOut = document.getElementById('calc-out');
   if (calcInput && calcOut) {
     calcInput.addEventListener('change', function () {
       var v = calcInput.value;
-      if (!v) { calcOut.textContent = 'Укажите дату, посчитаем крайний день подачи претензии.'; calcOut.classList.remove('is-soon'); return; }
+      if (!v) { calcOut.textContent = 'Укажите дату, посчитаем крайние дни подачи протокола и претензии.'; calcOut.classList.remove('is-soon'); return; }
       var start = new Date(v + 'T00:00:00');
       if (isNaN(start.getTime())) return;
-      var due = addWorkingDays(start, 15);
       var today = new Date(); today.setHours(0, 0, 0, 0);
-      var left = workingDaysBetween(today, due);
-      var text = 'Крайний день подачи претензии в территориальный фонд: ' + fmt(due) + '. ';
-      if (due < today) { text += 'Срок истек, но посмотреть документы все равно имеет смысл.'; }
-      else if (left <= 5) { text += 'Осталось рабочих дней: ' + left + '. Стоит не тянуть.'; }
-      else { text += 'Осталось рабочих дней: ' + left + '.'; }
-      text += ' Расчет учитывает выходные, но не переносы праздничных дней, поэтому это ориентир.';
+      var proto = addWorkingDays(start, 10);
+      var claim = addWorkingDays(start, 15);
+      var text = 'Протокол разногласий: ' + describe(proto, today) + '. ' +
+        'Претензия в фонд (по МЭЭ и ЭКМП): ' + describe(claim, today) + '. ';
+      if (claim < today) text += 'Оба срока прошли, но документы стоит посмотреть: остается суд. ';
+      var soonProto = proto >= today && workingDaysBetween(today, proto) <= 5;
+      var soonClaim = claim >= today && workingDaysBetween(today, claim) <= 5;
+      if (soonProto || soonClaim) text += 'Стоит не тянуть. ';
+      text += 'Праздники учтены по производственному календарю 2026 года, для других лет расчет ориентировочный.';
       calcOut.textContent = text;
-      calcOut.classList.toggle('is-soon', left <= 5);
+      calcOut.classList.toggle('is-soon', soonProto || soonClaim);
     });
   }
 
