@@ -185,3 +185,8 @@ p{margin:0 0 12px}
 .doc p,.doc li{font-size:16px;line-height:24px}
 .doc .back{display:inline-block;margin-bottom:var(--space-6);font-size:14px}
 .doc .meta{color:var(--muted);font-size:14px;line-height:20px;margin-bottom:var(--space-6)}
+
+/* Блок о данных пациентов */
+.pd{background:var(--mint);border-left:4px solid var(--deep);border-radius:var(--radius-sm);padding:var(--space-6)}
+.pd h2{margin-top:0}
+.pd .list{margin-bottom:var(--space-2)}

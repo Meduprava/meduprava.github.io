@@ -12,6 +12,5 @@ window.MEDUPRAVA = {
   REQUISITES: {
     ogrnip: "320246800028048",
     inn: "245208470580",
-    "version-date": "08.10.2026",
   },
 };
