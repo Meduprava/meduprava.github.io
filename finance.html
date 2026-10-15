@@ -77,6 +77,7 @@
     .hero__slogan { color: var(--terra); font-size: clamp(21px, 2.6vw, 28px); font-weight: 700; margin-bottom: 12px; }
     .hero__buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
     .hero__note { font-size: 13px; color: var(--muted); }
+    .hero__grid > picture { display: block; min-width: 0; }
     .hero__image { width: 100%; height: clamp(340px, 37vw, 500px); object-fit: cover; object-position: center; border-radius: 28px; box-shadow: var(--shadow); }
     .section-heading--center { text-align: center; margin-inline: auto; }
     .section-heading--center .section__intro { max-width: none; margin-inline: auto; white-space: nowrap; }
@@ -234,7 +235,10 @@
         </div>
         <p class="hero__note">Короткая анкета помогает определить предварительные зоны внимания. Анализ документов в неё не входит.</p>
       </div>
-      <img class="hero__image" src="assets/finance/clinic-financial-review.png" alt="Финансовый директор и врач обсуждают данные медицинской клиники" width="1600" height="900">
+      <picture>
+        <source srcset="assets/finance/clinic-financial-review.webp" type="image/webp">
+        <img class="hero__image" src="assets/finance/clinic-financial-review.jpg" alt="Финансовый директор и врач обсуждают данные медицинской клиники" width="1670" height="941" fetchpriority="high">
+      </picture>
     </div>
   </section>
 
@@ -432,7 +436,7 @@
       <p><a href="mailto:meduprava@mail.ru">meduprava@mail.ru</a></p>
     </div>
     <div class="footer-links">
-      <a href="legal/privacy.html?from=finance">Политика обработки персональных данных</a>
+      <a href="legal/privacy-finance.html">Политика обработки персональных данных</a>
       <a href="legal/consent-finance.html">Согласие на обработку персональных данных</a>
       <a href="legal/cookies.html?from=finance">Использование файлов cookie</a>
       <button class="linklike" type="button" data-cookie-settings>Настройки cookie</button>
