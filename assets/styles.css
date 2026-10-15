@@ -190,3 +190,5 @@ p{margin:0 0 12px}
 .pd{background:var(--mint);border-left:4px solid var(--deep);border-radius:var(--radius-sm);padding:var(--space-6)}
 .pd h2{margin-top:0}
 .pd .list{margin-bottom:var(--space-2)}
+
+.foot__linkbtn{padding:0;border:0;background:none;font:inherit;font-size:15px;line-height:22px;color:var(--on-ink);text-decoration:underline;cursor:pointer}

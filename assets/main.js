@@ -10,6 +10,26 @@
     if (el && CFG.REQUISITES[k]) el.textContent = CFG.REQUISITES[k];
   });
 
+  /* ---------- Мобильное меню ---------- */
+  var menuBtn = document.querySelector('.menu-toggle');
+  var menu = menuBtn && document.getElementById(menuBtn.getAttribute('aria-controls'));
+  if (menuBtn && menu) {
+    var setMenu = function (open) {
+      menu.classList.toggle('is-open', open);
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menuBtn.setAttribute('aria-label', open ? 'Закрыть меню разделов' : 'Открыть меню разделов');
+    };
+    menuBtn.addEventListener('click', function () {
+      setMenu(menuBtn.getAttribute('aria-expanded') !== 'true');
+    });
+    menu.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setMenu(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && menu.classList.contains('is-open')) { setMenu(false); menuBtn.focus(); }
+    });
+  }
+
   /* ---------- Калькулятор сроков обжалования ---------- */
   // Протокол разногласий - 10 рабочих дней (п. 71.1 Порядка контроля, приказ Минздрава России № 231н),
   // претензия в фонд - 15 рабочих дней, только по МЭЭ и ЭКМП (ч. 1 ст. 42 Федерального закона № 326-ФЗ).
@@ -159,14 +179,42 @@
   } else if (!choice && banner) {
     banner.hidden = false;
   }
+  // Удаляет cookie Яндекс Метрики (_ym_*), установленные на этом сайте.
+  function clearAnalyticsCookies() {
+    var host = location.hostname;
+    document.cookie.split(';').forEach(function (c) {
+      var name = c.split('=')[0].trim();
+      if (name.indexOf('_ym') !== 0) return;
+      var exp = '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+      document.cookie = name + exp;
+      document.cookie = name + exp + '; domain=' + host;
+      document.cookie = name + exp + '; domain=.' + host;
+    });
+  }
   if (banner) {
     banner.addEventListener('click', function (e) {
       var b = e.target.closest('[data-cookie]');
       if (!b) return;
       var v = b.getAttribute('data-cookie');
+      var prev = readChoice();
       saveChoice(v);
       banner.hidden = true;
-      if (v === 'accept') loadMetrika(CFG.ANALYTICS && CFG.ANALYTICS.YANDEX_METRIKA_ID);
+      if (v === 'accept') {
+        if (prev !== 'accept') loadMetrika(CFG.ANALYTICS && CFG.ANALYTICS.YANDEX_METRIKA_ID);
+      } else if (prev === 'accept') {
+        // Согласие отозвано: удаляем cookie аналитики и перезагружаем страницу, чтобы выгрузить счетчик.
+        clearAnalyticsCookies();
+        location.reload();
+      }
     });
   }
+  // Ссылка «Настройки cookie»: повторно показывает баннер, чтобы изменить или отозвать выбор.
+  document.addEventListener('click', function (e) {
+    var s = e.target.closest('[data-cookie-settings]');
+    if (!s || !banner) return;
+    e.preventDefault();
+    banner.hidden = false;
+    var first = banner.querySelector('[data-cookie]');
+    if (first) first.focus();
+  });
 })();

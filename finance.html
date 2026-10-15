@@ -7,6 +7,18 @@
   <meta name="description" content="Финансовое управление медицинской клиникой: управленческий учёт, контроль расходов и денежных потоков, KPI сотрудников и финансовые модели.">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#1F6B63">
+  <link rel="canonical" href="https://meduprava.github.io/finance.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Медуправа">
+  <meta property="og:title" content="Финансовый директор для медицинских клиник | Медуправа">
+  <meta property="og:description" content="Выручка есть. А где прибыль? Управленческий учёт, контроль расходов и денежных потоков для частных клиник.">
+  <meta property="og:url" content="https://meduprava.github.io/finance.html">
+  <meta property="og:image" content="https://meduprava.github.io/assets/finance/og-finance.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Финансовый директор и врач обсуждают данные медицинской клиники">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:locale" content="ru_RU">
   <link rel="icon" href="assets/meduprava-znak.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/fonts.css">
   <style>
@@ -36,6 +48,16 @@
     nav { display: flex; gap: 25px; align-items: center; }
     nav a { text-decoration: none; color: #43514C; font-size: 14px; }
     nav a:hover { color: var(--green); }
+    .menu-toggle { display: none; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 1px solid #b8cec8; border-radius: 12px; background: #fff; color: var(--green); cursor: pointer; flex: 0 0 auto; }
+    .menu-toggle svg { width: 22px; height: 22px; }
+    .menu-toggle .icon-close { display: none; }
+    .menu-toggle[aria-expanded="true"] .icon-open { display: none; }
+    .menu-toggle[aria-expanded="true"] .icon-close { display: block; }
+    .top__actions { display: flex; align-items: center; gap: 10px; }
+    [id] { scroll-margin-top: 16px; }
+    .footer-fine { grid-column: 1 / -1; margin: 6px 0 0; padding-top: 18px; border-top: 1px solid #3B8178; color: #d9e8e3; font-size: 13px; line-height: 1.5; }
+    .linklike { padding: 0; border: 0; background: none; font: inherit; color: #fff; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; text-align: left; }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--terra); outline-offset: 2px; }
     .btn { display: inline-flex; justify-content: center; align-items: center; text-align: center; min-height: 48px; padding: 12px 22px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid transparent; transition: transform .15s ease, background .15s ease; }
     .btn:hover { transform: translateY(-1px); }
     .btn--green { color: white; background: var(--green); }
@@ -119,8 +141,16 @@
     footer { padding: 28px 0; font-size: 13px; color: var(--muted); }
     footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
     footer a { color: var(--green); }
+    @media (max-width: 960px) {
+      .section-heading--center .section__intro, .benefits-shell > .section__intro { white-space: normal; }
+      .top__in { flex-wrap: wrap; }
+      .menu-toggle { display: inline-flex; }
+      nav { display: none; order: 3; flex: 1 0 100%; flex-direction: column; align-items: stretch; gap: 0; padding: 4px 0 14px; border-top: 1px solid #edf0ee; }
+      nav.is-open { display: flex; }
+      nav a { padding: 12px 2px; font-size: 16px; border-bottom: 1px solid #f1f3f2; }
+      nav a:last-child { border-bottom: 0; }
+    }
     @media (max-width: 850px) {
-      nav { display: none; }
       .hero__grid, .expert { grid-template-columns: 1fr; }
       .hero__grid { gap: 30px; }
       .hero__image { height: min(68vw, 430px); }
@@ -135,7 +165,10 @@
     @media (max-width: 600px) {
       .wrap { width: min(100% - 28px, 1160px); }
       .top__in { min-height: 72px; gap: 12px; }
-      .brand__logo { width: min(220px, 52vw); }
+      .brand__logo { width: min(200px, 44vw); }
+      .top__in { flex-wrap: wrap; }
+      .top__actions { gap: 8px; }
+      .menu-toggle { width: 40px; height: 40px; }
       .top .btn { min-height: 40px; padding: 8px 12px; font-size: 12px; }
       .hero { padding: 44px 0 48px; }
       .hero__buttons { align-items: stretch; flex-direction: column; }
@@ -148,6 +181,9 @@
       .cta { border-radius: 20px; }
       .footer-grid { grid-template-columns: 1fr; gap: 24px; }
       .footer-brand-column { grid-column: auto; }
+    }
+    @media (max-width: 420px) {
+      .top__actions .btn { display: none; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
 
@@ -164,16 +200,23 @@
 <body>
 <header class="top">
   <div class="wrap top__in">
-    <a class="brand" href="index.html" aria-label="Медуправа — главная">
+    <a class="brand" href="./" aria-label="Медуправа, главная страница">
       <img class="brand__logo" src="assets/meduprava-logo.svg" alt="Медуправа" width="444" height="90">
     </a>
-    <nav aria-label="Разделы страницы">
+    <nav id="site-nav" aria-label="Разделы страницы">
       <a href="#control">Финансы под контролем</a>
       <a href="#expert">Эксперт</a>
       <a href="#format">Формат работы</a>
       <a href="#services">Услуги</a>
+      <a href="#faq">Вопросы</a>
     </nav>
-    <a class="btn btn--green" href="https://forms.yandex.ru/u/6acb9dc39029027b3ec437ff">Оставить заявку</a>
+    <div class="top__actions">
+      <a class="btn btn--green" href="https://forms.yandex.ru/u/6acb9dc39029027b3ec437ff" target="_blank" rel="noopener">Оставить заявку</a>
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Открыть меню разделов">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -186,8 +229,8 @@
         <p class="hero__slogan">Выручка есть. А где прибыль?</p>
         <p class="hero__lead">Управленческий учёт, контроль расходов и денежных потоков, финансовые расчёты для развития клиники.</p>
         <div class="hero__buttons">
-          <a class="btn btn--green" href="https://forms.yandex.ru/u/6acb822e5057b228f8a8c76e">Получить бесплатную экспресс-диагностику</a>
-          <a class="btn btn--outline" href="https://forms.yandex.ru/u/6acb9dc39029027b3ec437ff">Оставить заявку</a>
+          <a class="btn btn--green" href="https://forms.yandex.ru/u/6acb822e5057b228f8a8c76e" target="_blank" rel="noopener">Получить бесплатную экспресс-диагностику</a>
+          <a class="btn btn--outline" href="https://forms.yandex.ru/u/6acb9dc39029027b3ec437ff" target="_blank" rel="noopener">Оставить заявку</a>
         </div>
         <p class="hero__note">Короткая анкета помогает определить предварительные зоны внимания. Анализ документов в неё не входит.</p>
       </div>
@@ -370,7 +413,7 @@
           <h2>Начните управлять финансами клиники на основании цифр</h2>
           <p>Расскажите о своей задаче — определим, какой формат финансовой работы вам подходит.</p>
         </div>
-        <a class="btn" href="https://forms.yandex.ru/u/6acb822e5057b228f8a8c76e">Получить экспресс-диагностику</a>
+        <a class="btn" href="https://forms.yandex.ru/u/6acb822e5057b228f8a8c76e" target="_blank" rel="noopener">Получить экспресс-диагностику</a>
       </div>
     </div>
   </section>
@@ -379,8 +422,9 @@
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div class="footer-brand-column">
-      <a href="index.html" aria-label="Медуправа — главная"><img class="footer-logo" src="assets/meduprava-logo-dark.svg" alt="Медуправа" width="444" height="90"></a>
+      <a href="./" aria-label="Медуправа, главная страница"><img class="footer-logo" src="assets/meduprava-logo-dark.svg" alt="Медуправа" width="444" height="90"></a>
       <p class="footer-description">Юридическое, финансовое и маркетинговое сопровождение медицинских организаций.</p>
+      <p class="footer-description" style="margin-top:10px"><a href="./" style="color:#fff">Юридическое направление: защита клиники в системе ОМС</a></p>
     </div>
     <div class="footer-details">
       <p>Исполнитель: индивидуальный предприниматель Штин Антон Владимирович</p>
@@ -388,15 +432,17 @@
       <p><a href="mailto:meduprava@mail.ru">meduprava@mail.ru</a></p>
     </div>
     <div class="footer-links">
-      <a href="legal/privacy.html">Политика обработки персональных данных</a>
+      <a href="legal/privacy.html?from=finance">Политика обработки персональных данных</a>
       <a href="legal/consent-finance.html">Согласие на обработку персональных данных</a>
-      <a href="legal/cookies.html">Использование файлов cookie</a>
+      <a href="legal/cookies.html?from=finance">Использование файлов cookie</a>
+      <button class="linklike" type="button" data-cookie-settings>Настройки cookie</button>
     </div>
+    <p class="footer-fine">Сайт информационный. Публикуемые сведения, в том числе о стоимости услуг, не являются публичной офертой. Услуги оказываются юридическим лицам и индивидуальным предпринимателям на основании договора. Медуправа не является медицинской организацией и медицинских услуг не оказывает.</p>
   </div>
 </footer>
 
 <div class="cookie" id="cookie" hidden role="dialog" aria-label="Настройки файлов cookie" aria-live="polite">
-  <p>Сайт использует необходимые файлы cookie для сохранения вашего выбора. Аналитические cookie подключаются только с вашего согласия. Подробнее — в <a href="legal/cookies.html">уведомлении об использовании файлов cookie</a>.</p>
+  <p>Сайт запоминает ваш выбор в браузере. Аналитические cookie подключаются только с вашего согласия. Подробнее - в <a href="legal/cookies.html?from=finance">уведомлении об использовании файлов cookie</a>.</p>
   <div class="cookie__btns">
     <button class="btn btn--green" type="button" data-cookie="accept">Принять</button>
     <button class="btn btn--mint" type="button" data-cookie="decline">Только необходимые</button>
