@@ -29,6 +29,7 @@
       <a href="#audit">Аудит</a>
       <a href="#services">Услуги</a>
       <a href="#faq">Вопросы</a>
+      <a href="finance.html">Финансовый директор</a>
     </nav>
     <a class="btn btn--sm" href="#form">Оставить заявку</a>
   </div>
@@ -221,6 +222,7 @@
     <div>
       <p class="foot__brand"><img class="foot__logo" src="assets/meduprava-logo-dark.svg" alt="Медуправа" width="475" height="112"></p>
       <p class="muted">Юридическое, финансовое и маркетинговое сопровождение медицинских организаций.</p>
+      <p><a href="finance.html">Финансовое направление: финансовый директор для клиник</a></p>
     </div>
     <div>
       <p>Исполнитель: индивидуальный предприниматель Штин Антон Владимирович</p>
@@ -232,6 +234,7 @@
       <p><a href="legal/obezlichivanie.html">Пользовательское соглашение</a></p>
       <p><a href="legal/consent.html">Согласие на обработку персональных данных</a></p>
       <p><a href="legal/cookies.html">Использование файлов cookie</a></p>
+      <p><button class="foot__linkbtn" type="button" data-cookie-settings>Настройки cookie</button></p>
     </div>
   </div>
   <div class="wrap foot__fine">
@@ -239,8 +242,8 @@
   </div>
 </footer>
 
-<div class="cookie" id="cookie" hidden>
-  <p>Сайт использует файлы cookie для работы веб-аналитики. Подробности - в <a href="legal/cookies.html">уведомлении о cookie</a>.</p>
+<div class="cookie" id="cookie" hidden role="dialog" aria-label="Настройки файлов cookie" aria-live="polite">
+  <p>Сайт запоминает ваш выбор в браузере. Аналитические cookie подключаются только с вашего согласия. Подробнее - в <a href="legal/cookies.html">уведомлении об использовании файлов cookie</a>.</p>
   <div class="cookie__btns">
     <button class="btn btn--sm" type="button" data-cookie="accept">Принять</button>
     <button class="btn btn--sm btn--mint" type="button" data-cookie="decline">Только необходимые</button>
