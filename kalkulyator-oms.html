@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Калькулятор потерь по ОМС | Медуправа</title>
+<meta name="description" content="Калькулятор Медуправы для руководителя клиники: сколько клиника теряет на снятиях и штрафах страховой по ОМС за месяц и за год.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://meduprava.github.io/kalkulyator-oms.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Медуправа">
+<meta property="og:title" content="Сколько клиника теряет на снятиях по ОМС? Калькулятор">
+<meta property="og:description" content="Введите сумму по реестрам, снятия и штрафы за месяц: калькулятор покажет потери за месяц и за год.">
+<meta property="og:url" content="https://meduprava.github.io/kalkulyator-oms.html">
+<meta property="og:locale" content="ru_RU">
+<link rel="icon" href="assets/meduprava-znak.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+/* Макет: две панели - ввод слева, результат справа; на телефоне одна колонка. Фирменный стиль Медуправы. */
+:root{
+  --bg:#F3F1EA; --paper:#FBFAF6; --ink:#23332C; --muted:#55645C; --line:#D9D3C3;
+  --mint:#DCE5D6; --deep:#34483F; --sage:#5E7F5D; --terra:#B5552F; --terra-text:#8F3F1F; --field:#FFFFFF;
+  --display:"Lora",Georgia,"Times New Roman",serif;
+  --body:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#18221E; --paper:#1F2B26; --ink:#EEF0E8; --muted:#A9B5AD; --line:#33433B;
+  --mint:#2A3A33; --deep:#34483F; --sage:#8FB08D; --terra:#D9825F; --terra-text:#E59A79; --field:#16201C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#18221E; --paper:#1F2B26; --ink:#EEF0E8; --muted:#A9B5AD; --line:#33433B;
+  --mint:#2A3A33; --deep:#34483F; --sage:#8FB08D; --terra:#D9825F; --terra-text:#E59A79; --field:#16201C; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--body)}
+main{max-width:1000px;margin:0 auto;padding-block:28px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:22px}
+.brand{display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.brand span{font:600 24px var(--display)}
+.eyebrow{color:var(--terra-text);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin:6px 0 0}
+h1{font:600 clamp(28px,5vw,42px)/1.15 var(--display);margin:0;max-width:760px;text-wrap:balance}
+.intro{color:var(--muted);margin:0;max-width:62ch}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:26px;min-width:0;display:flex;flex-direction:column;gap:18px}
+h2{font:600 22px/1.25 var(--display);margin:0}
+.field{display:flex;flex-direction:column;gap:7px}
+label{font-weight:600}
+input{width:100%;font:500 18px var(--body);font-variant-numeric:tabular-nums;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+input:focus{outline:3px solid var(--mint);outline-offset:1px;border-color:var(--sage)}
+input[aria-invalid=true]{border-color:var(--terra)}
+.hint{font-size:13px;color:var(--muted);margin:0}
+.buttons{display:flex;flex-wrap:wrap;gap:10px}
+button{font:600 15px var(--body);border-radius:999px;padding:12px 20px;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:var(--bg)}
+button.secondary{background:transparent;color:var(--ink)}
+button:focus-visible{outline:3px solid var(--sage);outline-offset:3px}
+.error{color:var(--terra-text);font-size:14px;margin:0}
+.error:empty{display:none}
+.results{background:var(--mint);border-color:transparent}
+.badge{align-self:flex-start;background:var(--paper);color:var(--sage);font-size:12px;font-weight:600;border-radius:999px;padding:5px 12px}
+.period{display:flex;flex-direction:column;gap:4px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.period h3{font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.amount{font:600 clamp(28px,4.4vw,40px)/1.15 var(--display);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.annual .amount{color:var(--terra-text)}
+.rate{margin:0;font-size:16px}
+.explain{margin:0}
+.deadlines{background:var(--deep);color:#F3F1EA;border-radius:18px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.deadlines strong{font:600 18px var(--display)}
+.dl{display:flex;gap:14px;align-items:baseline}
+.dl b{flex:none;font:600 26px var(--display);color:#E59A79;min-width:44px;font-variant-numeric:tabular-nums}
+.dl span{font-size:14px;line-height:1.45}
+.dl small{display:block;color:#B9C6BD;font-size:12px}
+.note{color:var(--muted);font-size:13px;margin:0}
+.method{color:var(--muted);font-size:14px;max-width:72ch;display:flex;flex-direction:column;gap:8px}
+.method p{margin:0}
+footer{border-top:1px solid var(--line);padding-top:16px;font-size:13px;color:var(--muted)}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.panel{padding:20px}}
+@media print{body{background:#fff}.buttons,#print{display:none}.layout{grid-template-columns:1fr 1fr}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<main>
+  <div class="brand">
+    <svg aria-hidden="true" width="40" height="40" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="var(--mint)"/><polyline points="8,26 15,26 18.5,18 22.5,31 26,23 29,27 37.5,15" fill="none" stroke="var(--ink)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="38.6" cy="13.6" r="2.9" fill="var(--terra)"/></svg>
+    <a href="./" style="color:inherit;text-decoration:none"><span>Медуправа</span></a>
+  </div>
+  <div>
+    <p class="eyebrow">Калькулятор для руководителя клиники</p>
+  </div>
+  <h1>Сколько денег клиника теряет на снятиях по ОМС?</h1>
+  <p class="intro">Укажите сумму по реестрам счетов за месяц и то, что сняла страховая. Калькулятор покажет потери за месяц и за год, если так будет каждый месяц.</p>
+
+  <div class="layout">
+    <section class="panel" aria-labelledby="in-h">
+      <h2 id="in-h">Три суммы за один месяц</h2>
+      <form id="form" novalidate style="display:flex;flex-direction:column;gap:18px">
+        <div class="field">
+          <label for="funds">Выставлено к оплате по реестрам, ₽</label>
+          <input id="funds" value="4 000 000" inputmode="decimal" autocomplete="off" aria-describedby="funds-help">
+          <p class="hint" id="funds-help">Сумма счетов по ОМС за месяц до снятий. В примере: 4 млн ₽.</p>
+        </div>
+        <div class="field">
+          <label for="cuts">Сколько сняла страховая, ₽</label>
+          <input id="cuts" value="80 000" inputmode="decimal" autocomplete="off" aria-describedby="cuts-help">
+          <p class="hint" id="cuts-help">Неоплата или уменьшение оплаты по актам, без штрафов.</p>
+        </div>
+        <div class="field">
+          <label for="fines">Штрафы, ₽</label>
+          <input id="fines" value="20 000" inputmode="decimal" autocomplete="off" aria-describedby="fines-help">
+          <p class="hint" id="fines-help">Отдельная сумма. Если штрафов нет, укажите 0.</p>
+        </div>
+        <p class="error" id="error" role="alert"></p>
+        <div class="buttons">
+          <button type="submit">Посчитать потери</button>
+          <button class="secondary" type="button" id="example">Пример из поста</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel results" aria-labelledby="out-h">
+      <span class="badge" id="badge">Условный пример из поста</span>
+      <h2 id="out-h">Сколько теряет клиника</h2>
+      <div id="result" aria-live="polite" aria-atomic="true" style="display:flex;flex-direction:column;gap:16px">
+        <div class="period"><h3>За месяц</h3><div class="amount" id="month">-</div><p class="rate" id="monthlyRate"></p></div>
+        <div class="period annual"><h3>За год, если так каждый месяц</h3><div class="amount" id="year">-</div><p class="rate" id="yearlyRate"></p></div>
+        <p class="explain" id="explain"></p>
+      </div>
+      <div class="deadlines">
+        <strong>Часть этой суммы ещё можно оспорить в срок</strong>
+        <div class="dl"><b>10</b><span>рабочих дней на протокол разногласий со дня получения заключения<small>по МЭК, МЭЭ и ЭКМП · п. 71.1 Порядка контроля, приказ Минздрава России № 231н</small></span></div>
+        <div class="dl"><b>15</b><span>рабочих дней на претензию в территориальный фонд<small>по МЭЭ и ЭКМП · ч. 1 ст. 42 Закона № 326-ФЗ</small></span></div>
+      </div>
+      <p class="note">Годовой расчёт - прогноз: поступления, снятия и штрафы каждый месяц такие же.</p>
+      <button class="secondary" type="button" id="print" style="align-self:flex-start">Печать или сохранить в PDF</button>
+    </section>
+  </div>
+
+  <div class="method">
+    <p><strong>Как считаем.</strong> Складываем снятия и штрафы, делим на сумму по реестрам и умножаем на 100: получаем процент потерь. Для года умножаем месячные суммы на 12, поэтому процент за год тот же.</p>
+    <p>Используйте суммы за один и тот же месяц. Отменённые по протоколу или претензии снятия не включайте. Калькулятор не показывает, какую сумму можно вернуть: это видно только по актам.</p>
+  </div>
+
+  <footer>Елена Штин, финансовый директор Медуправы<br>Расчёт идёт в вашем браузере: введённые суммы никуда не отправляются и не сохраняются.<br><br>
+Исполнитель: индивидуальный предприниматель Штин Антон Владимирович · ОГРНИП 320246800028048 · ИНН 245208470580<br>
+<a href="./" style="color:inherit">Защита клиники в системе ОМС</a> · <a href="finance.html" style="color:inherit">Финансовый директор для клиник</a> · <a href="legal/privacy.html" style="color:inherit">Политика обработки персональных данных</a></footer>
+</main>
+
+<script>
+'use strict';
+const $=id=>document.getElementById(id);const fields=['funds','cuts','fines'];let demo=true;
+const rub=k=>new Intl.NumberFormat('ru-RU',{style:'currency',currency:'RUB',maximumFractionDigits:2}).format(k/100);
+const num=n=>new Intl.NumberFormat('ru-RU',{maximumFractionDigits:2}).format(n);
+function parse(raw){const s=raw.trim().replace(/[\s  ]/g,'').replace(',','.');if(!/^\d+(?:\.\d{1,2})?$/.test(s))throw Error('Введите сумму цифрами, не больше двух знаков после запятой.');const n=Math.round(Number(s)*100);if(!Number.isSafeInteger(n)||n>100000000000000)throw Error('Введите сумму не больше 1 трлн ₽.');return n;}
+function compute(f,c,x){if(f<=0)throw Error('Сумма по реестрам должна быть больше нуля.');const loss=c+x;return{loss,year:loss*12,rate:loss/f*100,perThousand:loss/f*100000};}
+function clear(){['month','year'].forEach(id=>$(id).textContent='-');['monthlyRate','yearlyRate','explain'].forEach(id=>$(id).textContent='');}
+function calculate(){clear();$('error').textContent='';fields.forEach(id=>$(id).removeAttribute('aria-invalid'));let active='funds';
+ try{const v={};for(const id of fields){active=id;v[id]=parse($(id).value);}active='funds';const r=compute(v.funds,v.cuts,v.fines);
+  $('month').textContent=rub(r.loss);$('year').textContent=rub(r.year);
+  const rate=r.rate>0&&r.rate<0.01?'менее 0,01':num(r.rate);
+  $('monthlyRate').textContent=rate+' % от '+rub(v.funds);
+  $('yearlyRate').textContent=rate+' % от '+rub(v.funds*12);
+  $('explain').textContent=r.loss===0?'По этим данным потерь нет.':r.rate>100?'Потери больше суммы по реестрам. Проверьте, что все суммы за один месяц.':'С каждой 1 000 ₽ по реестрам клиника теряет '+(r.perThousand<1?'меньше 1 ₽':rub(r.perThousand))+'.';
+  $('badge').textContent=demo?'Условный пример из поста':'Расчёт по вашим данным';return true;
+ }catch(e){$(active).setAttribute('aria-invalid','true');$('error').textContent=e.message;$('badge').textContent='Проверьте данные';return false;}}
+$('form').addEventListener('submit',e=>{e.preventDefault();calculate();});
+fields.forEach(id=>$(id).addEventListener('input',()=>{demo=false;clear();$('badge').textContent='Данные изменены';$('error').textContent='';$(id).removeAttribute('aria-invalid');$('explain').textContent='Нажмите «Посчитать потери», чтобы обновить результат.';}));
+$('example').addEventListener('click',()=>{['4 000 000','80 000','20 000'].forEach((v,i)=>$(fields[i]).value=v);demo=true;calculate();});
+$('print').addEventListener('click',()=>{if(calculate())window.print();});
+calculate();
+</script>
+
+</body>
+</html>
