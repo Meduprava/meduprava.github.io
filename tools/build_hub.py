@@ -196,14 +196,16 @@ def pravo():
              ('Договоры с подрядчиками', 'IT, маркетинг, продвижение на агрегаторах: риски по пунктам, протокол разногласий, права на результаты.', None),
              ('Трудовые вопросы персонала', 'Положение об оплате труда, премии с критериями, индексация, подготовка к проверкам трудовой инспекции.', None)]
     cards = ''.join(f'<{"a" if l else "div"} class="card"{f" href={chr(34)}{l}{chr(34)}" if l else ""}><h3>{t}</h3><p>{d}</p>{"<span class=card__more>Подробнее →</span>" if l else ""}</{"a" if l else "div"}>' for t, d, l in items)
-    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / Юридическое направление</nav>
+    body = f'''<section class="page-hero"><div class="wrap media-hero"><div><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / Юридическое направление</nav>
 <p class="over">Юридическое направление</p><h1>Юрист для медицинской клиники в Москве и Московской области</h1>
 <p class="lead">Защищаем деньги и лицензию клиники: претензии пациентов, экспертизы страховых по ОМС, договоры и согласия. Начинаем с документов, которые уже есть, и показываем, где клиника уязвима.</p>
-<div class="hero__cta"><a class="btn" href="#contacts">Обсудить задачу</a><a class="btn btn--line" href="ekspertiza-oms.html">Экспертиза актов по ОМС</a></div></div></section>
+<div class="hero__cta"><a class="btn" href="#contacts">Обсудить задачу</a><a class="btn btn--line" href="ekspertiza-oms.html">Экспертиза актов по ОМС</a></div></div>
+<img class="media-img" src="assets/pravo/rabota-s-dokumentami.jpg" alt="Юрист работает с документами клиники" width="900" height="1350" fetchpriority="high"></div></section>
 <section class="sec"><div class="wrap"><div class="brief"><p class="over">Кратко</p><p>Юридическое направление Медуправы ведёт юрист Антон Штин. Услуги для частных медицинских клиник: экспертиза актов страховых компаний в рамках ОМС, ответы на претензии пациентов, договоры платных медицинских услуг, информированное добровольное согласие, лицензия на медицинскую деятельность, персональные данные и врачебная тайна, договоры с подрядчиками, трудовые вопросы персонала. Москва, Московская область, дистанционно по всей России.</p></div></div></section>
 <section class="sec sec--white"><div class="wrap"><div class="sec__head"><p class="over">Услуги</p><h2>С чем приходят клиники</h2></div><div class="grid grid--2">{cards}</div></div></section>
 <section class="sec"><div class="wrap cols">
-  <div><p class="over">Кто ведёт направление</p><h2>Антон Штин, юрист</h2>
+  <div><img class="media-img media-img--wide" src="assets/pravo/yurist-za-rabotoy.jpg" alt="Антон Штин за работой" width="900" height="1350" loading="lazy" style="margin-bottom:28px">
+  <p class="over">Кто ведёт направление</p><h2>Антон Штин, юрист</h2>
   <p>Управленческий стаж с 2007 года, с 2020 года - частная юридическая практика в сопровождении бизнеса. Пять лет юридически сопровождает медицинскую клинику: лицензирование, договоры, персональные данные и врачебная тайна, споры со страховой организацией по результатам экспертиз.</p>
   <p><a href="https://vk.ru/aresid" rel="noopener">Страница во ВКонтакте</a></p></div>
   <div><p class="over">Принцип</p><h2>Процедура, а не лечение</h2><p class="lead">Мы не оцениваем качество лечения и не спорим с медицинскими решениями. Наша часть - процедура контроля, соответствие кода дефекта фактам, сроки, договоры и согласия.</p></div>
