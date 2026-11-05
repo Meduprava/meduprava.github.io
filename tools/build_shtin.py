@@ -493,11 +493,17 @@ def practice_card(c):
 
 def praktika():
     url = BASE + '/praktika.html'
-    cards = ''.join(practice_card(c) for c in PRACTICE)
+    groups = [('dtp', 'ДТП', 'Дела по ДТП', 'yurist-po-dtp.html'), ('civil', 'Гражданские', 'Гражданские споры', 'grazhdanskie-spory.html'),
+              ('labor', 'Трудовые', 'Трудовые споры', 'trudovye-spory.html'), ('arb', 'Арбитраж', 'Арбитражные споры', 'soprovozhdenie-biznesa.html')]
+    groups = [(gid, pre, name, link, [c for c in PRACTICE if c['cat'].startswith(pre)]) for gid, pre, name, link in groups]
+    groups = [g for g in groups if g[4]]
+    chips = ''.join(f'<a class="chip" href="#{gid}">{name} <span>{len(items)}</span></a>' for gid, pre, name, link, items in groups)
+    cards = ''.join(f'<div class="pgroup" id="{gid}"><div class="pgroup__head"><h2>{name}</h2><a href="{link}">Об услуге →</a></div><div class="grid grid--2">' + ''.join(practice_card(c) for c in items) + '</div></div>' for gid, pre, name, link, items in groups)
     body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / Практика</nav>
 <p class="over">Практика</p><h1>Практика юриста: дела и результаты</h1>
-<p class="lead">Дела из моей практики - без имён, номеров автомобилей, адресов и дат, с согласия клиентов. Ситуация, что сделали и чем закончилось.</p></div></section>
-<section class="sec"><div class="wrap"><div class="grid grid--2">{cards}</div>
+<p class="lead">Дела из моей практики - без имён, номеров автомобилей, адресов и дат, с согласия клиентов. Ситуация, что сделали и чем закончилось.</p>
+<nav class="chips" aria-label="Категории дел">{chips}</nav></div></section>
+<section class="sec"><div class="wrap">{cards}
 <p class="law" style="margin-top:28px">Результат каждого дела зависит от его обстоятельств и доказательств. Описанные дела не гарантируют такого же результата в другой ситуации.</p></div></section>{cta()}'''
     lst = {'@type': 'ItemList', 'name': 'Практика юриста Антона Штина', 'itemListElement': [
         {'@type': 'ListItem', 'position': i + 1, 'item': {'@type': 'CreativeWork', 'name': c['title'], 'about': c['cat'], 'abstract': c['situation'] + ' ' + c['result'], 'author': {'@id': BASE + '/#person'}, 'url': url + '#' + c['id']}}

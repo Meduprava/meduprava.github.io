@@ -179,3 +179,14 @@ a.card:hover{border-color:var(--brass)}
 
 /* Правка 05.11: латунь по внешнему краю фото */
 .portrait,.media-img{border:2px solid var(--brass);outline:none}
+
+/* Практика: группы по типам споров */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid var(--ink);color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;background:var(--white)}
+.chip span{color:var(--brass-d);font-weight:700}
+.chip:hover{border-color:var(--brass)}
+.pgroup{scroll-margin-top:110px}
+.pgroup + .pgroup{margin-top:64px;padding-top:48px;border-top:1px solid var(--line)}
+.pgroup__head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.pgroup__head h2{margin:0}
+.pgroup__head a{font-weight:700;font-size:14px}
