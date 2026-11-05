@@ -514,11 +514,17 @@ def article_page(a):
          [PERSON, art, crumbs_ld([('', 'Главная'), ('razbory.html', 'Разборы'), (a['f'], a['title'])])], 'razbory.html')
 
 def razbory():
-    cards = ''.join(f'<a class="card" href="{a["f"]}"><p class="over" style="margin:0">{a["date_h"]}</p><h3>{a["title"]}</h3><p class="card__q">{a["desc"]}</p><span class="card__more">Читать →</span></a>' for a in ARTICLES)
+    TOPIC = {'razbor-pravilo-uvolneniya.html': 'labor', 'razbor-udalenka-vmesto-filiala.html': 'labor', 'razbor-klishe-podpisi.html': 'labor', 'razbor-nedovolnyy-klient.html': 'civil'}
+    tg = [('labor', 'Трудовые споры', 'trudovye-spory.html'), ('dtp', 'ДТП', 'yurist-po-dtp.html'), ('civil', 'Гражданские дела', 'grazhdanskie-spory.html')]
+    tg = [(t, name, link, [a for a in ARTICLES if a.get('topic', TOPIC.get(a['f'], 'civil')) == t]) for t, name, link in tg]
+    tg = [x for x in tg if x[3]]
+    chips = ''.join(f'<a class="chip" href="#{t}">{name} <span>{len(items)}</span></a>' for t, name, link, items in tg)
+    cards = ''.join(f'<div class="pgroup" id="{t}"><div class="pgroup__head"><h2>{name}</h2><a href="{link}">Об услуге →</a></div><div class="grid grid--2">' + ''.join(f'<a class="card" href="{a["f"]}"><p class="over" style="margin:0">{a["date_h"]}</p><h3>{a["title"]}</h3><p class="card__q">{a["desc"]}</p><span class="card__more">Читать →</span></a>' for a in items) + '</div></div>' for t, name, link, items in tg)
     body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / Разборы</nav>
 <p class="over">Разборы</p><h1>Разборы юриста: как ошибки бизнеса становятся спорами</h1>
-<p class="lead">Реальные ситуации без имён и с нормами: что пошло не так, сколько это стоит и что сделать, чтобы не повторить. Новые разборы - каждую неделю.</p></div></section>
-<section class="sec"><div class="wrap grid grid--2">{cards}</div></section>{cta()}'''
+<p class="lead">Реальные ситуации без имён и с нормами: что пошло не так, сколько это стоит и что сделать, чтобы не повторить. Новые разборы - каждую неделю.</p>
+<nav class="chips" aria-label="Темы разборов">{chips}</nav></div></section>
+<section class="sec"><div class="wrap">{cards}</div></section>{cta()}'''
     lst = {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'url': BASE + '/' + a['f'], 'name': a['title']} for i, a in enumerate(ARTICLES)]}
     page('razbory.html', 'Разборы юриста Антона Штина: претензии, договоры, трудовые споры', 'Статьи юриста из Красногорска о спорных ситуациях бизнеса и граждан: претензии, договоры, трудовые споры, медицинское право. С нормами и практическими шагами.',
          body, [PERSON, lst, crumbs_ld([('', 'Главная'), ('razbory.html', 'Разборы')])], 'razbory.html')
