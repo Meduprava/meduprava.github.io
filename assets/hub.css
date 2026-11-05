@@ -150,3 +150,16 @@ a.card:hover{border-color:var(--brass)}
 .media-img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:20px;border:1px solid var(--line)}
 .media-img--wide{aspect-ratio:4/3;object-position:50% 30%}
 @media (max-width:860px){.media-hero{grid-template-columns:1fr;gap:28px}.media-hero .media-img{aspect-ratio:4/3;max-height:420px}}
+
+/* Шапка: длинный пункт меню */
+.nav{gap:22px}
+@media (max-width:1080px){
+  .nav{display:none}
+  .top .btn{display:none}
+  .menu{display:block;margin-left:auto}
+  .menu summary{list-style:none;cursor:pointer;font-weight:700;font-size:15px;padding:10px 0}
+  .menu summary::-webkit-details-marker{display:none}
+  .menu[open] .menu__list{display:flex}
+  .menu__list{position:absolute;left:0;right:0;top:84px;background:var(--paper);border-bottom:2px solid var(--brass);flex-direction:column;padding:8px 16px 20px}
+  .menu__list a{padding:12px 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;font-weight:600}
+}

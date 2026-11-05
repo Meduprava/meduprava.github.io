@@ -46,7 +46,7 @@
     .brand__logo { display: block; width: min(310px, 29vw); height: auto; }
     .brand__sub { display: none; }
     nav { display: flex; gap: 25px; align-items: center; }
-    nav a { text-decoration: none; color: #43514C; font-size: 14px; }
+    nav a { text-decoration: none; color: #43514C; font-size: 14px; white-space: nowrap; }
     nav a:hover { color: var(--green); }
     .menu-toggle { display: none; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 1px solid #b8cec8; border-radius: 12px; background: #fff; color: var(--green); cursor: pointer; flex: 0 0 auto; }
     .menu-toggle svg { width: 22px; height: 22px; }
@@ -142,6 +142,14 @@
     footer { padding: 28px 0; font-size: 13px; color: var(--muted); }
     footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
     footer a { color: var(--green); }
+    @media (max-width: 1180px) {
+      .top__in { flex-wrap: wrap; }
+      .menu-toggle { display: inline-flex; }
+      nav { display: none; order: 3; flex: 1 0 100%; flex-direction: column; align-items: stretch; gap: 0; padding: 4px 0 14px; border-top: 1px solid #edf0ee; }
+      nav.is-open { display: flex; }
+      nav a { padding: 12px 2px; font-size: 16px; border-bottom: 1px solid #f1f3f2; }
+      nav a:last-child { border-bottom: 0; }
+    }
     @media (max-width: 960px) {
       .section-heading--center .section__intro, .benefits-shell > .section__intro { white-space: normal; }
       .top__in { flex-wrap: wrap; }
@@ -204,16 +212,15 @@
     <a class="brand" href="index.html" aria-label="Медуправа, главная страница">
       <img class="brand__logo" src="assets/meduprava-logo.svg" alt="Медуправа" width="444" height="90">
     </a>
-    <nav id="site-nav" aria-label="Разделы страницы">
-      <a href="#control">Финансы под контролем</a>
-      <a href="#expert">Эксперт</a>
-      <a href="#format">Формат работы</a>
-      <a href="#services">Услуги</a>
-      <a href="#faq">Вопросы</a>
+    <nav id="site-nav" aria-label="Разделы сайта">
+      <a href="pravo.html">Право</a>
+      <a href="finance.html" aria-current="page" style="color:var(--green);font-weight:600">Финансы</a>
+      <a href="servis.html">Операционное управление и сервис</a>
+      <a href="ekspertiza-oms.html">Экспертиза ОМС</a>
     </nav>
     <div class="top__actions">
       <a class="btn btn--green" href="https://forms.yandex.ru/u/6acb9dc39029027b3ec437ff" target="_blank" rel="noopener">Оставить заявку</a>
-      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Открыть меню разделов">
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Открыть меню">
         <svg class="icon-open" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         <svg class="icon-close" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>

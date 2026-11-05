@@ -12,7 +12,7 @@ TG, TG_H = 'https://t.me/AresID13', '@AresID13'
 PHONE, PHONE_H = '+79832816353', '+7 983 281-63-53'
 OGRNIP = '320246800028048'
 
-NAV = [('pravo.html', 'Право'), ('finance.html', 'Финансы'), ('servis.html', 'Операции и сервис'), ('ekspertiza-oms.html', 'Экспертиза ОМС'), ('index.html#faq', 'Вопросы')]
+NAV = [('pravo.html', 'Право'), ('finance.html', 'Финансы'), ('servis.html', 'Операционное управление и сервис'), ('ekspertiza-oms.html', 'Экспертиза ОМС')]
 AREA = [{'@type': 'City', 'name': 'Москва'}, {'@type': 'AdministrativeArea', 'name': 'Московская область'}, {'@type': 'Country', 'name': 'Россия'}]
 ORG = {'@type': 'ProfessionalService', '@id': BASE + '/#org', 'name': 'Медуправа', 'alternateName': 'МЕДУПРАВА',
        'description': 'Юридическое, финансовое и операционное сопровождение частных медицинских клиник: диагностика проблемных мест, экспертиза актов страховых компаний по ОМС, финансовый директор на аутсорсе, операционное управление и развитие, служба сервиса и заботы о пациентах.',
@@ -162,7 +162,7 @@ def home():
   <div class="team">
     <div class="person"><div class="person__ph"><img src="assets/team/anton-shtin.jpg" alt="Антон Штин, юрист" loading="lazy" width="900" height="1100"></div><div class="person__b"><span class="person__role">Право</span><h3>Антон Штин</h3><p>Юрист, руководитель юридического направления. Управленческий стаж с 2007 года, с 2020 года - частная юридическая практика, пять лет сопровождения медицинской клиники.</p></div></div>
     <div class="person"><div class="person__ph"><img src="assets/finance/elena-shtin-financial-director.jpg" alt="Елена Штин, финансовый директор" loading="lazy" width="900" height="1100"></div><div class="person__b"><span class="person__role">Финансы</span><h3>Елена Штин</h3><p>Финансовый директор. Более 20 лет в финансовой сфере: управленческий учёт, контроль денежных потоков, финансовые модели.</p></div></div>
-    <div class="person"><div class="person__ph"><img src="assets/team/daria-gavrilova.jpg" alt="Дарья Гаврилова" loading="lazy" width="900" height="1100"></div><div class="person__b"><span class="person__role">Операции и сервис</span><h3>Дарья Гаврилова</h3><p>Операционное управление и развитие, служба сервиса и заботы. Выстраивает путь пациента и работу команды клиники.</p></div></div>
+    <div class="person"><div class="person__ph"><img src="assets/team/daria-gavrilova.jpg" alt="Дарья Гаврилова" loading="lazy" width="900" height="1100"></div><div class="person__b"><span class="person__role">Операционное управление и сервис</span><h3>Дарья Гаврилова</h3><p>Операционное управление и развитие, служба сервиса и заботы. Выстраивает путь пациента и работу команды клиники.</p></div></div>
   </div>
 </div></section>
 <section class="sec sec--white"><div class="wrap cols" style="align-items:center">
@@ -239,7 +239,7 @@ def servis():
 <section class="sec"><div class="wrap"><div class="brief"><p class="over">Кратко</p><p>Операционное направление Медуправы ведёт Дарья Гаврилова: операционное управление и развитие частных клиник, служба сервиса и заботы о пациентах. Регламенты работы администраторов и регистратуры, путь пациента от записи до повторного визита, порядок работы с обращениями и отзывами. Работает в связке с юристом и финансовым директором Медуправы.</p></div></div></section>
 <section class="sec sec--white"><div class="wrap"><div class="sec__head"><p class="over">Что делаем</p><h2>Процессы, которые пациент чувствует сразу</h2></div><div class="grid grid--2">{cards}</div></div></section>
 <section class="sec"><div class="wrap cols" style="align-items:center">
-  <div class="person" style="max-width:420px"><div class="person__ph"><img src="assets/team/daria-gavrilova.jpg" alt="Дарья Гаврилова" loading="lazy" width="900" height="1100"></div><div class="person__b"><span class="person__role">Операции и сервис</span><h3>Дарья Гаврилова</h3><p>Операционное управление и развитие, служба сервиса и заботы.</p></div></div>
+  <div class="person" style="max-width:420px"><div class="person__ph"><img src="assets/team/daria-gavrilova.jpg" alt="Дарья Гаврилова" loading="lazy" width="900" height="1100"></div><div class="person__b"><span class="person__role">Операционное управление и сервис</span><h3>Дарья Гаврилова</h3><p>Операционное управление и развитие, служба сервиса и заботы.</p></div></div>
   <div><p class="over">Подход</p><h2>Сервис - это порядок, а не настроение</h2><p class="lead">У каждого этапа пути пациента есть ответственный и срок. Тогда забота не зависит от того, кто сегодня на смене.</p></div>
 </div></section>
 <section class="sec sec--white" id="faq"><div class="wrap"><div class="sec__head"><p class="over">Вопросы</p><h2>Операции и сервис: частые вопросы</h2></div>{faq_html(SERV_FAQ)}</div></section>
