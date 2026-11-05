@@ -145,3 +145,11 @@ a.card:hover{border-color:var(--brass)}
 /* Плавающая кнопка на телефоне */
 .float{display:none}
 @media (max-width:900px){.float{display:flex;position:fixed;left:16px;right:16px;bottom:max(16px,env(safe-area-inset-bottom));z-index:40;justify-content:center;box-shadow:0 8px 24px rgba(27,38,56,.25)} body{padding-bottom:84px}}
+
+/* Портрет */
+.portrait{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;border:1px solid var(--line);outline:1px solid var(--brass);outline-offset:-10px;background:var(--white)}
+.hero__side{display:grid;gap:28px}
+.hero__side .portrait{max-width:320px}
+.hero__side .facts{grid-template-columns:1fr 1fr;gap:18px 24px}
+.hero__side .fact b{font-size:38px}
+@media (max-width:860px){.hero__side .portrait{max-width:300px}}
