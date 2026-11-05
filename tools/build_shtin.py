@@ -135,7 +135,7 @@ def cta(text='Пришлите документы или опишите ситу
 
 # ---------- Услуги ----------
 SERVICES = [
- dict(f='grazhdanskie-spory.html', name='Гражданские споры', h1='Юрист по гражданским делам в Красногорске',
+ dict(f='grazhdanskie-spory.html', img=('yurist-za-rabotoy.jpg','Юрист Антон Штин работает с документами по делу'), name='Гражданские споры', h1='Юрист по гражданским делам в Красногорске',
   title='Юрист по гражданским делам в Красногорске - Антон Штин',
   desc='Юрист по гражданским спорам в Красногорске и Московской области: долги и договоры, ДТП сверх ОСАГО, защита прав потребителей, недвижимость и доли, споры с управляющими компаниями. Претензии, иски, суд.',
   q='Должник не платит, страховой выплаты не хватило на ремонт, продавец не возвращает деньги?',
@@ -194,7 +194,7 @@ SERVICES = [
        ('Работаете ли вы с пациентами против клиник?', 'Основная практика - защита медицинских организаций. Обращение пациента рассматриваю, если нет конфликта интересов с клиниками, которые я сопровождаю.'),
        ('Как вы обрабатываете сведения о пациентах?', 'Документы принимаются обезличенными: ФИО, полис, СНИЛС, адрес и диагноз закрываются на стороне клиники до передачи. Если обезличить нельзя, заключается соглашение об обработке персональных данных по 152-ФЗ.'),
        ('Есть ли комплексное сопровождение клиники - не только юридическое?', f'Да. Вместе с финансовым директором и руководителем операционного направления мы ведём проект «Медуправа» - право, финансы, операционное управление и сервис для частных клиник: <a href="{MEDUPRAVA}" rel="noopener">vk.ru/meduprava</a>.')]),
- dict(f='soprovozhdenie-biznesa.html', name='Сопровождение бизнеса', h1='Юридическое сопровождение бизнеса в Красногорске',
+ dict(f='soprovozhdenie-biznesa.html', img=('rabota-s-dokumentami.jpg','Проверка договора: заметки юриста'), name='Сопровождение бизнеса', h1='Юридическое сопровождение бизнеса в Красногорске',
   title='Юридическое сопровождение бизнеса в Красногорске - Антон Штин',
   desc='Юридическое сопровождение малого и среднего бизнеса в Красногорске и Московской области: проверка договоров и протоколы разногласий, претензионная работа, споры с контрагентами, лизинг, подряд, поставка.',
   q='Контрагент прислал договор «на подпись», претензию или требование по лизингу?',
@@ -219,13 +219,16 @@ def service_page(s):
     cases = ''.join(f'<li>{c}</li>' for c in s['cases'])
     steps = ''.join(f'<div class="step"><div><p>{w}</p></div></div>' for w in s['work'])
     others = ''.join(f'<a class="card" href="{o["f"]}"><h3>{o["name"]}</h3><span class="card__more">Подробнее →</span></a>' for o in SERVICES if o['f'] != s['f'])
-    body = f'''<section class="page-hero"><div class="wrap">
+    img = s.get('img')
+    open_media = '<div class="wrap media-hero"><div>' if img else '<div class="wrap">'
+    close_media = (f'</div><img class="media-img" src="assets/{img[0]}" alt="{img[1]}" width="900" height="1350" fetchpriority="high"></div>') if img else '</div>'
+    body = f'''<section class="page-hero">{open_media}
   <nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / <a href="uslugi.html">Услуги</a> / {s["name"]}</nav>
   <p class="over">{s["name"]}</p>
   <h1>{s["h1"]}</h1>
   <p class="lead"><b>{s["q"]}</b> {s["lead"]}</p>
   <div class="hero__cta"><a class="btn" href="{TG}" rel="noopener">Описать ситуацию в Telegram</a><a class="btn btn--line" href="tel:{PHONE}">{PHONE_H}</a></div>
-</div></section>
+{close_media}</section>
 <section class="sec"><div class="wrap"><div class="brief"><p class="over">Кратко</p><p>{s["brief"]}</p></div></div></section>
 <section class="sec sec--white"><div class="wrap cols">
   <div><p class="over">С чем обращаются</p><h2>Типовые ситуации</h2><ul class="list">{cases}</ul></div>

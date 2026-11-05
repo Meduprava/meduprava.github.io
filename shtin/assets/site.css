@@ -153,3 +153,8 @@ a.card:hover{border-color:var(--brass)}
 .hero__side .facts{grid-template-columns:1fr 1fr;gap:18px 24px}
 .hero__side .fact b{font-size:38px}
 @media (max-width:860px){.hero__side .portrait{max-width:300px}}
+
+/* Фото в первом экране страниц услуг */
+.media-hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:48px;align-items:center}
+.media-img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border:1px solid var(--line);outline:1px solid var(--brass);outline-offset:-10px}
+@media (max-width:860px){.media-hero{grid-template-columns:1fr;gap:28px}.media-hero .media-img{aspect-ratio:4/3;max-height:420px}}
