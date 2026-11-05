@@ -1,0 +1,37 @@
+# Отложенная публикация разборов личного сайта (shtin/).
+# Каждый день в 08:30 по Москве пересобирает сайт: разборы с наступившей датой
+# появляются на странице «Разборы», в sitemap.xml и llms.txt. Если ничего нового нет,
+# сборка дает те же файлы и коммита не будет.
+name: Публикация по расписанию
+
+on:
+  schedule:
+    - cron: '30 5 * * *'   # 05:30 UTC = 08:30 МСК
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Сборка
+        run: |
+          python3 tools/build_shtin.py shtin https://meduprava.github.io/shtin
+          rm -f shtin/sitemap.xml shtin/robots.txt
+          python3 tools/build_hub.py
+      - name: Коммит и запуск GitHub Pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git add -A
+          if git diff --cached --quiet; then echo "Новых публикаций нет"; exit 0; fi
+          git -c user.name="Штин Антон" -c user.email="meduprava@mail.ru" commit -m "Публикация по расписанию: $(TZ=Europe/Moscow date +%d.%m.%Y)"
+          git push
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "Pages соберется по push"

@@ -1,12 +1,13 @@
 """Сборка страниц-хаба Медуправы: index.html, pravo.html, servis.html, llms.txt, robots.txt, sitemap.xml.
 Остальные страницы (finance.html, ekspertiza-oms.html, kalkulyator-oms.html, legal/) правятся вручную.
 Запуск из корня репозитория: python3 tools/build_hub.py"""
-import json, re, html, datetime, pathlib
+import json, re, html, datetime, pathlib, hashlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 BASE = 'https://meduprava.github.io'
-CSSV = datetime.datetime.now().strftime('%Y%m%d%H%M')
-TODAY = datetime.date.today().isoformat()
+CSSV = hashlib.md5(pathlib.Path('assets/hub.css').read_bytes()).hexdigest()[:8]
+PUB = json.loads(pathlib.Path('shtin/published.json').read_text())  # пишет build_shtin.py
+TODAY = PUB['updated']
 EMAIL = 'meduprava@mail.ru'
 VK, VK_H = 'https://vk.ru/meduprava', 'vk.ru/meduprava'
 TG, TG_H = 'https://t.me/AresID13', '@AresID13'
@@ -252,7 +253,7 @@ def servis():
 
 def extras():
     pages = [('', '1.0'), ('pravo.html', '0.9'), ('finance.html', '0.9'), ('servis.html', '0.8'), ('ekspertiza-oms.html', '0.9'), ('kalkulyator-oms.html', '0.6'),
-             ('legal/privacy.html', '0.2'), ('legal/consent.html', '0.2'), ('legal/privacy-finance.html', '0.2'), ('legal/consent-finance.html', '0.2'), ('legal/cookies.html', '0.2'), ('legal/obezlichivanie.html', '0.2')] + [('shtin/' + x, '0.7') for x in ['', 'uslugi.html', 'grazhdanskie-spory.html', 'trudovye-spory.html', 'medicinskoe-pravo.html', 'soprovozhdenie-biznesa.html', 'yurist-po-dtp.html', 'praktika.html', 'razbory.html', 'razbor-beremennye-rabotnicy.html', 'razbor-rabotniki-s-detmi.html', 'razbor-predpensionery-i-pensionery.html', 'razbor-sokrashchenie-shtata.html', 'razbor-soglashenie-storon.html', 'razbor-pravilo-uvolneniya.html', 'razbor-udalenka-vmesto-filiala.html', 'razbor-klishe-podpisi.html', 'razbor-nedovolnyy-klient.html', 'o-yuriste.html', 'voprosy.html', 'kontakty.html']]
+             ('legal/privacy.html', '0.2'), ('legal/consent.html', '0.2'), ('legal/privacy-finance.html', '0.2'), ('legal/consent-finance.html', '0.2'), ('legal/cookies.html', '0.2'), ('legal/obezlichivanie.html', '0.2')] + [('shtin/' + x, '0.7') for x in ['', 'uslugi.html', 'grazhdanskie-spory.html', 'trudovye-spory.html', 'medicinskoe-pravo.html', 'soprovozhdenie-biznesa.html', 'yurist-po-dtp.html', 'praktika.html', 'razbory.html'] + PUB['files'] + ['o-yuriste.html', 'voprosy.html', 'kontakty.html']]
     (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
         ''.join(f'  <url><loc>{BASE}/{p}</loc><lastmod>{TODAY}</lastmod><priority>{pr}</priority></url>\n' for p, pr in pages) + '</urlset>\n')
     (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\n\n# Поисковые и ИИ-ассистенты: доступ открыт\nUser-agent: YandexBot\nAllow: /\nUser-agent: GPTBot\nAllow: /\nUser-agent: OAI-SearchBot\nAllow: /\nUser-agent: ClaudeBot\nAllow: /\nUser-agent: PerplexityBot\nAllow: /\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n')

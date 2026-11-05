@@ -1,0 +1,34 @@
+{
+ "updated": "2026-11-05",
+ "files": [
+  "razbor-sokrashchenie-shtata.html",
+  "razbor-soglashenie-storon.html",
+  "razbor-nedovolnyy-klient.html"
+ ],
+ "planned": [
+  {
+   "f": "razbor-beremennye-rabotnicy.html",
+   "date": "2026-11-10"
+  },
+  {
+   "f": "razbor-rabotniki-s-detmi.html",
+   "date": "2026-12-08"
+  },
+  {
+   "f": "razbor-predpensionery-i-pensionery.html",
+   "date": "2026-12-24"
+  },
+  {
+   "f": "razbor-pravilo-uvolneniya.html",
+   "date": "2026-11-26"
+  },
+  {
+   "f": "razbor-udalenka-vmesto-filiala.html",
+   "date": "2026-11-30"
+  },
+  {
+   "f": "razbor-klishe-podpisi.html",
+   "date": "2026-11-19"
+  }
+ ]
+}
