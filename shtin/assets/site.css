@@ -176,3 +176,6 @@ a.card:hover{border-color:var(--brass)}
 .prose h2{margin:40px 0 14px}
 .prose ol,.prose ul{padding-left:22px;margin:0 0 16px}
 .prose li{margin-bottom:8px}
+
+/* Правка 05.11: латунь по внешнему краю фото */
+.portrait,.media-img{border:2px solid var(--brass);outline:none}
