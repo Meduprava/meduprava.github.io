@@ -1,4 +1,18 @@
 User-agent: *
 Allow: /
 
+# Поисковые и ИИ-ассистенты: доступ открыт
+User-agent: YandexBot
+Allow: /
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://meduprava.github.io/sitemap.xml
