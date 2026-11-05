@@ -1,11 +1,32 @@
 {
- "updated": "2026-11-05",
+ "updated": "2026-11-06",
  "files": [
+  "profilaktika-manifest.html",
   "razbor-sokrashchenie-shtata.html",
   "razbor-soglashenie-storon.html",
   "razbor-nedovolnyy-klient.html"
  ],
  "planned": [
+  {
+   "f": "profilaktika-dogovor-predohranitel.html",
+   "date": "2027-02-04"
+  },
+  {
+   "f": "profilaktika-pretenziya-10-dney.html",
+   "date": "2027-01-28"
+  },
+  {
+   "f": "profilaktika-reglament-vmesto-vygovora.html",
+   "date": "2027-01-26"
+  },
+  {
+   "f": "profilaktika-dtp-pervye-30-minut.html",
+   "date": "2027-01-21"
+  },
+  {
+   "f": "profilaktika-vnutrenniy-kontrol.html",
+   "date": "2027-01-18"
+  },
   {
    "f": "zaklyuchenie-st-187-platezhnoe-poruchenie.html",
    "date": "2026-11-24"
