@@ -18,7 +18,7 @@ ORG = {'@type': 'ProfessionalService', '@id': BASE + '/#org', 'name': 'Меду�
        'description': 'Юридическое, финансовое и операционное сопровождение частных медицинских клиник: диагностика проблемных мест, экспертиза актов страховых компаний по ОМС, финансовый директор на аутсорсе, операционное управление и развитие, служба сервиса и заботы о пациентах.',
        'url': BASE + '/', 'logo': BASE + '/assets/meduprava-logo.svg', 'image': BASE + '/assets/og-hub-v2.png', 'email': EMAIL, 'telephone': PHONE_H,
        'areaServed': AREA, 'knowsLanguage': 'ru', 'sameAs': [VK],
-       'founder': [{'@type': 'Person', 'name': 'Антон Штин', 'jobTitle': 'Юрист, руководитель юридического направления', 'image': BASE + '/assets/team/anton-shtin.jpg', 'url': BASE + '/shtin/'},
+       'founder': [{'@type': 'Person', 'name': 'Антон Штин', 'jobTitle': 'Юрист, руководитель юридического направления', 'image': BASE + '/assets/team/anton-shtin-v2.jpg', 'url': BASE + '/shtin/'},
                    {'@type': 'Person', 'name': 'Елена Штин', 'jobTitle': 'Финансовый директор'},
                    {'@type': 'Person', 'name': 'Дарья Гаврилова', 'jobTitle': 'Операционное управление и развитие, служба сервиса и заботы'}],
        'parentOrganization': {'@type': 'Organization', 'name': 'ИП Штин Антон Владимирович', 'identifier': {'@type': 'PropertyValue', 'propertyID': 'ОГРНИП', 'value': OGRNIP}}}
@@ -160,7 +160,7 @@ def home():
 <section class="sec"><div class="wrap">
   <div class="sec__head"><p class="over">Команда</p><h2>Кто работает с клиникой</h2></div>
   <div class="team">
-    <div class="person"><div class="person__ph"><img src="assets/team/anton-shtin.jpg" alt="Антон Штин, юрист" loading="lazy" width="900" height="1100"></div><div class="person__b"><span class="person__role">Право</span><h3>Антон Штин</h3><p>Юрист, руководитель юридического направления. Управленческий стаж с 2007 года, с 2020 года - частная юридическая практика, пять лет сопровождения медицинской клиники.</p></div></div>
+    <div class="person"><div class="person__ph"><img src="assets/team/anton-shtin-v2.jpg" alt="Антон Штин, юрист" loading="lazy" width="900" height="1100"></div><div class="person__b"><span class="person__role">Право</span><h3>Антон Штин</h3><p>Юрист, руководитель юридического направления. Управленческий стаж с 2007 года, с 2020 года - частная юридическая практика, пять лет сопровождения медицинской клиники.</p></div></div>
     <div class="person"><div class="person__ph"><img src="assets/finance/elena-shtin-financial-director.jpg" alt="Елена Штин, финансовый директор" loading="lazy" width="900" height="1100"></div><div class="person__b"><span class="person__role">Финансы</span><h3>Елена Штин</h3><p>Финансовый директор. Более 20 лет в финансовой сфере: управленческий учёт, контроль денежных потоков, финансовые модели.</p></div></div>
     <div class="person"><div class="person__ph"><img src="assets/team/daria-gavrilova.jpg" alt="Дарья Гаврилова" loading="lazy" width="900" height="1100"></div><div class="person__b"><span class="person__role">Операционное управление и сервис</span><h3>Дарья Гаврилова</h3><p>Операционное управление и развитие, служба сервиса и заботы. Выстраивает путь пациента и работу команды клиники.</p></div></div>
   </div>

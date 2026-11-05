@@ -23,7 +23,7 @@ NAV = [('uslugi.html', 'Услуги'), ('razbory.html', 'Разборы'), ('o-
 
 PERSON = {
     '@type': 'Person', '@id': BASE + '/#person', 'name': NAME, 'alternateName': FULL,
-    'jobTitle': 'Юрист', 'url': BASE + '/o-yuriste.html', 'image': BASE + '/assets/anton-shtin.jpg', 'telephone': PHONE_H,
+    'jobTitle': 'Юрист', 'url': BASE + '/o-yuriste.html', 'image': BASE + '/assets/anton-shtin-v2.jpg', 'telephone': PHONE_H,
     'address': {'@type': 'PostalAddress', 'addressLocality': 'Красногорск', 'addressRegion': 'Московская область', 'addressCountry': 'RU'},
     'alumniOf': [{'@type': 'CollegeOrUniversity', 'name': 'Сибирский федеральный университет'},
                  {'@type': 'CollegeOrUniversity', 'name': 'Красноярский государственный педагогический университет им. В.П. Астафьева'}],
@@ -279,7 +279,7 @@ def home():
     <p class="lead">Веду споры и сопровождаю бизнес. До юридической практики двенадцать лет руководил компаниями, поэтому смотрю на вопрос так, как его видит собственник: сколько стоит ошибка и как её не допустить.</p>
     <div class="hero__cta"><a class="btn" href="{TG}" rel="noopener">Написать в Telegram</a><a class="btn btn--line" href="tel:{PHONE}">Позвонить {PHONE_H}</a></div>
   </div>
-  <div class="hero__side"><img class="portrait" src="assets/anton-shtin.jpg" alt="Антон Штин, юрист в Красногорске" width="900" height="1100" fetchpriority="high">
+  <div class="hero__side"><img class="portrait" src="assets/anton-shtin-v2.jpg" alt="Антон Штин, юрист в Красногорске" width="900" height="1100" fetchpriority="high">
   <div class="facts" aria-label="Коротко о практике">
     <div class="fact"><b>с 2020</b><span>частная юридическая практика</span></div>
     <div class="fact"><b>12 лет</b><span>руководства компаниями до юриспруденции</span></div>
@@ -338,7 +338,7 @@ def about():
 <p class="over">О юристе</p><h1>Антон Штин, юрист</h1>
 <p class="lead">Юрист из Красногорска. С 2020 года веду частную практику как индивидуальный предприниматель: споры, договоры, сопровождение бизнеса и медицинских организаций.</p></div></section>
 <section class="sec"><div class="wrap cols">
-  <div><img class="portrait" src="assets/anton-shtin.jpg" alt="Антон Штин, юрист" width="900" height="1100" loading="lazy" style="margin-bottom:32px;max-width:360px"><p class="over">Путь</p><h2>Из руководителя - в юристы</h2>
+  <div><img class="portrait" src="assets/anton-shtin-v2.jpg" alt="Антон Штин, юрист" width="900" height="1100" loading="lazy" style="margin-bottom:32px;max-width:360px"><p class="over">Путь</p><h2>Из руководителя - в юристы</h2>
     <p>До юриспруденции я двенадцать лет руководил компаниями: консалтинговой, затем оптовой торговой. Договоры, претензии, проверки и споры я видел глазами директора, который за них отвечает деньгами.</p>
     <p>С 2020 года - частная юридическая практика. Пять лет юридически сопровождаю медицинскую клинику. Медицина - самая сложная отрасль, которую я выбрал сам: сложно, непредсказуемо и ответственно.</p>
     <p>Являюсь помощником адвоката Коллегии адвокатов Енисейской Сибири.</p></div>
