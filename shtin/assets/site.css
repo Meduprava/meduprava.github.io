@@ -170,3 +170,9 @@ a.card:hover{border-color:var(--brass)}
   .media-hero .media-img{aspect-ratio:3/2;max-height:none}
   .hero__side .portrait{max-width:none;aspect-ratio:3/2;object-position:50% 20%}
 }
+
+/* Статьи */
+.prose{max-width:760px;font-size:18px;line-height:1.7}
+.prose h2{margin:40px 0 14px}
+.prose ol,.prose ul{padding-left:22px;margin:0 0 16px}
+.prose li{margin-bottom:8px}

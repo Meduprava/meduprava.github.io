@@ -16,7 +16,7 @@ NAV = [('pravo.html', 'Право'), ('finance.html', 'Финансы'), ('servi
 AREA = [{'@type': 'City', 'name': 'Москва'}, {'@type': 'AdministrativeArea', 'name': 'Московская область'}, {'@type': 'Country', 'name': 'Россия'}]
 ORG = {'@type': 'ProfessionalService', '@id': BASE + '/#org', 'name': 'Медуправа', 'alternateName': 'МЕДУПРАВА',
        'description': 'Юридическое, финансовое и операционное сопровождение частных медицинских клиник: диагностика проблемных мест, экспертиза актов страховых компаний по ОМС, финансовый директор на аутсорсе, операционное управление и развитие, служба сервиса и заботы о пациентах.',
-       'url': BASE + '/', 'logo': BASE + '/assets/meduprava-logo.svg', 'image': BASE + '/assets/og-hub.png', 'email': EMAIL, 'telephone': PHONE_H,
+       'url': BASE + '/', 'logo': BASE + '/assets/meduprava-logo.svg', 'image': BASE + '/assets/og-hub-v2.png', 'email': EMAIL, 'telephone': PHONE_H,
        'areaServed': AREA, 'knowsLanguage': 'ru', 'sameAs': [VK],
        'founder': [{'@type': 'Person', 'name': 'Антон Штин', 'jobTitle': 'Юрист, руководитель юридического направления', 'image': BASE + '/assets/team/anton-shtin.jpg', 'url': BASE + '/shtin/'},
                    {'@type': 'Person', 'name': 'Елена Штин', 'jobTitle': 'Финансовый директор'},
@@ -50,7 +50,7 @@ def page(fname, title, desc, body, schema, current=None):
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{BASE}/assets/og-hub.png">
+<meta property="og:image" content="{BASE}/assets/og-hub-v2.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F3F1EA">
 <link rel="icon" href="assets/meduprava-znak.svg" type="image/svg+xml">
@@ -251,7 +251,7 @@ def servis():
 
 def extras():
     pages = [('', '1.0'), ('pravo.html', '0.9'), ('finance.html', '0.9'), ('servis.html', '0.8'), ('ekspertiza-oms.html', '0.9'), ('kalkulyator-oms.html', '0.6'),
-             ('legal/privacy.html', '0.2'), ('legal/consent.html', '0.2'), ('legal/privacy-finance.html', '0.2'), ('legal/consent-finance.html', '0.2'), ('legal/cookies.html', '0.2'), ('legal/obezlichivanie.html', '0.2')] + [('shtin/' + x, '0.7') for x in ['', 'uslugi.html', 'grazhdanskie-spory.html', 'trudovye-spory.html', 'medicinskoe-pravo.html', 'soprovozhdenie-biznesa.html', 'o-yuriste.html', 'voprosy.html', 'kontakty.html']]
+             ('legal/privacy.html', '0.2'), ('legal/consent.html', '0.2'), ('legal/privacy-finance.html', '0.2'), ('legal/consent-finance.html', '0.2'), ('legal/cookies.html', '0.2'), ('legal/obezlichivanie.html', '0.2')] + [('shtin/' + x, '0.7') for x in ['', 'uslugi.html', 'grazhdanskie-spory.html', 'trudovye-spory.html', 'medicinskoe-pravo.html', 'soprovozhdenie-biznesa.html', 'yurist-po-dtp.html', 'razbory.html', 'razbor-nedovolnyy-klient.html', 'o-yuriste.html', 'voprosy.html', 'kontakty.html']]
     (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
         ''.join(f'  <url><loc>{BASE}/{p}</loc><lastmod>{TODAY}</lastmod><priority>{pr}</priority></url>\n' for p, pr in pages) + '</urlset>\n')
     (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\n\n# Поисковые и ИИ-ассистенты: доступ открыт\nUser-agent: YandexBot\nAllow: /\nUser-agent: GPTBot\nAllow: /\nUser-agent: OAI-SearchBot\nAllow: /\nUser-agent: ClaudeBot\nAllow: /\nUser-agent: PerplexityBot\nAllow: /\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n')
