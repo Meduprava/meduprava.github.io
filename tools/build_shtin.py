@@ -20,6 +20,9 @@ MONO = ('<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="1" y="1" width="62
         '<text x="32" y="40" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-weight="600" font-size="30" fill="#1B2638">Ш</text>'
         '<circle cx="26" cy="48" r="1.6" fill="#A8854A"/><circle cx="32" cy="48" r="1.6" fill="#A8854A"/><circle cx="38" cy="48" r="1.6" fill="#A8854A"/></svg>')
 
+PLANE = ('<svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">'
+         '<path d="M21.5 3.5 2.8 10.7c-.7.3-.7 1.3 0 1.5l4.6 1.6 1.8 5.6c.2.6 1 .8 1.4.3l2.6-2.7 4.7 3.5c.5.4 1.3.1 1.4-.6L22.6 4.6c.2-.8-.5-1.4-1.1-1.1Z"/>'
+         '<path d="m7.4 13.8 10.9-7.3-8.1 8.9"/></svg>')
 NAV = [('uslugi.html', 'Услуги'), ('praktika.html', 'Практика'), ('razbory.html', 'Разборы'), ('o-yuriste.html', 'О юристе'), ('voprosy.html', 'Вопросы'), ('kontakty.html', 'Контакты')]
 
 PERSON = {
@@ -126,6 +129,8 @@ def page(fname, title, desc, body, schema, current=None):
 </body>
 </html>
 '''
+    import re as _re
+    doc = _re.sub(r'(<a class="btn[^"]*"[^>]*href="' + _re.escape(TG) + r'"[^>]*>)', lambda m: m.group(1) + PLANE, doc)
     (OUT / fname).write_text(doc)
     return url
 

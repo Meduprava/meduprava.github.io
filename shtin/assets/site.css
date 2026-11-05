@@ -190,3 +190,4 @@ a.card:hover{border-color:var(--brass)}
 .pgroup__head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:24px}
 .pgroup__head h2{margin:0}
 .pgroup__head a{font-weight:700;font-size:14px}
+.btn .ico{flex:none;margin-right:2px}
