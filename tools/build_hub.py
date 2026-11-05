@@ -5,6 +5,7 @@ import json, re, html, datetime, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 BASE = 'https://meduprava.github.io'
+CSSV = '202611052226'
 TODAY = datetime.date.today().isoformat()
 EMAIL = 'meduprava@mail.ru'
 VK, VK_H = 'https://vk.ru/meduprava', 'vk.ru/meduprava'
@@ -55,7 +56,7 @@ def page(fname, title, desc, body, schema, current=None):
 <meta name="theme-color" content="#F3F1EA">
 <link rel="icon" href="assets/meduprava-znak.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/fonts.css">
-<link rel="stylesheet" href="assets/hub.css">
+<link rel="stylesheet" href="assets/hub.css?v={CSSV}">
 {ld(*schema)}
 </head>
 <body>

@@ -4,6 +4,7 @@ import json, sys, pathlib, datetime, html
 
 OUT = pathlib.Path(sys.argv[1])
 BASE = (sys.argv[2] if len(sys.argv) > 2 else 'https://antonshtin.github.io').rstrip('/')
+CSSV = '202611052226'
 TODAY = datetime.date.today().isoformat()
 
 PHONE, PHONE_H = '+79832816353', '+7 983 281-63-53'
@@ -86,7 +87,7 @@ def page(fname, title, desc, body, schema, current=None):
 <meta name="theme-color" content="#F6F4EF">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/cormorant-garamond-cyrillic-600-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/site.css?v={CSSV}">
 {ld(*schema)}
 </head>
 <body>
