@@ -158,3 +158,15 @@ a.card:hover{border-color:var(--brass)}
 .media-hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:48px;align-items:center}
 .media-img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border:1px solid var(--line);outline:1px solid var(--brass);outline-offset:-10px}
 @media (max-width:860px){.media-hero{grid-template-columns:1fr;gap:28px}.media-hero .media-img{aspect-ratio:4/3;max-height:420px}}
+
+/* Правка 05.11: менее вытянутые фото, отступ от кнопок */
+.portrait{aspect-ratio:1/1;object-position:50% 18%}
+.media-img{aspect-ratio:1/1;object-position:50% 45%}
+.hero__side{margin-top:8px}
+@media (max-width:860px){
+  .hero__grid{gap:48px}
+  .hero__side{margin-top:0}
+  .media-hero{gap:40px}
+  .media-hero .media-img{aspect-ratio:3/2;max-height:none}
+  .hero__side .portrait{max-width:none;aspect-ratio:3/2;object-position:50% 20%}
+}
