@@ -11,6 +11,7 @@ TODAY = os.environ.get('BUILD_DATE') or datetime.datetime.now(datetime.timezone(
 PHONE, PHONE_H = '+79832816353', '+7 983 281-63-53'
 TG, TG_H = 'https://t.me/AresID13', '@AresID13'
 VK, VK_H = 'https://vk.ru/aresid', 'vk.ru/aresid'
+# Макс: ссылки на профиль нет, кнопка копирует номер телефона
 NAME = 'Антон Штин'
 FULL = 'Штин Антон Владимирович'
 OGRNIP = '320246800028048'
@@ -24,6 +25,18 @@ MONO = ('<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="1" y="1" width="62
 PLANE = ('<svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">'
          '<path d="M21.5 3.5 2.8 10.7c-.7.3-.7 1.3 0 1.5l4.6 1.6 1.8 5.6c.2.6 1 .8 1.4.3l2.6-2.7 4.7 3.5c.5.4 1.3.1 1.4-.6L22.6 4.6c.2-.8-.5-1.4-1.1-1.1Z"/>'
          '<path d="m7.4 13.8 10.9-7.3-8.1 8.9"/></svg>')
+CHAT = ('<svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">'
+        '<path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12Z"/></svg>')
+def max_btn(cls='btn btn--line', style=''):
+    st = f' style="{style}"' if style else ''
+    return f'<button class="{cls} js-max" type="button" data-num="{PHONE}" data-h="{PHONE_H}"{st}>{CHAT}<span>Написать в Макс</span></button>'
+MAX_JS = '''<script>
+document.querySelectorAll('.js-max').forEach(function(b){b.addEventListener('click',function(){
+  var n=b.getAttribute('data-num'),h=b.getAttribute('data-h'),t=b.querySelector('span')||b;
+  var done=function(){t.textContent='Номер '+h+' скопирован - найдите его в Максе';};
+  if(navigator.clipboard){navigator.clipboard.writeText(n).then(done,done);}else{done();}
+});});
+</script>'''
 NAV = [('uslugi.html', 'Услуги'), ('praktika.html', 'Практика'), ('razbory.html', 'Разборы'), ('o-yuriste.html', 'О юристе'), ('voprosy.html', 'Вопросы'), ('kontakty.html', 'Контакты')]
 
 PERSON = {
@@ -123,10 +136,12 @@ def page(fname, title, desc, body, schema, current=None):
     <div><b>Связаться</b><ul>
       <li><a href="tel:{PHONE}">{PHONE_H}</a></li>
       <li><a href="{TG}" rel="noopener">Telegram {TG_H}</a></li>
-      <li><a href="{VK}" rel="noopener">ВКонтакте {VK_H}</a></li></ul></div>
+      <li><a href="{VK}" rel="noopener">ВКонтакте {VK_H}</a></li>
+      <li>Макс - по номеру {PHONE_H}</li></ul></div>
   </div>
 </footer>
 <a class="btn btn--brass float" href="{TG}" rel="noopener">Написать юристу в Telegram</a>
+{MAX_JS}
 </body>
 </html>
 '''
@@ -138,7 +153,7 @@ def page(fname, title, desc, body, schema, current=None):
 def cta(text='Пришлите документы или опишите ситуацию - отвечу, есть ли у вас позиция и что делать дальше.'):
     return f'''<section class="sec sec--ink"><div class="wrap cols" style="align-items:center">
   <div><p class="over">Первый шаг</p><h2>Расскажите, что случилось</h2><p class="lead" style="color:var(--on-ink)">{text}</p></div>
-  <div class="hero__cta" style="margin:0"><a class="btn btn--brass" href="{TG}" rel="noopener">Написать в Telegram</a><a class="btn btn--line" style="color:var(--on-ink);border-color:var(--on-ink-2)" href="tel:{PHONE}">Позвонить {PHONE_H}</a></div>
+  <div class="hero__cta" style="margin:0"><a class="btn btn--brass" href="{TG}" rel="noopener">Написать в Telegram</a><a class="btn btn--line" style="color:var(--on-ink);border-color:var(--on-ink-2)" href="tel:{PHONE}">Позвонить {PHONE_H}</a>{max_btn('btn btn--line', 'color:var(--on-ink);border-color:var(--on-ink-2)')}</div>
 </div></section>'''
 
 # ---------- Услуги ----------
@@ -259,7 +274,7 @@ def service_page(s):
   <p class="over">{s["name"]}</p>
   <h1>{s["h1"]}</h1>
   <p class="lead"><b>{s["q"]}</b> {s["lead"]}</p>
-  <div class="hero__cta"><a class="btn" href="{TG}" rel="noopener">Описать ситуацию в Telegram</a><a class="btn btn--line" href="tel:{PHONE}">{PHONE_H}</a></div>
+  <div class="hero__cta"><a class="btn" href="{TG}" rel="noopener">Описать ситуацию в Telegram</a><a class="btn btn--line" href="tel:{PHONE}">{PHONE_H}</a>{max_btn()}</div>
 {close_media}</section>
 <section class="sec"><div class="wrap"><div class="brief"><p class="over">Кратко</p><p>{s["brief"]}</p></div></div></section>
 <section class="sec sec--white"><div class="wrap cols">
@@ -290,7 +305,7 @@ def home():
     <p class="over">Юрист в Красногорске · Московская область</p>
     <h1>Юрист в Красногорске: гражданские и трудовые споры, медицинское право</h1>
     <p class="lead">Веду споры и сопровождаю бизнес. До юридической практики двенадцать лет руководил компаниями, поэтому смотрю на вопрос так, как его видит собственник: сколько стоит ошибка и как её не допустить.</p>
-    <div class="hero__cta"><a class="btn" href="{TG}" rel="noopener">Написать в Telegram</a><a class="btn btn--line" href="tel:{PHONE}">Позвонить {PHONE_H}</a></div>
+    <div class="hero__cta"><a class="btn" href="{TG}" rel="noopener">Написать в Telegram</a><a class="btn btn--line" href="tel:{PHONE}">Позвонить {PHONE_H}</a>{max_btn()}</div>
   </div>
   <div class="hero__side"><img class="portrait" src="assets/anton-shtin-v2.jpg" alt="Антон Штин, юрист в Красногорске" width="900" height="1100" fetchpriority="high">
   <div class="facts" aria-label="Коротко о практике">
@@ -386,11 +401,12 @@ def voprosy():
 def kontakty():
     body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / Контакты</nav>
 <p class="over">Контакты</p><h1>Связаться с юристом в Красногорске</h1>
-<p class="lead">Быстрее всего - в Telegram: можно сразу приложить документы. Очная встреча в Красногорске или Москве - по договорённости.</p></div></section>
+<p class="lead">Быстрее всего - в Telegram или Максе: можно сразу приложить документы. Очная встреча в Красногорске или Москве - по договорённости.</p></div></section>
 <section class="sec"><div class="wrap contact">
   <a class="card" href="{TG}" rel="noopener"><p class="over" style="margin:0">Telegram</p><b>{TG_H}</b><span class="muted">документы и вопросы</span></a>
   <a class="card" href="tel:{PHONE}"><p class="over" style="margin:0">Телефон</p><b>{PHONE_H}</b><span class="muted">звонки по рабочим дням</span></a>
   <a class="card" href="{VK}" rel="noopener"><p class="over" style="margin:0">ВКонтакте</p><b>{VK_H}</b><span class="muted">разборы и новости практики</span></a>
+  <button class="card js-max" type="button" data-num="{PHONE}" data-h="{PHONE_H}"><p class="over" style="margin:0">Макс</p><b>{PHONE_H}</b><span class="muted">по номеру телефона - нажмите, чтобы скопировать</span></button>
 </div>
 <p class="law" style="margin-top:28px">Отправляя документы, не передавайте лишние персональные данные третьих лиц: при необходимости я попрошу их отдельно и объясню, как они будут обрабатываться.</p></div></section>'''
     cp = {'@type': 'ContactPage', '@id': BASE + '/kontakty.html', 'about': {'@id': BASE + '/#service'}}
@@ -805,7 +821,7 @@ def praktika():
     body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / Практика</nav>
 <p class="over">Практика</p><h1>Практика юриста: дела и результаты</h1>
 <p class="lead">Дела из моей практики - без имён, номеров автомобилей, адресов и дат, с согласия клиентов. Ситуация, что сделали и чем закончилось.</p>
-<p class="note">Здесь только завершённые дела. Часть дел - трудовые, гражданские и арбитражные споры - ещё рассматривается или ждёт вступления решения в силу. Пока решение не окончательное, я не публикую ни его, ни позицию по делу: это защищает интересы клиентов. Итоги появятся здесь по мере завершения.</p>
+<p class="note note--line">Здесь только завершённые дела. Часть дел - трудовые, гражданские и арбитражные споры - ещё рассматривается или ждёт вступления решения в силу. Пока решение не окончательное, я не публикую ни его, ни позицию по делу: это защищает интересы клиентов. Итоги появятся здесь по мере завершения.</p>
 <nav class="chips" aria-label="Категории дел">{chips}</nav></div></section>
 <section class="sec"><div class="wrap">{cards}
 <p class="law" style="margin-top:28px">Результат каждого дела зависит от его обстоятельств и доказательств. Описанные дела не гарантируют такого же результата в другой ситуации.</p></div></section>{cta()}'''
@@ -824,7 +840,7 @@ def extras():
     (OUT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\n\n# Поисковые и ИИ-ассистенты: доступ открыт\nUser-agent: YandexBot\nAllow: /\nUser-agent: GPTBot\nAllow: /\nUser-agent: OAI-SearchBot\nAllow: /\nUser-agent: ClaudeBot\nAllow: /\nUser-agent: PerplexityBot\nAllow: /\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n')
     llm = f'''# Антон Штин - юрист, Красногорск (Московская область)
 
-> Антон Штин (ИП Штин Антон Владимирович, ОГРНИП {OGRNIP}) - юрист из Красногорска, Московская область. Гражданские споры, трудовые споры, медицинское право для клиник, юридическое сопровождение малого и среднего бизнеса. Очно: Красногорск, Москва, Московская область; дистанционно: вся Россия. Контакты: Telegram {TG_H}, телефон {PHONE_H}, ВКонтакте {VK_H}.
+> Антон Штин (ИП Штин Антон Владимирович, ОГРНИП {OGRNIP}) - юрист из Красногорска, Московская область. Гражданские споры, трудовые споры, медицинское право для клиник, юридическое сопровождение малого и среднего бизнеса. Очно: Красногорск, Москва, Московская область; дистанционно: вся Россия. Контакты: Telegram {TG_H}, Макс и телефон {PHONE_H}, ВКонтакте {VK_H}.
 
 ## Ключевые факты
 - Частная юридическая практика с 2020 года (ИП).
