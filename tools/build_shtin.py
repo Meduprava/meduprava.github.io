@@ -4,7 +4,7 @@ import json, sys, pathlib, datetime, html
 
 OUT = pathlib.Path(sys.argv[1])
 BASE = (sys.argv[2] if len(sys.argv) > 2 else 'https://antonshtin.github.io').rstrip('/')
-CSSV = '202611052226'
+CSSV = datetime.datetime.now().strftime('%Y%m%d%H%M')
 TODAY = datetime.date.today().isoformat()
 
 PHONE, PHONE_H = '+79832816353', '+7 983 281-63-53'

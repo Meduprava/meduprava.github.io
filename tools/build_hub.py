@@ -5,7 +5,7 @@ import json, re, html, datetime, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 BASE = 'https://meduprava.github.io'
-CSSV = '202611052226'
+CSSV = datetime.datetime.now().strftime('%Y%m%d%H%M')
 TODAY = datetime.date.today().isoformat()
 EMAIL = 'meduprava@mail.ru'
 VK, VK_H = 'https://vk.ru/meduprava', 'vk.ru/meduprava'
