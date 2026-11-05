@@ -20,7 +20,7 @@ MONO = ('<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="1" y="1" width="62
         '<text x="32" y="40" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-weight="600" font-size="30" fill="#1B2638">Ш</text>'
         '<circle cx="26" cy="48" r="1.6" fill="#A8854A"/><circle cx="32" cy="48" r="1.6" fill="#A8854A"/><circle cx="38" cy="48" r="1.6" fill="#A8854A"/></svg>')
 
-NAV = [('uslugi.html', 'Услуги'), ('razbory.html', 'Разборы'), ('o-yuriste.html', 'О юристе'), ('voprosy.html', 'Вопросы'), ('kontakty.html', 'Контакты')]
+NAV = [('uslugi.html', 'Услуги'), ('praktika.html', 'Практика'), ('razbory.html', 'Разборы'), ('o-yuriste.html', 'О юристе'), ('voprosy.html', 'Вопросы'), ('kontakty.html', 'Контакты')]
 
 PERSON = {
     '@type': 'Person', '@id': BASE + '/#person', 'name': NAME, 'alternateName': FULL,
@@ -234,6 +234,11 @@ SERVICES = [
        ('Работаете ли вы с компаниями из других регионов?', 'Да. Договоры и претензии - полностью дистанционно, арбитражные споры - с подачей документов через «Мой арбитр» и участием в заседаниях онлайн, где суд это позволяет.')]),
 ]
 
+def practice_block(s):
+    items = [c for c in PRACTICE if s['f'] == 'yurist-po-dtp.html' and c['cat'] == 'ДТП']
+    if not items: return ''
+    return '<section class="sec sec--white"><div class="wrap"><div class="sec__head"><p class="over">Практика</p><h2>Дела по ДТП</h2></div><div class="grid grid--2">' + ''.join(practice_card(c) for c in items) + '</div><p style="margin-top:24px"><a href="praktika.html">Вся практика →</a></p></div></section>'
+
 def service_page(s):
     url = BASE + '/' + s['f']
     cases = ''.join(f'<li>{c}</li>' for c in s['cases'])
@@ -254,7 +259,7 @@ def service_page(s):
   <div><p class="over">С чем обращаются</p><h2>Типовые ситуации</h2><ul class="list">{cases}</ul></div>
   <div><p class="over">Как я работаю</p><h2>Порядок работы</h2><div class="steps">{steps}</div></div>
 </div></section>
-<section class="sec" id="faq"><div class="wrap"><div class="sec__head"><p class="over">Вопросы и ответы</p><h2>{s["name"]}: частые вопросы</h2></div>{faq_html(s["faq"])}</div></section>
+{practice_block(s)}<section class="sec" id="faq"><div class="wrap"><div class="sec__head"><p class="over">Вопросы и ответы</p><h2>{s["name"]}: частые вопросы</h2></div>{faq_html(s["faq"])}</div></section>
 {cta()}
 <section class="sec"><div class="wrap"><p class="over">Другие направления</p><div class="grid grid--3">{others}</div></div></section>'''
     srv = {'@type': 'Service', '@id': url + '#service', 'name': s['name'], 'serviceType': s['name'], 'description': s['desc'],
@@ -431,8 +436,42 @@ def razbory():
     page('razbory.html', 'Разборы юриста Антона Штина: претензии, договоры, трудовые споры', 'Статьи юриста из Красногорска о спорных ситуациях бизнеса и граждан: претензии, договоры, трудовые споры, медицинское право. С нормами и практическими шагами.',
          body, [PERSON, lst, crumbs_ld([('', 'Главная'), ('razbory.html', 'Разборы')])], 'razbory.html')
 
+PRACTICE = [
+ dict(id='dtp-obgon', cat='ДТП', year='2025', city='Красноярск',
+  title='Поворот налево с включённым поворотником: виновным признан обгонявший водитель',
+  situation='Клиент поворачивал налево вне перекрёстка, к въезду на прилегающую территорию. Автомобиль, ехавший сзади, начал обгон по встречной полосе, произошло столкновение. Клиенту грозило признание виновным в ДТП: поворот налево с выездом на встречную полосу обычно оценивают не в пользу поворачивающего.',
+  work='Разобрали запись видеорегистратора по секундам. Указатель поворота включён примерно за две секунды до того, как второй водитель начал обгон, и работал до столкновения - это подтверждали звук в салоне и показания свидетелей. Обгон транспортного средства, которое подало сигнал поворота налево, запрещён (п. 11.2 ПДД РФ). У второго водителя было около трёх секунд, чтобы заметить опасность и затормозить (п. 10.1 ПДД РФ).',
+  result='Виновным в ДТП признан водитель обгонявшего автомобиля. Нарушений Правил со стороны клиента не установлено.',
+  norms='п. 8.1, 8.2, 8.8, 10.1, 11.2 ПДД РФ'),
+ dict(id='dtp-perekrestok', cat='ДТП', year='2025', city='Красноярск',
+  title='Перекрёсток или выезд с прилегающей территории: от ответа зависела вина',
+  situation='Клиент поворачивал налево на светофоре и завершал манёвр после смены сигнала. Встречный автомобиль продолжил движение, произошло столкновение. Позиция второй стороны строилась на том, что место ДТП - не перекрёсток, а выезд с прилегающей территории, и клиент обязан был уступить.',
+  work='Доказали, что место ДТП - перекрёсток: дорога предназначена для сквозного проезда, знаков «Жилая зона» нет, установлены транспортные и пешеходные светофоры (п. 1.2 ПДД РФ). Клиент въехал на перекрёсток на разрешающий сигнал и вправе был завершить поворот (п. 13.7 ПДД РФ). Встречный водитель выехал на запрещающий сигнал, хотя мог остановиться, и поэтому не имел преимущества (п. 14 постановления Пленума Верховного Суда РФ от 25.06.2019 № 20).',
+  result='Виновным в ДТП признан второй участник. Вины клиента нет.',
+  norms='п. 1.2, 6.2, 13.7 ПДД РФ; п. 14 постановления Пленума ВС РФ от 25.06.2019 № 20'),
+]
+
+def practice_card(c):
+    return f'''<article class="card" id="{c["id"]}"><p class="over" style="margin:0">{c["cat"]} · {c["city"]} · {c["year"]}</p><h3>{c["title"]}</h3>
+<p><b>Ситуация.</b> {c["situation"]}</p><p><b>Что сделали.</b> {c["work"]}</p><p><b>Результат.</b> {c["result"]}</p><p class="law" style="margin:0">Нормы: {c["norms"]}</p></article>'''
+
+def praktika():
+    url = BASE + '/praktika.html'
+    cards = ''.join(practice_card(c) for c in PRACTICE)
+    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / Практика</nav>
+<p class="over">Практика</p><h1>Практика юриста: дела и результаты</h1>
+<p class="lead">Дела из моей практики - без имён, номеров автомобилей, адресов и дат, с согласия клиентов. Ситуация, что сделали и чем закончилось.</p></div></section>
+<section class="sec"><div class="wrap"><div class="grid grid--2">{cards}</div>
+<p class="law" style="margin-top:28px">Результат каждого дела зависит от его обстоятельств и доказательств. Описанные дела не гарантируют такого же результата в другой ситуации.</p></div></section>{cta()}'''
+    lst = {'@type': 'ItemList', 'name': 'Практика юриста Антона Штина', 'itemListElement': [
+        {'@type': 'ListItem', 'position': i + 1, 'item': {'@type': 'CreativeWork', 'name': c['title'], 'about': c['cat'], 'abstract': c['situation'] + ' ' + c['result'], 'author': {'@id': BASE + '/#person'}, 'url': url + '#' + c['id']}}
+        for i, c in enumerate(PRACTICE)]}
+    page('praktika.html', 'Практика юриста Антона Штина: дела по ДТП, трудовым и гражданским спорам',
+         'Обезличенные дела из практики юриста Антона Штина: ситуация, позиция и результат. ДТП, трудовые и гражданские споры.',
+         body, [PERSON, lst, crumbs_ld([('', 'Главная'), ('praktika.html', 'Практика')])], 'praktika.html')
+
 def extras():
-    pages = ['', 'uslugi.html'] + [s['f'] for s in SERVICES] + ['razbory.html'] + [a['f'] for a in ARTICLES] + ['o-yuriste.html', 'voprosy.html', 'kontakty.html']
+    pages = ['', 'uslugi.html'] + [s['f'] for s in SERVICES] + ['praktika.html', 'razbory.html'] + [a['f'] for a in ARTICLES] + ['o-yuriste.html', 'voprosy.html', 'kontakty.html']
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(
         f'  <url><loc>{BASE}/{p}</loc><lastmod>{TODAY}</lastmod></url>\n' for p in pages) + '</urlset>\n'
     (OUT / 'sitemap.xml').write_text(sm)
@@ -450,7 +489,8 @@ def extras():
 - Руководит юридическим направлением проекта «Медуправа» (право, финансы, операционное управление и сервис для частных клиник): {MEDUPRAVA}
 
 ## Страницы
-''' + ''.join(f'- [{s["name"]}]({BASE}/{s["f"]}): {s["brief"]}\n' for s in SERVICES) + f'''- [Разборы]({BASE}/razbory.html): статьи юриста о спорных ситуациях бизнеса, с нормами.
+''' + ''.join(f'- [{s["name"]}]({BASE}/{s["f"]}): {s["brief"]}\n' for s in SERVICES) + f'''- [Практика]({BASE}/praktika.html): обезличенные дела по ДТП с результатами (Красноярск, 2025).
+- [Разборы]({BASE}/razbory.html): статьи юриста о спорных ситуациях бизнеса, с нормами.
 - [О юристе]({BASE}/o-yuriste.html): опыт, образование, принципы работы.
 - [Вопросы и ответы]({BASE}/voprosy.html): сроки исковой давности, претензионный порядок, сроки по трудовым спорам, обжалование актов экспертизы по ОМС.
 - [Контакты]({BASE}/kontakty.html)
@@ -462,5 +502,6 @@ def extras():
 for s in SERVICES: service_page(s)
 for a_ in ARTICLES: article_page(a_)
 razbory()
+praktika()
 home(); uslugi(); about(); voprosy(); kontakty(); extras()
 print('ok', BASE)
