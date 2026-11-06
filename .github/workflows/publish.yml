@@ -50,5 +50,5 @@ jobs:
           if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
             echo "::warning::Секреты YC_KEY_ID и YC_SECRET не заданы - выгрузка в Yandex Cloud пропущена"; exit 0
           fi
-          bash tools/deploy_yc.sh . meduprava.ru "shtin/*" "googlec*.html"
+          bash tools/deploy_yc.sh . meduprava.ru "shtin/*"
           bash tools/deploy_yc.sh shtin antonshtin.ru
