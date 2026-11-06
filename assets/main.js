@@ -1,4 +1,4 @@
-/* Логика лендинга: калькулятор срока, форма заявки, cookie-баннер, аналитика по согласию. */
+/* Логика лендинга: калькулятор срока, форма заявки. Баннер cookie и аналитика - assets/consent.js. */
 (function () {
   'use strict';
   var CFG = window.MEDUPRAVA || {};
@@ -151,70 +151,5 @@
     });
   }
 
-  /* ---------- Cookie и аналитика ---------- */
-  function readChoice() {
-    try { return localStorage.getItem(LS_COOKIE); } catch (e) { return null; }
-  }
-  function saveChoice(v) {
-    try { localStorage.setItem(LS_COOKIE, v); } catch (e) { /* приватный режим */ }
-  }
-  function loadMetrika(id) {
-    if (!id) return;
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://mc.yandex.ru/metrika/tag.js';
-    s.onload = function () {
-      if (typeof window.ym === 'function') {
-        window.ym(id, 'init', { clickmap: true, trackLinks: true, accurateTrackBounce: true });
-      }
-    };
-    document.head.appendChild(s);
-    window.ym = window.ym || function () { (window.ym.a = window.ym.a || []).push(arguments); };
-    window.ym.l = +new Date();
-  }
-  var banner = document.getElementById('cookie');
-  var choice = readChoice();
-  if (choice === 'accept') {
-    loadMetrika(CFG.ANALYTICS && CFG.ANALYTICS.YANDEX_METRIKA_ID);
-  } else if (!choice && banner) {
-    banner.hidden = false;
-  }
-  // Удаляет cookie Яндекс Метрики (_ym_*), установленные на этом сайте.
-  function clearAnalyticsCookies() {
-    var host = location.hostname;
-    document.cookie.split(';').forEach(function (c) {
-      var name = c.split('=')[0].trim();
-      if (name.indexOf('_ym') !== 0) return;
-      var exp = '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
-      document.cookie = name + exp;
-      document.cookie = name + exp + '; domain=' + host;
-      document.cookie = name + exp + '; domain=.' + host;
-    });
-  }
-  if (banner) {
-    banner.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-cookie]');
-      if (!b) return;
-      var v = b.getAttribute('data-cookie');
-      var prev = readChoice();
-      saveChoice(v);
-      banner.hidden = true;
-      if (v === 'accept') {
-        if (prev !== 'accept') loadMetrika(CFG.ANALYTICS && CFG.ANALYTICS.YANDEX_METRIKA_ID);
-      } else if (prev === 'accept') {
-        // Согласие отозвано: удаляем cookie аналитики и перезагружаем страницу, чтобы выгрузить счетчик.
-        clearAnalyticsCookies();
-        location.reload();
-      }
-    });
-  }
-  // Ссылка «Настройки cookie»: повторно показывает баннер, чтобы изменить или отозвать выбор.
-  document.addEventListener('click', function (e) {
-    var s = e.target.closest('[data-cookie-settings]');
-    if (!s || !banner) return;
-    e.preventDefault();
-    banner.hidden = false;
-    var first = banner.querySelector('[data-cookie]');
-    if (first) first.focus();
-  });
+  /* Баннер cookie и Яндекс Метрика - в assets/consent.js. */
 })();

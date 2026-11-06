@@ -4,7 +4,11 @@
 import json, re, html, datetime, pathlib, hashlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-BASE = 'https://meduprava.github.io'
+BASE = 'https://meduprava.ru'
+SHTIN = 'https://antonshtin.ru'  # личный сайт юриста
+METRIKA = '114100611'  # Яндекс Метрика, счетчик meduprava.ru
+INN = '245208470580'
+YEAR = '2026'
 CSSV = hashlib.md5(pathlib.Path('assets/hub.css').read_bytes()).hexdigest()[:8]
 PUB = json.loads(pathlib.Path('shtin/published.json').read_text())  # пишет build_shtin.py
 TODAY = PUB['updated']
@@ -20,7 +24,7 @@ ORG = {'@type': 'ProfessionalService', '@id': BASE + '/#org', 'name': 'Меду�
        'description': 'Юридическое, финансовое и операционное сопровождение частных медицинских клиник: диагностика проблемных мест, экспертиза актов страховых компаний по ОМС, финансовый директор на аутсорсе, операционное управление и развитие, служба сервиса и заботы о пациентах.',
        'url': BASE + '/', 'logo': BASE + '/assets/meduprava-logo.svg', 'image': BASE + '/assets/og-hub-v2.png', 'email': EMAIL, 'telephone': PHONE_H,
        'areaServed': AREA, 'knowsLanguage': 'ru', 'sameAs': [VK],
-       'founder': [{'@type': 'Person', 'name': 'Антон Штин', 'jobTitle': 'Юрист, руководитель юридического направления', 'image': BASE + '/assets/team/anton-shtin-v2.jpg', 'url': BASE + '/shtin/'},
+       'founder': [{'@type': 'Person', 'name': 'Антон Штин', 'jobTitle': 'Юрист, руководитель юридического направления', 'image': BASE + '/assets/team/anton-shtin-v2.jpg', 'url': SHTIN + '/'},
                    {'@type': 'Person', 'name': 'Елена Штин', 'jobTitle': 'Финансовый директор'},
                    {'@type': 'Person', 'name': 'Дарья Гаврилова', 'jobTitle': 'Операционное управление и развитие, служба сервиса и заботы'}],
        'parentOrganization': {'@type': 'Organization', 'name': 'ИП Штин Антон Владимирович', 'identifier': {'@type': 'PropertyValue', 'propertyID': 'ОГРНИП', 'value': OGRNIP}}}
@@ -55,6 +59,7 @@ def page(fname, title, desc, body, schema, current=None):
 <meta property="og:image" content="{BASE}/assets/og-hub-v2.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F3F1EA">
+<script src="assets/move.js"></script>
 <link rel="icon" href="assets/meduprava-znak.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/fonts.css">
 <link rel="stylesheet" href="assets/hub.css?v={CSSV}">
@@ -78,8 +83,9 @@ def page(fname, title, desc, body, schema, current=None):
     <div>
       <b>Медуправа</b>
       <p>Право, финансы и операционное управление частных медицинских клиник. Москва, Московская область, дистанционно по всей России.</p>
-      <p>Исполнитель: ИП Штин Антон Владимирович, ОГРНИП {OGRNIP}. Информация на сайте не является публичной офертой. Прямой результат по спорам и проверкам не гарантируется.</p>
-      <p><a href="legal/privacy.html">Политика обработки персональных данных</a> · <a href="legal/cookies.html">Cookie</a></p>
+      <p>Исполнитель: ИП Штин Антон Владимирович, ОГРНИП {OGRNIP}, ИНН {INN}. Информация на сайте не является публичной офертой. Прямой результат по спорам и проверкам не гарантируется.</p>
+      <p><a href="legal/privacy.html">Политика обработки персональных данных</a> · <a href="legal/cookies.html">Файлы cookie</a> · <a href="#" data-cookie-settings>Настройки cookie</a></p>
+      <p>© {YEAR} ИП Штин А.В. Тексты, расчеты и изображения сайта охраняются авторским правом. Цитирование - с указанием источника и ссылкой на страницу (подп. 1 п. 1 ст. 1274 ГК РФ), иное использование - с письменного разрешения правообладателя.</p>
     </div>
     <div><b>Направления</b><ul>
       <li><a href="pravo.html">Юридическое</a></li>
@@ -94,6 +100,7 @@ def page(fname, title, desc, body, schema, current=None):
   </div>
 </footer>
 <a class="btn btn--brass float" href="mailto:{EMAIL}">Написать в Медуправу</a>
+<script src="assets/consent.js" data-metrika="{METRIKA}" data-host="meduprava.ru" data-key="meduprava.cookie" data-notice="legal/cookies.html" defer></script>
 </body>
 </html>
 '''
@@ -121,7 +128,7 @@ HOME_FAQ = [
 def home():
     url = BASE + '/'
     dirs = [('pravo.html', 'Юридическое', 'Претензии пациентов, экспертизы страховых по ОМС, договоры, лицензия, персональные данные и врачебная тайна.', 'Антон Штин, юрист'),
-            ('finance.html', 'Финансовое', 'Управленческий учёт, деньги к сроку платежей, KPI персонала и финансовая модель клиники.', 'Елена Штин, финансовый директор'),
+            ('finance.html', 'Финансовое', 'Управленческий учёт, деньги к сроку платежей, ключевые показатели (KPI) персонала и финансовая модель клиники.', 'Елена Штин, финансовый директор'),
             ('servis.html', 'Операционное', 'Операционное управление и развитие клиники, служба сервиса и заботы о пациентах.', 'Дарья Гаврилова')]
     dcards = ''.join(f'<a class="card" href="{u}"><span class="tag" style="align-self:flex-start">{t}</span><h3>{t} направление</h3><p>{d}</p><p class="muted" style="margin:0">{w}</p><span class="card__more">Подробнее →</span></a>' for u, t, d, w in dirs)
     body = f'''<section class="hero"><div class="wrap hero__grid">
@@ -253,7 +260,7 @@ def servis():
 
 def extras():
     pages = [('', '1.0'), ('pravo.html', '0.9'), ('finance.html', '0.9'), ('servis.html', '0.8'), ('ekspertiza-oms.html', '0.9'), ('kalkulyator-oms.html', '0.6'),
-             ('legal/privacy.html', '0.2'), ('legal/consent.html', '0.2'), ('legal/privacy-finance.html', '0.2'), ('legal/consent-finance.html', '0.2'), ('legal/cookies.html', '0.2'), ('legal/obezlichivanie.html', '0.2')] + [('shtin/' + x, '0.7') for x in ['', 'uslugi.html', 'grazhdanskie-spory.html', 'trudovye-spory.html', 'medicinskoe-pravo.html', 'soprovozhdenie-biznesa.html', 'yurist-po-dtp.html', 'praktika.html', 'razbory.html'] + PUB['files'] + ['o-yuriste.html', 'voprosy.html', 'kontakty.html']]
+             ('legal/privacy.html', '0.2'), ('legal/consent.html', '0.2'), ('legal/privacy-finance.html', '0.2'), ('legal/consent-finance.html', '0.2'), ('legal/cookies.html', '0.2'), ('legal/obezlichivanie.html', '0.2')]
     (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
         ''.join(f'  <url><loc>{BASE}/{p}</loc><lastmod>{TODAY}</lastmod><priority>{pr}</priority></url>\n' for p, pr in pages) + '</urlset>\n')
     (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\n\n# Поисковые и ИИ-ассистенты: доступ открыт\nUser-agent: YandexBot\nAllow: /\nUser-agent: GPTBot\nAllow: /\nUser-agent: OAI-SearchBot\nAllow: /\nUser-agent: ClaudeBot\nAllow: /\nUser-agent: PerplexityBot\nAllow: /\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n')
@@ -269,7 +276,7 @@ def extras():
 ## Страницы
 - [Юридическое направление]({BASE}/pravo.html): экспертиза актов страховых компаний в рамках ОМС, претензии пациентов, договор платных медицинских услуг, информированное добровольное согласие, лицензия, персональные данные и врачебная тайна.
 - [Экспертиза актов страховых компаний в рамках ОМС]({BASE}/ekspertiza-oms.html): протокол разногласий (10 рабочих дней, п. 71.1 Порядка контроля, приказ Минздрава России № 231н) и претензия в ТФОМС (15 рабочих дней, ст. 42 326-ФЗ).
-- [Финансовый директор для клиник]({BASE}/finance.html): управленческий учёт, денежные потоки, KPI персонала, финансовая модель; стоимость услуг указана на странице.
+- [Финансовый директор для клиник]({BASE}/finance.html): управленческий учёт, денежные потоки, ключевые показатели (KPI) персонала, финансовая модель; стоимость услуг указана на странице.
 - [Операционное управление и сервис]({BASE}/servis.html): операционное управление и развитие клиники, служба сервиса и заботы о пациентах, регламент работы с обращениями и отзывами.
 - [Калькулятор потерь по ОМС]({BASE}/kalkulyator-oms.html)
 
@@ -278,8 +285,21 @@ def extras():
 - Качество лечения не оценивается; предмет работы - процедура контроля, документы, сроки, деньги клиники.
 
 ## Связанные сайты
-- [Антон Штин, юрист (Красногорск)]({BASE}/shtin/): личная страница руководителя юридического направления - гражданские и трудовые споры, медицинское право, сопровождение бизнеса; подробности - {BASE}/shtin/llms.txt
+- [Антон Штин, юрист (Красногорск)]({SHTIN}/): личный сайт руководителя юридического направления - гражданские и трудовые споры, медицинское право, сопровождение бизнеса; подробности - {SHTIN}/llms.txt
 ''')
 
-home(); pravo(); servis(); extras()
+def notfound():
+    body = '''<section class="section"><div class="wrap"><h1>Страница не найдена</h1>
+<p>Возможно, адрес изменился. Начните с главной страницы или выберите направление.</p>
+<p><a class="btn" href="/">На главную</a></p></div></section>'''
+    page('404.html', 'Страница не найдена | Медуправа', 'Страница не найдена.', body, [ORG])
+    f = ROOT / '404.html'
+    d = f.read_text().replace('content="index, follow, max-image-preview:large"', 'content="noindex, follow"')
+    import re as _re
+    d = _re.sub(r'<link rel="canonical"[^>]*>\n', '', d)
+    # ссылки на ресурсы от корня: 404 отдается по любому адресу
+    d = _re.sub(r'(href|src)="(?!https?:|mailto:|tel:|#|/)', r'\1="/', d)
+    f.write_text(d)
+
+home(); pravo(); servis(); extras(); notfound()
 print('ok')

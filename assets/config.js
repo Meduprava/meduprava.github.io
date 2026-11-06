@@ -3,11 +3,7 @@ window.MEDUPRAVA = {
   FORM_ENDPOINT: "",
   FALLBACK_EMAIL: "meduprava@mail.ru",
 
-  ANALYTICS: {
-    // Вставьте сюда номер счётчика Яндекс Метрики после его создания.
-    // Например: YANDEX_METRIKA_ID: "12345678"
-    YANDEX_METRIKA_ID: "",
-  },
+  // Яндекс Метрика подключается в assets/consent.js (счетчик 114100611), только с согласия посетителя.
 
   REQUISITES: {
     ogrnip: "320246800028048",

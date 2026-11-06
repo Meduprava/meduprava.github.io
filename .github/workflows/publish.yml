@@ -1,10 +1,14 @@
-# Отложенная публикация разборов личного сайта (shtin/).
-# Каждый день в 08:30 по Москве пересобирает сайт: разборы с наступившей датой
-# появляются на странице «Разборы», в sitemap.xml и llms.txt. Если ничего нового нет,
-# сборка дает те же файлы и коммита не будет.
-name: Публикация по расписанию
+# Сборка и публикация сайтов в Yandex Cloud (Object Storage):
+#   meduprava.ru   - корень репозитория (без папки shtin/)
+#   antonshtin.ru  - папка shtin/
+# Запуск: при каждом push в main, каждый день в 08:30 по Москве (отложенные разборы с наступившей датой) и вручную.
+# Ключ сервисного аккаунта Yandex Cloud хранится в секретах репозитория YC_KEY_ID и YC_SECRET.
+# GitHub Pages (meduprava.github.io) остается резервной копией: страницы там переводят посетителя на новые домены.
+name: Публикация сайтов
 
 on:
+  push:
+    branches: [main]
   schedule:
     - cron: '30 5 * * *'   # 05:30 UTC = 08:30 МСК
   workflow_dispatch:
@@ -12,6 +16,10 @@ on:
 permissions:
   contents: write
   pages: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
 
 jobs:
   publish:
@@ -23,15 +31,24 @@ jobs:
           python-version: '3.12'
       - name: Сборка
         run: |
-          python3 tools/build_shtin.py shtin https://meduprava.github.io/shtin
-          rm -f shtin/sitemap.xml shtin/robots.txt
+          python3 tools/build_shtin.py shtin https://antonshtin.ru
           python3 tools/build_hub.py
-      - name: Коммит и запуск GitHub Pages
+      - name: Коммит изменений сборки
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git add -A
-          if git diff --cached --quiet; then echo "Новых публикаций нет"; exit 0; fi
+          if git diff --cached --quiet; then echo "Сборка не изменила файлы"; exit 0; fi
           git -c user.name="Штин Антон" -c user.email="meduprava@mail.ru" commit -m "Публикация по расписанию: $(TZ=Europe/Moscow date +%d.%m.%Y)"
           git push
           gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "Pages соберется по push"
+      - name: Выгрузка в Yandex Cloud
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.YC_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET }}
+        run: |
+          if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
+            echo "::warning::Секреты YC_KEY_ID и YC_SECRET не заданы - выгрузка в Yandex Cloud пропущена"; exit 0
+          fi
+          bash tools/deploy_yc.sh . meduprava.ru "shtin/*" "googlec*.html"
+          bash tools/deploy_yc.sh shtin antonshtin.ru

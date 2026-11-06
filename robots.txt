@@ -15,4 +15,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://meduprava.github.io/sitemap.xml
+Sitemap: https://meduprava.ru/sitemap.xml
