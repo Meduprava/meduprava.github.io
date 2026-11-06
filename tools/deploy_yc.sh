@@ -10,7 +10,8 @@ EXCL=(--exclude ".git/*" --exclude ".github/*" --exclude "tools/*" --exclude "RE
 for x in "$@"; do EXCL+=(--exclude "$x"); done
 
 put() { # шаблон, тип, кэш
-  aws s3 sync "$SRC" "s3://$BUCKET" $EP "${EXCL[@]}" --exclude "*" --include "$1" \
+  # порядок важен: в aws cli побеждает последний фильтр, поэтому исключения идут после --include
+  aws s3 sync "$SRC" "s3://$BUCKET" $EP --exclude "*" --include "$1" "${EXCL[@]}" \
     --content-type "$2" --cache-control "$3" --only-show-errors
 }
 put "*.html" "text/html; charset=utf-8" "max-age=300"
@@ -21,4 +22,6 @@ put "*.xml"  "application/xml; charset=utf-8" "max-age=300"
 put "*.svg"  "image/svg+xml" "max-age=86400"
 # остальное (картинки, шрифты) - тип по расширению; удаление файлов, которых больше нет в репозитории
 aws s3 sync "$SRC" "s3://$BUCKET" $EP "${EXCL[@]}" --cache-control "max-age=86400" --delete --only-show-errors
+# убрать из бакета то, что попасть в него не должно (если попало раньше)
+for x in "$@"; do case "$x" in */\*) aws s3 rm "s3://$BUCKET/${x%\*}" $EP --recursive --only-show-errors || true;; esac; done
 echo "Выгружено: $SRC -> $BUCKET"
