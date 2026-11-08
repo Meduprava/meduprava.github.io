@@ -386,7 +386,7 @@ def about():
   <div class="card"><h3>Тон - деловой</h3><p>В переписке с контрагентом - без ультиматумов: позиция сильнее, когда оставляет место для диалога.</p></div>
   <div class="card"><h3>Нормы - действующие</h3><p>Каждую ссылку на закон и судебную практику проверяю по актуальной редакции.</p></div>
 </div></div></section>{cta()}'''
-    prof = {'@type': 'ProfilePage', '@id': BASE + '/o-yuriste.html', 'mainEntity': {'@id': BASE + '/#person'}, 'dateModified': SITE_DATE}
+    prof = {'@type': 'ProfilePage', '@id': BASE + '/o-yuriste.html', 'mainEntity': {'@id': BASE + '/#person'}, 'dateModified': iso_dt(SITE_DATE)}
     page('o-yuriste.html', 'Антон Штин - юрист в Красногорске: опыт и образование', 'Антон Штин, юрист из Красногорска: частная практика с 2020 года, 12 лет руководства компаниями, юридическое сопровождение медицинской клиники, СФУ.',
          body, [PERSON, prof, crumbs_ld([('', 'Главная'), ('o-yuriste.html', 'О юристе')])], 'o-yuriste.html')
 
@@ -872,6 +872,11 @@ for a_ in ALL_ARTICLES:
     if a_ not in ARTICLES and (OUT / a_['f']).exists():
         (OUT / a_['f']).unlink()
 SITE_DATE = max(a['date'] for a in ARTICLES)
+
+def iso_dt(d):
+    # Google требует дату со временем и часовым поясом (ISO 8601); 08:30 МСК - время ежедневной публикации
+    return d + 'T08:30:00+03:00'
+
 (OUT / 'published.json').write_text(json.dumps({'updated': SITE_DATE, 'files': [a['f'] for a in ARTICLES],
     'planned': [{'f': a['f'], 'date': a['date']} for a in ALL_ARTICLES if a not in ARTICLES]}, ensure_ascii=False, indent=1))
 
@@ -886,7 +891,7 @@ def article_page(a):
 <section class="sec"><div class="wrap"><article class="prose">{a["body"]}</article>
 <p class="law" style="margin-top:32px">Материал носит информационный характер и не заменяет консультацию по вашим документам. Нормы сверены: {a.get("checked_h", "5 ноября 2026")}.</p></div></section>
 {cta()}'''
-    art = {'@type': 'Article', '@id': url + '#article', 'headline': a['title'], 'description': a['desc'], 'datePublished': a['date'], 'dateModified': a['date'],
+    art = {'@type': 'Article', '@id': url + '#article', 'headline': a['title'], 'description': a['desc'], 'datePublished': iso_dt(a['date']), 'dateModified': iso_dt(a['date']),
            'inLanguage': 'ru', 'author': {'@id': BASE + '/#person'}, 'publisher': {'@id': BASE + '/#person'}, 'mainEntityOfPage': url, 'image': BASE + '/assets/og.png'}
     page(a['f'], a['title'] + ' - разбор юриста Антона Штина', a['desc'], body,
          [PERSON, art, crumbs_ld([('', 'Главная'), ('razbory.html', 'Разборы'), (a['f'], a['title'])])], 'razbory.html')
