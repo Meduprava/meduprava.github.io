@@ -17,6 +17,7 @@ FULL = 'Штин Антон Владимирович'
 OGRNIP = '320246800028048'
 MEDUPRAVA = 'https://vk.ru/meduprava'
 MEDUPRAVA_SITE = 'https://meduprava.ru'
+VC = 'https://vc.ru/antonshtin'
 INN = '245208470580'
 REG_DATE = '16.03.2020'  # дата внесения записи в ЕГРИП
 REG_BODY = ''  # наименование регистрирующего органа - после сверки с листом записи ЕГРИП
@@ -45,7 +46,7 @@ PERSON = {
     'alumniOf': [{'@type': 'CollegeOrUniversity', 'name': 'Сибирский федеральный университет'},
                  {'@type': 'CollegeOrUniversity', 'name': 'Красноярский государственный педагогический университет им. В.П. Астафьева'}],
     'knowsAbout': ['Гражданское право', 'Трудовые споры', 'Медицинское право', 'ОМС', 'Защита прав потребителей', 'Договорное право', 'Правовое сопровождение бизнеса'],
-    'knowsLanguage': ['ru', 'en'], 'sameAs': [VK, TG, MAX, 'https://vc.ru/antonshtin'],
+    'knowsLanguage': ['ru', 'en'], 'sameAs': [VK, TG, MAX, VC],
 }
 SERVICE = {
     '@type': 'LegalService', '@id': BASE + '/#service', 'name': 'Юрист Антон Штин', 'legalName': 'ИП Штин Антон Владимирович',
@@ -54,7 +55,7 @@ SERVICE = {
     'areaServed': [{'@type': 'City', 'name': 'Красногорск'}, {'@type': 'AdministrativeArea', 'name': 'Московская область'},
                    {'@type': 'City', 'name': 'Москва'}, {'@type': 'Country', 'name': 'Россия'}],
     'founder': {'@id': BASE + '/#person'}, 'identifier': {'@type': 'PropertyValue', 'propertyID': 'ОГРНИП', 'value': OGRNIP},
-    'knowsLanguage': 'ru', 'sameAs': [VK, TG, MAX, 'https://vc.ru/antonshtin'],
+    'knowsLanguage': 'ru', 'sameAs': [VK, TG, MAX, VC],
 }
 
 def esc(t): return html.escape(t, quote=True)
@@ -141,6 +142,10 @@ def page(fname, title, desc, body, schema, current=None):
       <li><a href="{TG}" rel="noopener">Telegram {TG_H}</a></li>
       <li><a href="{VK}" rel="noopener">ВКонтакте {VK_H}</a></li>
       <li><a href="{MAX}" rel="noopener">Макс</a></li></ul></div>
+    <div><b>Читать</b><ul>
+      <li><a href="razbory.html">Разборы на сайте</a></li>
+      <li><a href="{VC}" rel="noopener">Статьи на vc.ru</a></li>
+      <li><a href="{MEDUPRAVA_SITE}/" rel="noopener">Медуправа - для клиник</a></li></ul></div>
   </div>
 </footer>
 <a class="btn btn--brass float" href="{TG}" rel="noopener">Написать юристу в Telegram</a>
@@ -410,6 +415,8 @@ def kontakty():
   <a class="card" href="tel:{PHONE}"><p class="over" style="margin:0">Телефон</p><b>{PHONE_H}</b><span class="muted">звонки по рабочим дням</span></a>
   <a class="card" href="{VK}" rel="noopener"><p class="over" style="margin:0">ВКонтакте</p><b>{VK_H}</b><span class="muted">разборы и новости практики</span></a>
   <a class="card" href="{MAX}" rel="noopener"><p class="over" style="margin:0">Макс</p><b>Антон Штин</b><span class="muted">документы и вопросы</span></a>
+  <a class="card" href="{VC}" rel="noopener"><p class="over" style="margin:0">vc.ru</p><b>vc.ru/antonshtin</b><span class="muted">статьи о рисках бизнеса</span></a>
+  <a class="card" href="{MEDUPRAVA_SITE}/" rel="noopener"><p class="over" style="margin:0">Медуправа</p><b>meduprava.ru</b><span class="muted">право, финансы и сервис для клиник</span></a>
 </div>
 <p class="law" style="margin-top:28px">Отправляя документы, не передавайте лишние персональные данные третьих лиц: при необходимости я попрошу их отдельно и объясню, как они будут обрабатываться.</p></div></section>'''
     cp = {'@type': 'ContactPage', '@id': BASE + '/kontakty.html', 'about': {'@id': BASE + '/#service'}}
