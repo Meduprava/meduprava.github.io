@@ -113,7 +113,7 @@ def page(fname, title, desc, body, schema, current=None):
 <a class="skip" href="#main">К содержанию</a>
 <header class="top">
   <div class="wrap top__in">
-    <a class="brand" href="index.html" aria-label="Антон Штин, юрист - на главную">{MONO}<span class="brand__name"><b>АНТОН ШТИН</b><span>ЮРИСТ · КРАСНОГОРСК</span></span></a>
+    <a class="brand" href="./" aria-label="Антон Штин, юрист - на главную">{MONO}<span class="brand__name"><b>АНТОН ШТИН</b><span>ЮРИСТ · КРАСНОГОРСК</span></span></a>
     <nav class="nav" aria-label="Разделы">{nav}</nav>
     <a class="btn" href="{TG}" rel="noopener">Написать в Telegram</a>
     <details class="menu"><summary>Меню</summary><div class="menu__list">{menu}<a href="tel:{PHONE}">{PHONE_H}</a></div></details>
@@ -278,7 +278,7 @@ def service_page(s):
     open_media = '<div class="wrap media-hero"><div>' if img else '<div class="wrap">'
     close_media = (f'</div><img class="media-img" src="assets/{img[0]}" alt="{img[1]}" width="900" height="1350" fetchpriority="high"></div>') if img else '</div>'
     body = f'''<section class="page-hero">{open_media}
-  <nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / <a href="uslugi.html">Услуги</a> / {s["name"]}</nav>
+  <nav class="crumbs" aria-label="Навигация"><a href="./">Главная</a> / <a href="uslugi.html">Услуги</a> / {s["name"]}</nav>
   <p class="over">{s["name"]}</p>
   <h1>{s["h1"]}</h1>
   <p class="lead"><b>{s["q"]}</b> {s["lead"]}</p>
@@ -361,7 +361,7 @@ def home():
 
 def uslugi():
     cards = ''.join(f'<a class="card" href="{s["f"]}"><h3>{s["name"]}</h3><p>{s["desc"]}</p><span class="card__more">Подробнее →</span></a>' for s in SERVICES)
-    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / Услуги</nav>
+    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="./">Главная</a> / Услуги</nav>
 <p class="over">Услуги</p><h1>Услуги юриста в Красногорске</h1>
 <p class="lead">Четыре направления практики. В каждом - претензии, иски, представительство в суде и документы, которые предотвращают следующий спор.</p></div></section>
 <section class="sec"><div class="wrap grid grid--2">{cards}</div></section>{cta()}'''
@@ -370,7 +370,7 @@ def uslugi():
          body, [SERVICE, lst, crumbs_ld([('', 'Главная'), ('uslugi.html', 'Услуги')])], 'uslugi.html')
 
 def about():
-    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / О юристе</nav>
+    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="./">Главная</a> / О юристе</nav>
 <p class="over">О юристе</p><h1>Антон Штин, юрист</h1>
 <p class="lead">Юрист из Красногорска. С 2020 года веду частную практику как индивидуальный предприниматель: споры, договоры, сопровождение бизнеса и медицинских организаций.</p></div></section>
 <section class="sec"><div class="wrap cols">
@@ -398,7 +398,7 @@ def about():
 def voprosy():
     allq = HOME_FAQ + [q for s in SERVICES for q in s['faq']]
     url = BASE + '/voprosy.html'
-    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / Вопросы</nav>
+    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="./">Главная</a> / Вопросы</nav>
 <p class="over">Вопросы и ответы</p><h1>Вопросы юристу: сроки, суды, документы</h1>
 <p class="lead">Короткие ответы на вопросы, которые задают чаще всего. Это общая информация: точный ответ зависит от ваших документов.</p></div></section>
 <section class="sec"><div class="wrap">{faq_html(allq)}</div></section>{cta()}'''
@@ -407,7 +407,7 @@ def voprosy():
          body, [SERVICE, faq_ld(allq, url), crumbs_ld([('', 'Главная'), ('voprosy.html', 'Вопросы')])], 'voprosy.html')
 
 def kontakty():
-    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / Контакты</nav>
+    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="./">Главная</a> / Контакты</nav>
 <p class="over">Контакты</p><h1>Связаться с юристом в Красногорске</h1>
 <p class="lead">Быстрее всего - в Telegram или Максе: можно сразу приложить документы. Очная встреча в Красногорске или Москве - по договорённости.</p></div></section>
 <section class="sec"><div class="wrap contact">
@@ -965,7 +965,7 @@ def article_page(a):
     # ссылки на разборы, которые ещё не вышли, - обычным текстом до даты выхода
     hidden = {x['f'] for x in ALL_ARTICLES} - {x['f'] for x in ARTICLES}
     a = dict(a, body=re.sub(r'<a href="([^"]+)">(.*?)</a>', lambda m: m.group(2) if m.group(1) in hidden else m.group(0), a['body']))
-    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / <a href="razbory.html">Разборы</a> / {a["title"]}</nav>
+    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="./">Главная</a> / <a href="razbory.html">Разборы</a> / {a["title"]}</nav>
 <p class="over">{a.get("kind", "Разбор")} · {a["date_h"]}</p><h1>{a["title"]}</h1>
 <p class="muted">Автор: <a href="o-yuriste.html">Антон Штин</a>, юрист, Красногорск{(" · Впервые опубликовано: " + a["first"]) if a.get("first") else ""}</p></div></section>
 <section class="sec"><div class="wrap"><article class="prose">{a["body"]}</article>
@@ -983,7 +983,7 @@ def razbory():
     tg = [x for x in tg if x[3]]
     chips = ''.join(f'<a class="chip" href="#{t}">{name} <span>{len(items)}</span></a>' for t, name, link, items in tg)
     cards = ''.join(f'<div class="pgroup" id="{t}"><div class="pgroup__head"><h2>{name}</h2><a href="{link}">Об услуге →</a></div><div class="grid grid--2">' + ''.join(f'<a class="card" href="{a["f"]}"><p class="over" style="margin:0">{a.get("kind", "Разбор")} · {a["date_h"]}</p><h3>{a["title"]}</h3><p class="card__q">{a["desc"]}</p><span class="card__more">Читать →</span></a>' for a in items) + '</div></div>' for t, name, link, items in tg)
-    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / Разборы</nav>
+    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="./">Главная</a> / Разборы</nav>
 <p class="over">Разборы</p><h1>Разборы юриста: как ошибки бизнеса становятся спорами</h1>
 <p class="lead">Реальные ситуации без имён и с нормами: что пошло не так, сколько это стоит и что сделать, чтобы не повторить. Новые разборы - каждую неделю.</p>
 <nav class="chips" aria-label="Темы разборов">{chips}</nav></div></section>
@@ -1031,7 +1031,7 @@ def praktika():
     groups = [g for g in groups if g[4]]
     chips = ''.join(f'<a class="chip" href="#{gid}">{name} <span>{len(items)}</span></a>' for gid, pre, name, link, items in groups)
     cards = ''.join(f'<div class="pgroup" id="{gid}"><div class="pgroup__head"><h2>{name}</h2><a href="{link}">Об услуге →</a></div><div class="grid grid--2">' + ''.join(practice_card(c) for c in items) + '</div></div>' for gid, pre, name, link, items in groups)
-    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / Практика</nav>
+    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="./">Главная</a> / Практика</nav>
 <p class="over">Практика</p><h1>Практика юриста: дела и результаты</h1>
 <p class="lead">Дела из моей практики - без имён, номеров автомобилей, адресов и дат, с согласия клиентов. Ситуация, что сделали и чем закончилось.</p>
 <p class="note note--line">Здесь только завершённые дела. Часть дел - трудовые, гражданские и арбитражные споры - ещё рассматривается или ждёт вступления решения в силу. Пока решение не окончательное, я не публикую ни его, ни позицию по делу: это защищает интересы клиентов. Итоги появятся здесь по мере завершения.</p>
@@ -1077,7 +1077,7 @@ def extras():
 POLICY_DATE = '06.11.2026'
 def politika():
     url = BASE + '/politika.html'
-    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / Политика обработки персональных данных</nav>
+    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="./">Главная</a> / Политика обработки персональных данных</nav>
 <p class="over">Документы</p><h1>Политика в отношении обработки персональных данных</h1>
 <p class="lead">Редакция от {POLICY_DATE}. Оператор: индивидуальный предприниматель {FULL}, ОГРНИП {OGRNIP}, ИНН {INN}, адрес электронной почты для обращений meduprava@mail.ru.</p></div></section>
 <section class="sec"><div class="wrap prose">
@@ -1125,6 +1125,7 @@ def notfound():
     d = f.read_text().replace('content="index, follow, max-image-preview:large"', 'content="noindex, follow"')
     d = re.sub(r'<link rel="canonical"[^>]*>\n', '', d)
     d = re.sub(r'(href|src)="(?!https?:|mailto:|tel:|#|/)', r'\1="/', d)
+    d = d.replace('="/./', '="/')
     f.write_text(d)
 
 for s in SERVICES: service_page(s)

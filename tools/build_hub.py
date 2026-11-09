@@ -69,9 +69,9 @@ def page(fname, title, desc, body, schema, current=None):
 <a class="skip" href="#main">К содержанию</a>
 <header class="top">
   <div class="wrap top__in">
-    <a class="brand" href="index.html" aria-label="Медуправа, на главную"><img src="assets/meduprava-logo.svg" alt="Медуправа" width="271" height="64"></a>
+    <a class="brand" href="./" aria-label="Медуправа, на главную"><img src="assets/meduprava-logo.svg" alt="Медуправа" width="271" height="64"></a>
     <nav class="nav" aria-label="Разделы">{nav}</nav>
-    <a class="btn" href="index.html#contacts">Связаться</a>
+    <a class="btn" href="./#contacts">Связаться</a>
     <details class="menu"><summary>Меню</summary><div class="menu__list">{menu}<a href="mailto:{EMAIL}">{EMAIL}</a></div></details>
   </div>
 </header>
@@ -205,7 +205,7 @@ def pravo():
              ('Договоры с подрядчиками', 'IT, маркетинг, продвижение на агрегаторах: риски по пунктам, протокол разногласий, права на результаты.', None),
              ('Трудовые вопросы персонала', 'Положение об оплате труда, премии с критериями, индексация, подготовка к проверкам трудовой инспекции.', None)]
     cards = ''.join(f'<{"a" if l else "div"} class="card"{f" href={chr(34)}{l}{chr(34)}" if l else ""}><h3>{t}</h3><p>{d}</p>{"<span class=card__more>Подробнее →</span>" if l else ""}</{"a" if l else "div"}>' for t, d, l in items)
-    body = f'''<section class="page-hero"><div class="wrap media-hero"><div><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / Юридическое направление</nav>
+    body = f'''<section class="page-hero"><div class="wrap media-hero"><div><nav class="crumbs" aria-label="Навигация"><a href="./">Главная</a> / Юридическое направление</nav>
 <p class="over">Юридическое направление</p><h1>Юрист для медицинской клиники в Москве и Московской области</h1>
 <p class="lead">Защищаем деньги и лицензию клиники: претензии пациентов, экспертизы страховых по ОМС, договоры и согласия. Начинаем с документов, которые уже есть, и показываем, где клиника уязвима.</p>
 <div class="hero__cta"><a class="btn" href="#contacts">Обсудить задачу</a><a class="btn btn--line" href="ekspertiza-oms.html">Экспертиза актов по ОМС</a></div></div>
@@ -241,7 +241,7 @@ def servis():
              ('Служба сервиса и заботы', 'Путь пациента от записи до повторного визита: напоминания, связь после приёма, ответственные на каждом этапе.'),
              ('Обращения и отзывы', 'Порядок приёма жалоб, сроки ответа, правила ответов на отзывы без раскрытия врачебной тайны.')]
     cards = ''.join(f'<div class="card"><h3>{t}</h3><p>{d}</p></div>' for t, d in items)
-    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="index.html">Главная</a> / Операционное управление и сервис</nav>
+    body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="./">Главная</a> / Операционное управление и сервис</nav>
 <p class="over">Операционное направление</p><h1>Операционное управление клиникой и служба заботы о пациентах</h1>
 <p class="lead">Многие претензии начинаются не с лечения, а с процесса: звонок не записали, ответ не дали, пациента не предупредили. Выстраиваем работу команды и путь пациента так, чтобы клиника росла без потерь на сервисе.</p>
 <div class="hero__cta"><a class="btn" href="#contacts">Обсудить работу клиники</a></div></div></section>
@@ -299,6 +299,7 @@ def notfound():
     d = _re.sub(r'<link rel="canonical"[^>]*>\n', '', d)
     # ссылки на ресурсы от корня: 404 отдается по любому адресу
     d = _re.sub(r'(href|src)="(?!https?:|mailto:|tel:|#|/)', r'\1="/', d)
+    d = d.replace('="/./', '="/')
     f.write_text(d)
 
 home(); pravo(); servis(); extras(); notfound()
