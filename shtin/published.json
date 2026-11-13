@@ -1,6 +1,7 @@
 {
- "updated": "2026-11-10",
+ "updated": "2026-11-13",
  "files": [
+  "obrazec-vozrazheniy-podryadchika.html",
   "razbor-samozanyatyy-rabotnik.html",
   "razbor-beremennye-rabotnicy.html",
   "profilaktika-dogovor-s-agentstvom.html",
@@ -30,10 +31,6 @@
   {
    "f": "profilaktika-vnutrenniy-kontrol.html",
    "date": "2027-01-18"
-  },
-  {
-   "f": "obrazec-vozrazheniy-podryadchika.html",
-   "date": "2026-11-13"
   },
   {
    "f": "zaklyuchenie-st-187-platezhnoe-poruchenie.html",
