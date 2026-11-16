@@ -18,6 +18,23 @@ OGRNIP = '320246800028048'
 MEDUPRAVA = 'https://vk.ru/meduprava'
 MEDUPRAVA_SITE = 'https://meduprava.ru'
 VC = 'https://vc.ru/antonshtin'
+ZAKON = 'https://zakon.ru/anton_shtin'          # профиль на Закон.ру
+ZAKON_BLOG = 'https://zakon.ru/anton_shtin/blogs'  # лента статей
+# Статьи на Закон.ру: новые - в начало списка (дата ГГГГ-ММ-ДД, заголовок как на Закон.ру, адрес)
+ZAKON_POSTS = [
+    ('2026-11-16', 'Критерий субъектного состава договора в ч. 5-7 ст. 159 УК РФ: организационно-правовая форма Заказчика вместо характера экономических отношений',
+     'https://zakon.ru/blog/2026/11/16/kriterij_subektnogo_sostava_dogovora_v_ch_5-7_st_159_uk_rf_organizacionno-pravovaya_forma_zakazchika'),
+    ('2026-11-13', 'Обезличивание по 152-ФЗ после приказа Роскомнадзора № 140: почему замены ФИО недостаточно',
+     'https://zakon.ru/blog/2026/11/13/obezlichivanie_po_152-fz_posle_prikaza_roskomnadzora_%E2%84%96_140_pochemu_zameny_fio_nedostatochno'),
+    ('2026-11-11', 'Экономия подрядчика против мошенничества. Часть 2. Что делать?',
+     'https://zakon.ru/blog/2026/11/11/ekonomiya_podryadchika_protiv_moshennichestva_chast_2_chto_delat'),
+    ('2026-11-10', 'Ст. 710 ГК РФ против ст. 159 УК РФ. Часть 1. Кто виноват?',
+     'https://zakon.ru/blog/2026/11/10/st_710_gk_rf_protiv_st_159_uk_rf_chast_1_kto_vinovat'),
+]
+MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
+def date_ru(d):
+    y, m, dd = d.split('-')
+    return f'{int(dd)} {MONTHS[int(m) - 1]} {y}'
 INN = '245208470580'
 REG_DATE = '16.03.2020'  # дата внесения записи в ЕГРИП
 REG_BODY = ''  # наименование регистрирующего органа - после сверки с листом записи ЕГРИП
@@ -46,7 +63,7 @@ PERSON = {
     'alumniOf': [{'@type': 'CollegeOrUniversity', 'name': 'Сибирский федеральный университет'},
                  {'@type': 'CollegeOrUniversity', 'name': 'Красноярский государственный педагогический университет им. В.П. Астафьева'}],
     'knowsAbout': ['Гражданское право', 'Трудовые споры', 'Медицинское право', 'ОМС', 'Защита прав потребителей', 'Договорное право', 'Правовое сопровождение бизнеса'],
-    'knowsLanguage': ['ru', 'en'], 'sameAs': [VK, TG, MAX, VC],
+    'knowsLanguage': ['ru', 'en'], 'sameAs': [VK, TG, MAX, VC, ZAKON],
 }
 SERVICE = {
     '@type': 'LegalService', '@id': BASE + '/#service', 'name': 'Юрист Антон Штин', 'legalName': 'ИП Штин Антон Владимирович',
@@ -55,7 +72,7 @@ SERVICE = {
     'areaServed': [{'@type': 'City', 'name': 'Красногорск'}, {'@type': 'AdministrativeArea', 'name': 'Московская область'},
                    {'@type': 'City', 'name': 'Москва'}, {'@type': 'Country', 'name': 'Россия'}],
     'founder': {'@id': BASE + '/#person'}, 'identifier': {'@type': 'PropertyValue', 'propertyID': 'ОГРНИП', 'value': OGRNIP},
-    'knowsLanguage': 'ru', 'sameAs': [VK, TG, MAX, VC],
+    'knowsLanguage': 'ru', 'sameAs': [VK, TG, MAX, VC, ZAKON],
 }
 
 def esc(t): return html.escape(t, quote=True)
@@ -145,6 +162,7 @@ def page(fname, title, desc, body, schema, current=None):
     <div><b>Читать</b><ul>
       <li><a href="razbory.html">Разборы на сайте</a></li>
       <li><a href="{VC}" rel="noopener">Статьи на vc.ru</a></li>
+      <li><a href="{ZAKON_BLOG}" rel="noopener">Статьи на Закон.ру</a></li>
       <li><a href="{MEDUPRAVA_SITE}/" rel="noopener">Медуправа - для клиник</a></li></ul></div>
   </div>
 </footer>
@@ -416,6 +434,7 @@ def kontakty():
   <a class="card" href="{VK}" rel="noopener"><p class="over" style="margin:0">ВКонтакте</p><b>{VK_H}</b><span class="muted">разборы и новости практики</span></a>
   <a class="card" href="{MAX}" rel="noopener"><p class="over" style="margin:0">Макс</p><b>Антон Штин</b><span class="muted">документы и вопросы</span></a>
   <a class="card" href="{VC}" rel="noopener"><p class="over" style="margin:0">vc.ru</p><b>vc.ru/antonshtin</b><span class="muted">статьи о рисках бизнеса</span></a>
+  <a class="card" href="{ZAKON_BLOG}" rel="noopener"><p class="over" style="margin:0">Закон.ру</p><b>zakon.ru/anton_shtin</b><span class="muted">статьи для юристов: практика и нормы</span></a>
   <a class="card" href="{MEDUPRAVA_SITE}/" rel="noopener"><p class="over" style="margin:0">Медуправа</p><b>meduprava.ru</b><span class="muted">право, финансы и сервис для клиник</span></a>
 </div>
 <p class="law" style="margin-top:28px">Отправляя документы, не передавайте лишние персональные данные третьих лиц: при необходимости я попрошу их отдельно и объясню, как они будут обрабатываться.</p></div></section>'''
@@ -596,7 +615,7 @@ ARTICLES = [
 <p>[Должность уполномоченного лица Подрядчика по Контракту] ______ [Ф.И.О.]</p>
 </div>
 <p>Уведомление направляется способом, предусмотренным контрактом, и дублируется записью в общем журнале работ. Ответ Заказчика или его отсутствие фиксируйте: молчание Заказчика не освобождает Подрядчика от рисков, но документ, составленный вовремя, отделяет открытое отступление от проекта от сокрытия расхождения.</p>
-<p class="muted">Разбор судебной практики 2023-2026 годов - на Zakon.ru: <a href="https://zakon.ru/blog/2026/11/10/st_710_gk_rf_protiv_st_159_uk_rf_chast_1_kto_vinovat">«Ст. 710 ГК РФ против ст. 159 УК РФ. Часть 1. Кто виноват?»</a>.</p>"""),
+<p class="muted">Разбор судебной практики 2023-2026 годов - на Zakon.ru: <a href="https://zakon.ru/blog/2026/11/10/st_710_gk_rf_protiv_st_159_uk_rf_chast_1_kto_vinovat">«Ст. 710 ГК РФ против ст. 159 УК РФ. Часть 1. Кто виноват?»</a>; порядок действий до подписания КС-2 - <a href="https://zakon.ru/blog/2026/11/11/ekonomiya_podryadchika_protiv_moshennichestva_chast_2_chto_delat">«Часть 2. Что делать?»</a>.</p>"""),
  dict(f='chek-list-droblenie-biznesa.html', date='2026-11-08', date_h='8 ноября 2026', topic='biz', kind='Чек-лист', checked_h='8 ноября 2026',
   title='Чек-лист: есть ли у вашего бизнеса признаки дробления',
   desc='Самопроверка для собственника: 20 вопросов по признакам дробления бизнеса, которые ФНС перечислила в письме от 09.08.2024 № СД-4-7/9113, пороги ст. 198 и 199 УК РФ и условия амнистии дробления до конца 2026 года.',
@@ -1070,13 +1089,19 @@ def razbory():
     tg = [('biz', 'Бизнес: налоговые и уголовные риски', 'soprovozhdenie-biznesa.html'), ('labor', 'Трудовые споры', 'trudovye-spory.html'), ('med', 'Медицинское право', 'medicinskoe-pravo.html'), ('dtp', 'ДТП', 'yurist-po-dtp.html'), ('civil', 'Гражданские дела', 'grazhdanskie-spory.html')]
     tg = [(t, name, link, [a for a in ARTICLES if a.get('topic', TOPIC.get(a['f'], 'civil')) == t]) for t, name, link in tg]
     tg = [x for x in tg if x[3]]
+    zchip = f'<a class="chip" href="#zakon">Закон.ру <span>{len(ZAKON_POSTS)}</span></a>' if ZAKON_POSTS else ''
+    zakon = ('<div class="pgroup" id="zakon"><div class="pgroup__head"><h2>Статьи для юристов на Закон.ру</h2>'
+             f'<a href="{ZAKON_BLOG}" rel="noopener">Все статьи на Закон.ру →</a></div>'
+             '<p class="muted" style="margin:-8px 0 24px">Разборы судебной практики и норм в профессиональном сообществе юристов.</p><div class="grid grid--2">'
+             + ''.join(f'<a class="card" href="{u}" rel="noopener"><p class="over" style="margin:0">Закон.ру · {date_ru(d)}</p><h3>{t}</h3><span class="card__more">Читать на Закон.ру →</span></a>' for d, t, u in ZAKON_POSTS)
+             + '</div></div>') if ZAKON_POSTS else ''
     chips = ''.join(f'<a class="chip" href="#{t}">{name} <span>{len(items)}</span></a>' for t, name, link, items in tg)
     cards = ''.join(f'<div class="pgroup" id="{t}"><div class="pgroup__head"><h2>{name}</h2><a href="{link}">Об услуге →</a></div><div class="grid grid--2">' + ''.join(f'<a class="card" href="{a["f"]}"><p class="over" style="margin:0">{a.get("kind", "Разбор")} · {a["date_h"]}</p><h3>{a["title"]}</h3><p class="card__q">{a["desc"]}</p><span class="card__more">Читать →</span></a>' for a in items) + '</div></div>' for t, name, link, items in tg)
     body = f'''<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Навигация"><a href="./">Главная</a> / Разборы</nav>
 <p class="over">Разборы</p><h1>Разборы юриста: как ошибки бизнеса становятся спорами</h1>
 <p class="lead">Реальные ситуации без имён и с нормами: что пошло не так, сколько это стоит и что сделать, чтобы не повторить. Новые разборы - каждую неделю.</p>
-<nav class="chips" aria-label="Темы разборов">{chips}</nav></div></section>
-<section class="sec"><div class="wrap">{cards}</div></section>{cta()}'''
+<nav class="chips" aria-label="Темы разборов">{chips}{zchip}</nav></div></section>
+<section class="sec"><div class="wrap">{cards}{zakon}</div></section>{cta()}'''
     lst = {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'url': BASE + '/' + a['f'], 'name': a['title']} for i, a in enumerate(ARTICLES)]}
     page('razbory.html', 'Разборы юриста Антона Штина: претензии, договоры, трудовые споры', 'Статьи юриста из Красногорска о спорных ситуациях бизнеса и граждан: претензии, договоры, трудовые споры, медицинское право. С нормами и практическими шагами.',
          body, [PERSON, lst, crumbs_ld([('', 'Главная'), ('razbory.html', 'Разборы')])], 'razbory.html')
