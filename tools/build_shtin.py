@@ -153,7 +153,8 @@ def page(fname, title, desc, body, schema, current=None):
       <li><a href="trudovye-spory.html">Трудовые споры</a></li>
       <li><a href="yurist-po-dtp.html">ДТП</a></li>
       <li><a href="medicinskoe-pravo.html">Медицинское право</a></li>
-      <li><a href="soprovozhdenie-biznesa.html">Сопровождение бизнеса</a></li></ul></div>
+      <li><a href="soprovozhdenie-biznesa.html">Сопровождение бизнеса</a></li>
+      <li><a href="vual/">Программа «Вуаль»</a></li></ul></div>
     <div><b>Связаться</b><ul>
       <li><a href="tel:{PHONE}">{PHONE_H}</a></li>
       <li><a href="{TG}" rel="noopener">Telegram {TG_H}</a></li>
@@ -368,6 +369,11 @@ def home():
   <div><p class="over">Разборы</p><h2>Как ошибки бизнеса превращаются в суд</h2>
   <p class="lead" style="color:var(--on-ink)">Пишу короткие разборы реальных ситуаций - без имён и с нормами: что пошло не так, сколько это стоило и что сделать, чтобы не повторить.</p></div>
   <div class="hero__cta" style="margin:0"><a class="btn btn--brass" href="razbory.html">Читать разборы</a><a class="btn btn--line" style="color:var(--on-ink);border-color:var(--on-ink-2)" href="{VK}" rel="noopener">ВКонтакте</a></div>
+</div></section>
+<section class="sec sec--white" id="vual"><div class="wrap cols" style="align-items:center">
+  <div><p class="over">Программа для юристов</p><h2>«Вуаль» - обезличивание документов перед работой с ИИ</h2>
+  <p class="lead">Программа для Mac и Windows заменяет персональные данные в документах метками по правилам 152-ФЗ и приказа Роскомнадзора № 140, а после ответа ИИ возвращает их обратно. Документы обрабатываются только на вашем компьютере и никуда не передаются.</p></div>
+  <div class="hero__cta" style="margin:0"><a class="btn" href="vual/">О программе</a><a class="btn btn--line" href="vual/#download">Скачать - 30 дней бесплатно</a></div>
 </div></section>
 <section class="sec" id="faq"><div class="wrap"><div class="sec__head"><p class="over">Вопросы</p><h2>Частые вопросы</h2></div>{faq_html(HOME_FAQ)}
   <p style="margin-top:24px"><a href="voprosy.html">Все вопросы и ответы →</a></p></div></section>
@@ -1160,7 +1166,7 @@ def praktika():
          body, [PERSON, lst, crumbs_ld([('', 'Главная'), ('praktika.html', 'Практика')])], 'praktika.html')
 
 def extras():
-    pages = ['', 'uslugi.html'] + [s['f'] for s in SERVICES] + ['praktika.html', 'razbory.html'] + [a['f'] for a in ARTICLES] + ['o-yuriste.html', 'voprosy.html', 'kontakty.html', 'politika.html']
+    pages = ['', 'uslugi.html'] + [s['f'] for s in SERVICES] + ['praktika.html', 'razbory.html'] + [a['f'] for a in ARTICLES] + ['o-yuriste.html', 'voprosy.html', 'kontakty.html', 'politika.html', 'vual/', 'vual/soglashenie.html', 'vual/politika.html']
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(
         f'  <url><loc>{BASE}/{p}</loc><lastmod>{SITE_DATE}</lastmod></url>\n' for p in pages) + '</urlset>\n'
     (OUT / 'sitemap.xml').write_text(sm)
