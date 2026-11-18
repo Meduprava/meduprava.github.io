@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A3A4C"/><stop offset="1" stop-color="#16202B"/></linearGradient></defs>
+<rect x="100" y="100" width="824" height="824" rx="185" fill="url(#bg)"/>
+<g transform="translate(512 512) scale(2.45) translate(-111 -133)">
+<path d="M30 8h108l48 48v184a18 18 0 0 1-18 18H30a18 18 0 0 1-18-18V26A18 18 0 0 1 30 8Z" fill="#fff" stroke="#F6F8FA" stroke-width="10" stroke-linejoin="round"/>
+<path d="M138 10v44a8 8 0 0 0 8 8h40" fill="none" stroke="#C9D2DA" stroke-width="10" stroke-linejoin="round"/>
+<path d="M52 100h105" stroke="#243746" stroke-width="11" stroke-linecap="round"/>
+<path d="M52 196h105M52 228h80" stroke="#243746" stroke-width="11" stroke-linecap="round" opacity=".55"/>
+<path d="M17 150c40-20 66 22 106 0s58-20 69-6v94a18 18 0 0 1-18 18H35a18 18 0 0 1-18-18Z" fill="#10A998" opacity=".82"/>
+<path d="M17 150c40-20 66 22 106 0s58-20 69-6" fill="none" stroke="#0E8F81" stroke-width="9" stroke-linecap="round"/>
+<path d="M60 176c18-8 33 10 51 2M100 236c16-7 29 9 45 2" stroke="#E6FAF7" stroke-width="7" stroke-linecap="round" opacity=".6"/>
+</g>
+</svg>
