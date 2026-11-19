@@ -1,6 +1,7 @@
 {
- "updated": "2026-11-13",
+ "updated": "2026-11-19",
  "files": [
+  "razbor-klishe-podpisi.html",
   "obrazec-vozrazheniy-podryadchika.html",
   "razbor-samozanyatyy-rabotnik.html",
   "razbor-beremennye-rabotnicy.html",
@@ -51,10 +52,6 @@
   {
    "f": "razbor-udalenka-vmesto-filiala.html",
    "date": "2026-11-30"
-  },
-  {
-   "f": "razbor-klishe-podpisi.html",
-   "date": "2026-11-19"
   }
  ]
 }
