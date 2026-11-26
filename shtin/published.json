@@ -1,6 +1,7 @@
 {
- "updated": "2026-11-24",
+ "updated": "2026-11-26",
  "files": [
+  "razbor-pravilo-uvolneniya.html",
   "zaklyuchenie-st-187-platezhnoe-poruchenie.html",
   "razbor-klishe-podpisi.html",
   "obrazec-vozrazheniy-podryadchika.html",
@@ -41,10 +42,6 @@
   {
    "f": "razbor-predpensionery-i-pensionery.html",
    "date": "2026-12-24"
-  },
-  {
-   "f": "razbor-pravilo-uvolneniya.html",
-   "date": "2026-11-26"
   },
   {
    "f": "razbor-udalenka-vmesto-filiala.html",
